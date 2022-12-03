@@ -12,6 +12,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.blockentities.AltarBlockEntity;
 import org.abos.fabricmc.magic.blocks.AltarBlock;
@@ -36,6 +37,8 @@ public class MagicContent {
     public final static EntityType<MediumEarthMissileEntity> MEDIUM_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_EARTH_MISSILE_ENTITY_TYPE_ID, MediumEarthMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
     public final static Identifier BIG_EARTH_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "big_earth_missile");
     public final static EntityType<BigEarthMissileEntity> BIG_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(BIG_EARTH_MISSILE_ENTITY_TYPE_ID, BigEarthMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
+
+    public final static ScreenHandlerType<AltarScreenHandler> ALTAR_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, ALTAR_ID, new ScreenHandlerType(AltarScreenHandler::new));
 
     private MagicContent() {
         /* No instantiation. */
