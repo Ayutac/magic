@@ -1,24 +1,28 @@
 package org.abos.fabricmc.magic;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.abos.fabricmc.magic.entities.MagicMissileEntity;
+import org.abos.fabricmc.magic.entities.BigEarthMissileEntity;
+import org.abos.fabricmc.magic.entities.MediumEarthMissileEntity;
+import org.abos.fabricmc.magic.entities.SmallEarthMissileEntity;
 import org.abos.fabricmc.magic.items.WandItem;
+import org.abos.fabricmc.magic.utils.MissileSize;
 
 public class MagicContent {
 
     public final static WandItem BEGINNER_WAND = new WandItem(new FabricItemSettings());
 
-    public final static EntityType<MagicMissileEntity> SMALL_MAGIC_MISSILE_ENTITY_TYPE;
-    public final static Identifier SMALL_MAGIC_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "small_magic_missile");
-    public final static EntityType<MagicMissileEntity> MEDIUM_MAGIC_MISSILE_ENTITY_TYPE;
-    public final static Identifier MEDIUM_MAGIC_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "medium_magic_missile");
-    public final static EntityType<MagicMissileEntity> BIG_MAGIC_MISSILE_ENTITY_TYPE;
-    public final static Identifier BIG_MAGIC_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "big_magic_missile");
+    public final static Identifier SMALL_EARTH_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "small_earth_missile");
+    public final static EntityType<SmallEarthMissileEntity> SMALL_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_EARTH_MISSILE_ENTITY_TYPE_ID, SmallEarthMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
+    public final static Identifier MEDIUM_EARTH_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "medium_earth_missile");
+    public final static EntityType<MediumEarthMissileEntity> MEDIUM_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_EARTH_MISSILE_ENTITY_TYPE_ID, MediumEarthMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
+    public final static Identifier BIG_EARTH_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "big_earth_missile");
+    public final static EntityType<BigEarthMissileEntity> BIG_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(BIG_EARTH_MISSILE_ENTITY_TYPE_ID, BigEarthMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
 
     private MagicContent() {
         /* No instantiation. */
@@ -32,25 +36,13 @@ public class MagicContent {
         Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "beginner_wand"), BEGINNER_WAND);
     }
 
-    static {
-        SMALL_MAGIC_MISSILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE, SMALL_MAGIC_MISSILE_ENTITY_TYPE_ID,
-                EntityType.Builder.<MagicMissileEntity>create(MagicMissileEntity::new, SpawnGroup.MISC)
-                        .setDimensions(0.5f, 0.5f)
-                        .maxTrackingRange(4)
-                        .trackingTickInterval(10)
-                        .build(SMALL_MAGIC_MISSILE_ENTITY_TYPE_ID.toString()));
-        MEDIUM_MAGIC_MISSILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE, MEDIUM_MAGIC_MISSILE_ENTITY_TYPE_ID,
-                EntityType.Builder.<MagicMissileEntity>create(MagicMissileEntity::new, SpawnGroup.MISC)
-                        .setDimensions(1f, 1f)
-                        .maxTrackingRange(4)
-                        .trackingTickInterval(10)
-                        .build(MEDIUM_MAGIC_MISSILE_ENTITY_TYPE_ID.toString()));
-        BIG_MAGIC_MISSILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE, BIG_MAGIC_MISSILE_ENTITY_TYPE_ID,
-                EntityType.Builder.<MagicMissileEntity>create(MagicMissileEntity::new, SpawnGroup.MISC)
-                        .setDimensions(1.5f, 1.5f)
-                        .maxTrackingRange(4)
-                        .trackingTickInterval(10)
-                        .build(BIG_MAGIC_MISSILE_ENTITY_TYPE_ID.toString()));
+    private static <T extends Entity> EntityType<T> registerEntityType(Identifier id, EntityType.EntityFactory<T> factory, float width, float height, int maxTrackingRange, int trackingTickInterval) {
+        return Registry.register(Registries.ENTITY_TYPE, id,
+                EntityType.Builder.create(factory, SpawnGroup.MISC)
+                        .setDimensions(width, height)
+                        .maxTrackingRange(maxTrackingRange)
+                        .trackingTickInterval(trackingTickInterval)
+                        .build(id.toString()));
     }
 
 }

@@ -7,6 +7,8 @@ import org.abos.fabricmc.magic.MagicContent;
 public class MagicClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(MagicContent.SMALL_MAGIC_MISSILE_ENTITY_TYPE, (context) -> new MagicMissileEntityRenderer<>(context));
+        EntityRendererRegistry.register(MagicContent.SMALL_EARTH_MISSILE_ENTITY_TYPE, (context) -> new MagicMissileEntityRenderer<>(context));
+        EntityRendererRegistry.register(MagicContent.MEDIUM_EARTH_MISSILE_ENTITY_TYPE, (context) -> new MagicMissileEntityRenderer<>(context));
+        EntityRendererRegistry.register(MagicContent.BIG_EARTH_MISSILE_ENTITY_TYPE, (context) -> new MagicMissileEntityRenderer<>(context));
     }
 }

@@ -1,27 +1,30 @@
 package org.abos.fabricmc.magic.entities;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.ProjectileDamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
-public class MagicMissileEntity extends PersistentProjectileEntity {
+public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
     private int maxAge = 50;
 
-    public MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, World world) {
+    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, World world) {
         super(type, world);
     }
 
-    public MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, LivingEntity owner, World world) {
+    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, LivingEntity owner, World world) {
         super(type, owner, world);
-    }
-
-    public MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, double x, double y, double z, World world) {
-        super(type, x, y, z, world);
     }
 
     public int getMaxAge() {
@@ -43,6 +46,52 @@ public class MagicMissileEntity extends PersistentProjectileEntity {
         }
     }
 
+    protected DamageSource getDamageSource(Entity attacker) {
+        return new ProjectileDamageSource("magic", this, attacker).setProjectile();
+    }
+
+    @Override
+    protected void onEntityHit(EntityHitResult entityHitResult) {
+        DamageSource damageSource = getDamageSource(getOwner() == null ? this : getOwner());
+        if (getOwner() instanceof LivingEntity) {
+            ((LivingEntity)getOwner()).onAttacking(entityHitResult.getEntity());
+        }
+
+        Entity entity = entityHitResult.getEntity();
+
+        if (entity.damage(damageSource, (float)getDamage())) {
+            if (entity.getType() == EntityType.ENDERMAN) {
+                return;
+            }
+
+            if (entity instanceof LivingEntity livingEntity) {
+
+                if (!this.world.isClient && getOwner() instanceof LivingEntity) {
+                    EnchantmentHelper.onUserDamaged(livingEntity, getOwner());
+                    EnchantmentHelper.onTargetDamaged((LivingEntity)getOwner(), livingEntity);
+                }
+
+                this.onHit(livingEntity);
+                if (getOwner() != null && livingEntity != getOwner() && livingEntity instanceof PlayerEntity && getOwner() instanceof ServerPlayerEntity && !this.isSilent()) {
+                    ((ServerPlayerEntity)getOwner()).networkHandler.sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, 0.0F));
+                }
+            }
+
+            // this.playSound(this.sound, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+            if (this.getPierceLevel() <= 0) {
+                this.discard();
+            }
+        } else {
+            // entity.setFireTicks(j);
+            this.setVelocity(this.getVelocity().multiply(-0.1));
+            this.setYaw(this.getYaw() + 180.0F);
+            this.prevYaw += 180.0F;
+            if (!this.world.isClient && this.getVelocity().lengthSquared() < 1.0E-7) {
+                this.discard();
+            }
+        }
+    }
+
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
@@ -59,5 +108,15 @@ public class MagicMissileEntity extends PersistentProjectileEntity {
     @Override
     protected ItemStack asItemStack() {
         return ItemStack.EMPTY;
+    }
+
+    @Override
+    public boolean isShotFromCrossbow() {
+        return false;
+    }
+
+    @Override
+    public boolean isCritical() {
+        return false;
     }
 }
