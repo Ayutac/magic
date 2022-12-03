@@ -13,13 +13,16 @@
     "sources": "https://github.com/Ayutac/magic"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/magic/textures/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
       "org.abos.fabricmc.magic.Magic"
+    ],
+    "client": [
+      "org.abos.fabricmc.magic.client.MagicClient"
     ]
   },
   "mixins": [
