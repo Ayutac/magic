@@ -12,6 +12,6 @@ public class MagicClient implements ClientModInitializer {
         EntityRendererRegistry.register(MagicContent.MEDIUM_EARTH_MISSILE_ENTITY_TYPE, (context) -> new MagicMissileEntityRenderer<>(context));
         EntityRendererRegistry.register(MagicContent.BIG_EARTH_MISSILE_ENTITY_TYPE, (context) -> new MagicMissileEntityRenderer<>(context));
 
-        HandledScreens.register(MagicContent.ALTAR_SCREEN_HANDLER, AltarScreen::new);
+        HandledScreens.register(MagicContent.ALTAR_SCREEN_HANDLER_TYPE, AltarScreen::new);
     }
 }

@@ -16,7 +16,7 @@ public class AltarScreenHandler extends ScreenHandler {
     }
 
     public AltarScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(null, syncId);
+        super(MagicContent.ALTAR_SCREEN_HANDLER_TYPE, syncId);
         checkSize(inventory, 1);
         this.inventory = inventory;
 
