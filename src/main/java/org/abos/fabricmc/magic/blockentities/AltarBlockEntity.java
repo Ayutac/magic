@@ -13,6 +13,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import org.abos.fabricmc.magic.AltarScreenHandler;
 import org.abos.fabricmc.magic.MagicContent;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +42,7 @@ public class AltarBlockEntity extends BlockEntity implements NamedScreenHandlerF
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return null;
+        return new AltarScreenHandler(syncId, inv);
     }
 
     @Override
