@@ -5,12 +5,16 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.abos.fabricmc.magic.AltarScreenHandler;
 import org.abos.fabricmc.magic.blockentities.AltarBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,6 +28,23 @@ public class AltarBlock extends BlockWithEntity {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new AltarBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+        return new NamedScreenHandlerFactory() {
+            @Override
+            public Text getDisplayName() {
+                return Text.literal("test");
+            }
+
+            @Nullable
+            @Override
+            public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+                return new AltarScreenHandler(syncId, inv);
+            }
+        };
     }
 
     @Override
