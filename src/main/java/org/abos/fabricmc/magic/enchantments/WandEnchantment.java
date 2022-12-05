@@ -6,20 +6,15 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import org.abos.fabricmc.magic.items.WandItem;
 
-public abstract class WandEnchantment extends Enchantment {
+public class WandEnchantment extends Enchantment {
 
-    protected WandEnchantment(Rarity weight) {
+    public WandEnchantment(Rarity weight) {
         super(weight, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.getItem() instanceof WandItem;
-    }
-
-    @Override
-    public boolean isAvailableForRandomSelection() {
-        return super.isAvailableForRandomSelection();
     }
 
     @Override
