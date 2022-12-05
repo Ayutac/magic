@@ -9,10 +9,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.MagicContent;
-import org.abos.fabricmc.magic.entities.BigEarthMissileEntity;
-import org.abos.fabricmc.magic.entities.MagicMissileEntity;
-import org.abos.fabricmc.magic.entities.MediumEarthMissileEntity;
-import org.abos.fabricmc.magic.entities.SmallEarthMissileEntity;
+import org.abos.fabricmc.magic.entities.*;
 
 public class WandItem extends ToolItem {
 
@@ -26,14 +23,41 @@ public class WandItem extends ToolItem {
         if (!world.isClient) {
             ItemStack stack = user.getStackInHand(hand);
             MagicMissileEntity ballEntity;
-            if (EnchantmentHelper.getLevel(MagicContent.SMALL_EARTH_MISSILE_ENCHANTMENT, stack) > 0) {
-                ballEntity = SmallEarthMissileEntity.create(world, user);
+            if (EnchantmentHelper.getLevel(MagicContent.SMALL_AIR_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = SmallAirMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_AIR_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = MediumAirMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.BIG_AIR_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = BigAirMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.SMALL_EARTH_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = BigEarthMissileEntity.create(world, user);
             }
             else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_EARTH_MISSILE_ENCHANTMENT, stack) > 0) {
                 ballEntity = MediumEarthMissileEntity.create(world, user);
             }
             else if (EnchantmentHelper.getLevel(MagicContent.BIG_EARTH_MISSILE_ENCHANTMENT, stack) > 0) {
                 ballEntity = BigEarthMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.SMALL_FIRE_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = BigFireMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_FIRE_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = MediumFireMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.BIG_FIRE_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = BigFireMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.SMALL_WATER_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = BigWaterMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_WATER_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = MediumWaterMissileEntity.create(world, user);
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.BIG_WATER_MISSILE_ENCHANTMENT, stack) > 0) {
+                ballEntity = BigWaterMissileEntity.create(world, user);
             }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
