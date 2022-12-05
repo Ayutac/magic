@@ -20,6 +20,11 @@ public class WandItem extends Item {
     }
 
     @Override
+    public boolean isDamageable() {
+        return true;
+    }
+
+    @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 
         if (!world.isClient) {

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -16,6 +17,7 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.blockentities.AltarBlockEntity;
 import org.abos.fabricmc.magic.blocks.AltarBlock;
+import org.abos.fabricmc.magic.enchantments.SmallEarthMissileEnchantment;
 import org.abos.fabricmc.magic.entities.BigEarthMissileEntity;
 import org.abos.fabricmc.magic.entities.MediumEarthMissileEntity;
 import org.abos.fabricmc.magic.entities.SmallEarthMissileEntity;
@@ -38,6 +40,8 @@ public class MagicContent {
     public final static Identifier BIG_EARTH_MISSILE_ENTITY_TYPE_ID = new Identifier(Magic.MOD_ID, "big_earth_missile");
     public final static EntityType<BigEarthMissileEntity> BIG_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(BIG_EARTH_MISSILE_ENTITY_TYPE_ID, BigEarthMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
 
+    public final static Enchantment SMALL_EARTH_MISSILE_ENCHANTMENT = new SmallEarthMissileEnchantment();
+
     public final static ScreenHandlerType<AltarScreenHandler> ALTAR_SCREEN_HANDLER_TYPE = Registry.register(Registries.SCREEN_HANDLER, ALTAR_ID, new ScreenHandlerType(AltarScreenHandler::new));
 
     private MagicContent() {
@@ -46,10 +50,15 @@ public class MagicContent {
 
     public static void init() {
         registerItems();
+        registerEnchantments();
     }
 
     private static void registerItems() {
         Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "beginner_wand"), BEGINNER_WAND);
+    }
+
+    private static void registerEnchantments() {
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "small_earth_missile"), SMALL_EARTH_MISSILE_ENCHANTMENT);
     }
 
     private static <T extends Entity> EntityType<T> registerEntityType(Identifier id, EntityType.EntityFactory<T> factory, float width, float height, int maxTrackingRange, int trackingTickInterval) {
