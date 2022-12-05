@@ -2,8 +2,9 @@ package org.abos.fabricmc.magic.items;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -11,15 +12,10 @@ import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.entities.MagicMissileEntity;
 import org.abos.fabricmc.magic.entities.SmallEarthMissileEntity;
 
-public class WandItem extends Item {
+public class WandItem extends ToolItem {
 
-    public WandItem(Settings settings) {
-        super(settings.maxCount(1));
-    }
-
-    @Override
-    public boolean isDamageable() {
-        return true;
+    public WandItem(ToolMaterial material, Settings settings) {
+        super(material, settings);
     }
 
     @Override
@@ -35,6 +31,7 @@ public class WandItem extends Item {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
             world.spawnEntity(ballEntity);
+            stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
             return TypedActionResult.consume(user.getStackInHand(hand));
         }
         return TypedActionResult.pass(user.getStackInHand(hand));

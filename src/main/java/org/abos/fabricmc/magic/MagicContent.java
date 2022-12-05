@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenHandlerType;
@@ -26,7 +27,7 @@ import org.abos.fabricmc.magic.utils.MissileSize;
 
 public class MagicContent {
 
-    public final static WandItem BEGINNER_WAND = new WandItem(new FabricItemSettings());
+    public final static WandItem BEGINNER_WAND = new WandItem(ToolMaterials.IRON, new FabricItemSettings());
 
     public final static Identifier ALTAR_ID = new Identifier(Magic.MOD_ID, "altar");
     public final static Block ALTAR_BLOCK = Registry.register(Registries.BLOCK, ALTAR_ID, new AltarBlock(FabricBlockSettings.copyOf(Blocks.LECTERN)));

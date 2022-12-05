@@ -2,7 +2,6 @@ package org.abos.fabricmc.magic.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.enchantment.MendingEnchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import org.abos.fabricmc.magic.items.WandItem;
@@ -10,12 +9,17 @@ import org.abos.fabricmc.magic.items.WandItem;
 public abstract class WandEnchantment extends Enchantment {
 
     protected WandEnchantment(Rarity weight) {
-        super(weight, EnchantmentTarget.BREAKABLE, new EquipmentSlot[0]);
+        super(weight, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.getItem() instanceof WandItem;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return super.isAvailableForRandomSelection();
     }
 
     @Override
