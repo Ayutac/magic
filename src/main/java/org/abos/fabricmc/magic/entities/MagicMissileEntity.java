@@ -7,15 +7,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.ProjectileDamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
-public abstract class MagicMissileEntity extends PersistentProjectileEntity {
+public abstract class MagicMissileEntity extends ProjectileEntity {
 
     private int maxAge = 50;
 
@@ -24,7 +23,8 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
     }
 
     protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, LivingEntity owner, World world) {
-        super(type, owner, world);
+        this(type, world);
+        setOwner(owner);
     }
 
     public int getMaxAge() {
@@ -39,6 +39,9 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
     }
 
     @Override
+    protected void initDataTracker() {}
+
+    @Override
     public void tick() {
         super.tick();
         if (age > getMaxAge()) {
@@ -50,6 +53,8 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
         return new ProjectileDamageSource("magic", this, attacker).setProjectile();
     }
 
+    protected abstract float getDamage();
+
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         DamageSource damageSource = getDamageSource(getOwner() == null ? this : getOwner());
@@ -59,7 +64,7 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
         Entity entity = entityHitResult.getEntity();
 
-        if (entity.damage(damageSource, (float)getDamage())) {
+        if (entity.damage(damageSource, getDamage())) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
@@ -71,16 +76,13 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
                     EnchantmentHelper.onTargetDamaged((LivingEntity)getOwner(), livingEntity);
                 }
 
-                this.onHit(livingEntity);
+                //this.onHit(livingEntity);
                 if (getOwner() != null && livingEntity != getOwner() && livingEntity instanceof PlayerEntity && getOwner() instanceof ServerPlayerEntity && !this.isSilent()) {
                     ((ServerPlayerEntity)getOwner()).networkHandler.sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, 0.0F));
                 }
             }
 
             // this.playSound(this.sound, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
-            if (this.getPierceLevel() <= 0) {
-                this.discard();
-            }
         } else {
             // entity.setFireTicks(j);
             this.setVelocity(this.getVelocity().multiply(-0.1));
@@ -100,23 +102,8 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
     @Override
     public void onPlayerCollision(PlayerEntity player) {
-        if (!world.isClient && (inGround || isNoClip()) && shake <= 0) {
+        if (!world.isClient) {
             discard();
         }
-    }
-
-    @Override
-    protected ItemStack asItemStack() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public boolean isShotFromCrossbow() {
-        return false;
-    }
-
-    @Override
-    public boolean isCritical() {
-        return false;
     }
 }
