@@ -8,12 +8,15 @@ import org.abos.fabricmc.magic.entities.MagicMissileEntity;
 
 public class MagicMissileEntityRenderer<T extends MagicMissileEntity> extends ProjectileEntityRenderer<T> {
 
-    public MagicMissileEntityRenderer(EntityRendererFactory.Context context) {
+    private final String fileName;
+
+    public MagicMissileEntityRenderer(EntityRendererFactory.Context context, String fileName) {
         super(context);
+        this.fileName = fileName;
     }
 
     @Override
     public Identifier getTexture(T entity) {
-        return new Identifier(Magic.MOD_ID, "textures/entities/projectiles/small_earth_missile.png");
+        return new Identifier(Magic.MOD_ID, "textures/entities/projectiles/" + fileName);
     }
 }
