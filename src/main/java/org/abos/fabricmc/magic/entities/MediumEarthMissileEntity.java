@@ -21,11 +21,7 @@ public class MediumEarthMissileEntity extends MagicMissileEntity {
 
     private void finishConstructor() {
         setMaxAge(20*60);
-    }
-
-    @Override
-    protected float getDamage() {
-        return 6f;
+        this.setDamage(6d);
     }
 
     public static MediumEarthMissileEntity create(World world, PlayerEntity user) {
