@@ -2,7 +2,7 @@ package org.abos.fabricmc.magic.utils;
 
 public enum MissileSize {
 
-    SMALL(0.5f, 0.5f, 8f, 0.05f),
+    SMALL(0.5f, 0.5f, 7f, 0.05f),
     MEDIUM(1f, 1f, 5f, 0.2f),
     BIG(1.5f, 1.5f, 3f, 0.5f);
 
