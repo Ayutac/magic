@@ -19,12 +19,12 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
     private int maxAge = 50;
 
-    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, LivingEntity owner, World world) {
-        super(type, owner, world);
+    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, World world) {
+        super(type, world);
     }
 
-    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, World world) {
-        this(type, null, world);
+    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, LivingEntity owner, World world) {
+        super(type, owner, world);
     }
 
     public int getMaxAge() {
