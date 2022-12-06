@@ -23,6 +23,7 @@ public class BigAirMissileEntity extends MagicMissileEntity {
     private void finishConstructor() {
         setMaxAge(20*60);
         setDamage(3d);
+        setNoGravity(true);
         setSound(SoundEvents.ENTITY_PHANTOM_FLAP);
     }
 

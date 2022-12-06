@@ -24,6 +24,7 @@ public class MediumFireMissileEntity extends MagicMissileEntity {
         setMaxAge(20*60);
         setDamage(4d);
         setFireTicks(5);
+        setNoGravity(true);
         setSound(SoundEvents.ENTITY_BLAZE_SHOOT);
     }
 
