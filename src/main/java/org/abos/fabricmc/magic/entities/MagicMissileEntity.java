@@ -89,12 +89,7 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
-            if (isExtinguishing() & entity.getFireTicks() > 0) {
-                entity.extinguishWithSound();
-            }
-            if (getFireTicks() > entity.getFireTicks()) {
-                entity.setFireTicks(getFireTicks());
-            }
+            applyEntityEffects(entity);
 
             if (entity instanceof LivingEntity livingEntity) {
 
@@ -123,9 +118,16 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
         }
     }
 
-    @Override
-    protected void onBlockHit(BlockHitResult blockHitResult) {
-        super.onBlockHit(blockHitResult);
+    protected void applyEntityEffects(Entity target) {
+        if (isExtinguishing() & target.getFireTicks() > 0) {
+            target.extinguishWithSound();
+        }
+        if (getFireTicks() > target.getFireTicks()) {
+            target.setFireTicks(getFireTicks());
+        }
+    }
+
+    protected void applyBlockEffects(BlockHitResult blockHitResult) {
         if (isExtinguishing()) {
             // TODO extinguish fires, including camp fires
         }
@@ -136,6 +138,12 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
                 world.setBlockState(blockPos2, blockState2, 11); // set on fire
             }
         }
+    }
+
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        super.onBlockHit(blockHitResult);
+        applyBlockEffects(blockHitResult);
         kill();
     }
 
