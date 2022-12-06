@@ -1,5 +1,7 @@
 package org.abos.fabricmc.magic.entities;
 
+import net.minecraft.block.AbstractFireBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -13,11 +15,14 @@ import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
     private int maxAge = 50;
+    private boolean extinguishing = false;
+    private int fireTicks = 0;
 
     protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, World world) {
         super(type, world);
@@ -36,6 +41,27 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
             throw new IllegalArgumentException("Max age must be positive!");
         }
         this.maxAge = maxAge;
+    }
+
+    public boolean isExtinguishing() {
+        return extinguishing;
+    }
+
+    public void setExtinguishing(boolean extinguishing) {
+        this.extinguishing = extinguishing;
+    }
+
+    @Override
+    public int getFireTicks() {
+        return fireTicks;
+    }
+
+    @Override
+    public void setFireTicks(int fireTicks) {
+        if (fireTicks < 0) {
+            throw new IllegalArgumentException("Max age must be non-negative!");
+        }
+        this.fireTicks = fireTicks;
     }
 
     @Override
@@ -63,6 +89,12 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
+            if (isExtinguishing() & entity.getFireTicks() > 0) {
+                entity.extinguishWithSound();
+            }
+            if (getFireTicks() > entity.getFireTicks()) {
+                entity.setFireTicks(getFireTicks());
+            }
 
             if (entity instanceof LivingEntity livingEntity) {
 
@@ -82,7 +114,6 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
                 this.discard();
             }
         } else {
-            // entity.setFireTicks(j);
             this.setVelocity(this.getVelocity().multiply(-0.1));
             this.setYaw(this.getYaw() + 180.0F);
             this.prevYaw += 180.0F;
@@ -95,6 +126,13 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
+        if (getFireTicks() > 0) {
+            BlockPos blockPos2 = blockHitResult.getBlockPos().offset(blockHitResult.getSide());
+            if (AbstractFireBlock.canPlaceAt(world, blockPos2, blockHitResult.getSide())) {
+                BlockState blockState2 = AbstractFireBlock.getState(world, blockPos2);
+                world.setBlockState(blockPos2, blockState2, 11); // set on fire
+            }
+        }
         kill();
     }
 

@@ -23,6 +23,7 @@ public class SmallWaterMissileEntity extends MagicMissileEntity {
     private void finishConstructor() {
         setMaxAge(20*60);
         setDamage(0d);
+        setExtinguishing(true);
         setSound(SoundEvents.ITEM_BUCKET_EMPTY);
     }
 

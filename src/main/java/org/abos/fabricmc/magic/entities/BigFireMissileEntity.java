@@ -23,6 +23,7 @@ public class BigFireMissileEntity extends MagicMissileEntity {
     private void finishConstructor() {
         setMaxAge(20*60);
         setDamage(10d);
+        setFireTicks(10);
         setSound(SoundEvents.ENTITY_BLAZE_SHOOT);
     }
 
