@@ -126,6 +126,9 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
+        if (isExtinguishing()) {
+            // TODO extinguish fires, including camp fires
+        }
         if (getFireTicks() > 0) {
             BlockPos blockPos2 = blockHitResult.getBlockPos().offset(blockHitResult.getSide());
             if (AbstractFireBlock.canPlaceAt(world, blockPos2, blockHitResult.getSide())) {
