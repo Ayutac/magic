@@ -24,6 +24,7 @@ public class SmallAirMissileEntity extends MagicMissileEntity {
         setMaxAge(20*60);
         setDamage(0d);
         setNoGravity(true);
+        setKnockupSpeed(0.4f);
         setSound(SoundEvents.ENTITY_PHANTOM_SWOOP);
     }
 

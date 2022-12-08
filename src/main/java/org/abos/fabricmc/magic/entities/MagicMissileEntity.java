@@ -16,6 +16,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public abstract class MagicMissileEntity extends PersistentProjectileEntity {
@@ -23,6 +24,8 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
     private int maxAge = 50;
     private boolean extinguishing = false;
     private int fireTicks = 0;
+
+    private float knockupSpeed = 0f;
 
     protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, World world) {
         super(type, world);
@@ -59,9 +62,20 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
     @Override
     public void setFireTicks(int fireTicks) {
         if (fireTicks < 0) {
-            throw new IllegalArgumentException("Max age must be non-negative!");
+            throw new IllegalArgumentException("Fire ticks must be non-negative!");
         }
         this.fireTicks = fireTicks;
+    }
+
+    public float getKnockupSpeed() {
+        return knockupSpeed;
+    }
+
+    public void setKnockupSpeed(float knockupSpeed) {
+        if (knockupSpeed < 0) {
+            throw new IllegalArgumentException("Knockup speed must be non-negative!");
+        }
+        this.knockupSpeed = knockupSpeed;
     }
 
     @Override
@@ -85,7 +99,7 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
         Entity entity = entityHitResult.getEntity();
 
-        if (entity.damage(damageSource, (float)getDamage())) {
+        if (entity.damage(damageSource, calculateDamageOn(entity))) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
@@ -118,12 +132,22 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
         }
     }
 
+    protected float calculateDamageOn(Entity entity) {
+        if (entity.getType() == EntityType.BLAZE && isExtinguishing()) {
+            return (float)(getDamage()*2);
+        }
+        return (float)getDamage();
+    }
+
     protected void applyEntityEffects(Entity target) {
         if (isExtinguishing() & target.getFireTicks() > 0) {
             target.extinguishWithSound();
         }
         if (getFireTicks() > target.getFireTicks()) {
             target.setFireTicks(getFireTicks());
+        }
+        if (getKnockupSpeed() != 0) {
+            target.addVelocity(new Vec3d(0d, getKnockupSpeed(), 0d));
         }
     }
 
@@ -137,6 +161,9 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
                 BlockState blockState2 = AbstractFireBlock.getState(world, blockPos2);
                 world.setBlockState(blockPos2, blockState2, 11); // set on fire
             }
+        }
+        if (getKnockupSpeed() != 0) {
+            // TODO detachable blocks like torches should fall off
         }
     }
 
