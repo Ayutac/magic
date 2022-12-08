@@ -25,7 +25,7 @@ public class SmallAirMissileEntity extends MagicMissileEntity {
         setDamage(0d);
         setNoGravity(true);
         setKnockupSpeed(0.4f);
-        setSound(SoundEvents.ENTITY_PHANTOM_SWOOP);
+        setSound(SoundEvents.ENTITY_PHANTOM_FLAP);
     }
 
     public static SmallAirMissileEntity create(World world, PlayerEntity user) {
