@@ -1,0 +1,18 @@
+{
+  "itemGroup.magic.item_group": "Magic",
+
+  "item.magic.beginner_wand": "Beginner Wand",
+
+  "enchantment.magic.small_air_missile": "Air Bolt",
+  "enchantment.magic.medium_air_missile": "Air Orb",
+  "enchantment.magic.big_air_missile": "Air Ball",
+  "enchantment.magic.small_earth_missile": "Earth Bolt",
+  "enchantment.magic.medium_earth_missile": "Earth Orb",
+  "enchantment.magic.big_earth_missile": "Earth Ball",
+  "enchantment.magic.small_fire_missile": "Fire Bolt",
+  "enchantment.magic.medium_fire_missile": "Fire Orb",
+  "enchantment.magic.big_fire_missile": "Fire Ball",
+  "enchantment.magic.small_water_missile": "Water Bolt",
+  "enchantment.magic.medium_water_missile": "Water Orb",
+  "enchantment.magic.big_water_missile": "Water Ball"
+}
