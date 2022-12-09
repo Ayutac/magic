@@ -6,11 +6,13 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
@@ -119,11 +121,11 @@ public class MagicContent {
 
     private static <T extends Entity> EntityType<T> registerEntityType(Identifier id, EntityType.EntityFactory<T> factory, float width, float height, int maxTrackingRange, int trackingTickInterval) {
         return Registry.register(Registries.ENTITY_TYPE, id,
-                EntityType.Builder.create(factory, SpawnGroup.MISC)
-                        .setDimensions(width, height)
-                        .maxTrackingRange(maxTrackingRange)
-                        .trackingTickInterval(trackingTickInterval)
-                        .build(id.toString()));
+                FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory)
+                        .dimensions(new EntityDimensions(width, height, true))
+                        .trackRangeBlocks(maxTrackingRange)
+                        .trackedUpdateRate(trackingTickInterval)
+                        .build());
     }
 
     private static void registerItemGroup(FabricItemGroupEntries entries) {
