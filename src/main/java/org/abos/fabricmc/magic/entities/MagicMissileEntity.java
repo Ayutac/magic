@@ -1,7 +1,9 @@
 package org.abos.fabricmc.magic.entities;
 
+import net.minecraft.block.AbstractCandleBlock;
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -12,6 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -153,7 +156,18 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
     protected void applyBlockEffects(BlockHitResult blockHitResult) {
         if (isExtinguishing()) {
-            // TODO extinguish fires, including camp fires
+            BlockPos pos = blockHitResult.getBlockPos();
+            BlockState blockState = world.getBlockState(pos);
+            if (blockState.isIn(BlockTags.FIRE)) {
+                this.world.removeBlock(blockHitResult.getBlockPos(), false);
+            }
+            else if (AbstractCandleBlock.isLitCandle(blockState)) {
+                AbstractCandleBlock.extinguish(null, blockState, world, pos);
+            } else if (CampfireBlock.isLitCampfire(blockState)) {
+                this.world.syncWorldEvent(null, 1009, pos, 0);
+                CampfireBlock.extinguish(getOwner(), world, pos, blockState);
+                this.world.setBlockState(pos, blockState.with(CampfireBlock.LIT, false));
+            }
         }
         if (getFireTicks() > 0) {
             BlockPos blockPos2 = blockHitResult.getBlockPos().offset(blockHitResult.getSide());
