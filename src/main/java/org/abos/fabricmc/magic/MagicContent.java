@@ -1,6 +1,9 @@
 package org.abos.fabricmc.magic;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
@@ -10,8 +13,11 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ToolMaterials;
+import net.minecraft.item.*;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtInt;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtString;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenHandlerType;
@@ -26,6 +32,10 @@ import org.abos.fabricmc.magic.utils.MissileSize;
 public class MagicContent {
 
     public final static WandItem BEGINNER_WAND = new WandItem(ToolMaterials.IRON, new FabricItemSettings());
+
+    public static final ItemGroup ITEM_GROUP = FabricItemGroup.builder(new Identifier(Magic.MOD_ID, "item_group"))
+            .icon(() -> new ItemStack(BEGINNER_WAND))
+            .build();
 
     public final static Identifier ALTAR_ID = new Identifier(Magic.MOD_ID, "altar");
     public final static Identifier SMALL_AIR_MISSILE_ID = new Identifier(Magic.MOD_ID, "small_air_missile");
@@ -80,6 +90,7 @@ public class MagicContent {
     public static void init() {
         registerItems();
         registerEnchantments();
+        registerCreativeMenu();
     }
 
     private static void registerItems() {
@@ -101,6 +112,11 @@ public class MagicContent {
         Registry.register(Registries.ENCHANTMENT, BIG_WATER_MISSILE_ID, BIG_WATER_MISSILE_ENCHANTMENT);
     }
 
+    private static void registerCreativeMenu() {
+        ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register(MagicContent::registerItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(MagicContent::registerCombat);
+    }
+
     private static <T extends Entity> EntityType<T> registerEntityType(Identifier id, EntityType.EntityFactory<T> factory, float width, float height, int maxTrackingRange, int trackingTickInterval) {
         return Registry.register(Registries.ENTITY_TYPE, id,
                 EntityType.Builder.create(factory, SpawnGroup.MISC)
@@ -108,6 +124,33 @@ public class MagicContent {
                         .maxTrackingRange(maxTrackingRange)
                         .trackingTickInterval(trackingTickInterval)
                         .build(id.toString()));
+    }
+
+    private static void registerItemGroup(FabricItemGroupEntries entries) {
+        entries.add(BEGINNER_WAND);
+
+        String transKey;
+        ItemStack book;
+        NbtList list;
+        NbtCompound spell;
+        for (Enchantment enchantment : Registries.ENCHANTMENT) {
+            transKey = enchantment.getTranslationKey();
+            if (transKey.startsWith("enchantment."+Magic.MOD_ID+".")) {
+                spell = new NbtCompound();
+                spell.put("id", NbtString.of(transKey.substring(transKey.indexOf('.')+1).replace('.',':')));
+                spell.put("lvl", NbtInt.of(1));
+                list = new NbtList();
+                list.add(spell);
+                book = new ItemStack(Items.ENCHANTED_BOOK);
+                book.setSubNbt("StoredEnchantments", list);
+                entries.add(book);
+            }
+        }
+    }
+
+    private static void registerCombat(FabricItemGroupEntries entries) {
+        entries.addBefore(Items.SHIELD,
+                BEGINNER_WAND);
     }
 
 }
