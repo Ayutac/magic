@@ -131,19 +131,15 @@ public class MagicContent {
     private static void registerItemGroup(FabricItemGroupEntries entries) {
         entries.add(BEGINNER_WAND);
 
-        String transKey;
-        ItemStack book;
-        NbtList list;
-        NbtCompound spell;
         for (Enchantment enchantment : Registries.ENCHANTMENT) {
-            transKey = enchantment.getTranslationKey();
-            if (transKey.startsWith("enchantment."+Magic.MOD_ID+".")) {
-                spell = new NbtCompound();
-                spell.put("id", NbtString.of(transKey.substring(transKey.indexOf('.')+1).replace('.',':')));
+            Identifier id = Registries.ENCHANTMENT.getId(enchantment);
+            if (id.getNamespace().equals(Magic.MOD_ID)) {
+                NbtCompound spell = new NbtCompound();
+                spell.put("id", NbtString.of(id.toString()));
                 spell.put("lvl", NbtInt.of(1));
-                list = new NbtList();
+                NbtList list = new NbtList();
                 list.add(spell);
-                book = new ItemStack(Items.ENCHANTED_BOOK);
+                ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
                 book.setSubNbt("StoredEnchantments", list);
                 entries.add(book);
             }
