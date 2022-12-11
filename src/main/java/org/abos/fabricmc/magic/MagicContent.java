@@ -198,7 +198,7 @@ public class MagicContent {
         arrow = new ItemStack(Items.TIPPED_ARROW);
         PotionUtil.setPotion(arrow, STRONG_MANA_POTION);
         entries.add(arrow);
-        new ItemStack(Items.TIPPED_ARROW);
+        arrow = new ItemStack(Items.TIPPED_ARROW);
         PotionUtil.setPotion(arrow, MANA_DRAIN_POTION);
         entries.add(arrow);
         arrow = new ItemStack(Items.TIPPED_ARROW);
