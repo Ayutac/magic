@@ -1,8 +1,9 @@
 package org.abos.fabricmc.magic.cca;
 
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.abos.fabricmc.magic.Magic;
 
-public class ManaComponent implements NatMaxComponent {
+public class ManaComponent implements NatMaxComponent, AutoSyncedComponent {
 
     public static final int MAX_MANA = 100;
 
@@ -47,4 +48,5 @@ public class ManaComponent implements NatMaxComponent {
     public String getMaxKey() {
         return Magic.MAX_MANA_ID.toString();
     }
+
 }
