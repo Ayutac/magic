@@ -223,7 +223,10 @@ public class MagicContent {
 
     private static void registerCombat(FabricItemGroupEntries entries) {
         entries.addBefore(Items.SHIELD,
-                BEGINNER_WAND);
+                BEGINNER_WAND,
+                NOVICE_WAND,
+                EXPERT_WAND,
+                MASTER_WAND);
     }
 
 }
