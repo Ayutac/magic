@@ -32,8 +32,8 @@ public class MagicClient implements ClientModInitializer {
             public void onHudRender(MatrixStack matrixStack, float tickDelta) {
                 PlayerEntity player = MinecraftClient.getInstance().player;
                 if (player != null) {
-                    int manaMax = Magic.MANA.get(player).getMax();
-                    int mana = Magic.MANA.get(player).getValue();
+                    int manaMax = Magic.MANA.get(player).getMax() / 10;
+                    int mana = Magic.MANA.get(player).getValue() / 10;
                     int k = MinecraftClient.getInstance().getWindow().getScaledHeight() - 39;
                     int l = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2 + 91;
                     int m = k;
