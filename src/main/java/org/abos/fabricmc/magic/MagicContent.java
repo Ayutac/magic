@@ -4,12 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
@@ -22,10 +17,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
-import org.abos.fabricmc.magic.blockentities.AltarBlockEntity;
-import org.abos.fabricmc.magic.blocks.AltarBlock;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.items.WandItem;
@@ -39,7 +31,6 @@ public class MagicContent {
             .icon(() -> new ItemStack(BEGINNER_WAND))
             .build();
 
-    public final static Identifier ALTAR_ID = new Identifier(Magic.MOD_ID, "altar");
     public final static Identifier SMALL_AIR_MISSILE_ID = new Identifier(Magic.MOD_ID, "small_air_missile");
     public final static Identifier MEDIUM_AIR_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_air_missile");
     public final static Identifier BIG_AIR_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_air_missile");
@@ -52,10 +43,6 @@ public class MagicContent {
     public final static Identifier SMALL_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "small_water_missile");
     public final static Identifier MEDIUM_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_water_missile");
     public final static Identifier BIG_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_water_missile");
-
-    public final static Block ALTAR_BLOCK = Registry.register(Registries.BLOCK, ALTAR_ID, new AltarBlock(FabricBlockSettings.copyOf(Blocks.LECTERN)));
-    public final static BlockItem ALTAR_BLOCK_ITEM =  Registry.register(Registries.ITEM, ALTAR_ID, new BlockItem(ALTAR_BLOCK, new FabricItemSettings()));
-    public final static BlockEntityType<AltarBlockEntity> ALTAR_BLOCK_ENTITY_TYPE = Registry.register(Registries.BLOCK_ENTITY_TYPE, ALTAR_ID, FabricBlockEntityTypeBuilder.create(AltarBlockEntity::new, ALTAR_BLOCK).build(null));
 
     public final static EntityType<SmallAirMissileEntity> SMALL_AIR_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_AIR_MISSILE_ID, SmallAirMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
     public final static EntityType<MediumAirMissileEntity> MEDIUM_AIR_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_AIR_MISSILE_ID, MediumAirMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
@@ -82,8 +69,6 @@ public class MagicContent {
     public final static Enchantment SMALL_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON);
     public final static Enchantment MEDIUM_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE);
     public final static Enchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE);
-
-    public final static ScreenHandlerType<AltarScreenHandler> ALTAR_SCREEN_HANDLER_TYPE = Registry.register(Registries.SCREEN_HANDLER, ALTAR_ID, new ScreenHandlerType(AltarScreenHandler::new));
 
     private MagicContent() {
         /* No instantiation. */
