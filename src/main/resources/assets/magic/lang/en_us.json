@@ -19,5 +19,6 @@
   "effect.magic.instant_mana": "Instant Mana",
   "item.minecraft.potion.effect.magic.mana": "Potion of Mana",
   "item.minecraft.splash_potion.effect.magic.mana": "Splash Potion of Mana",
-  "item.minecraft.lingering_potion.effect.magic.mana": "Lingering Potion of Mana"
+  "item.minecraft.lingering_potion.effect.magic.mana": "Lingering Potion of Mana",
+  "item.minecraft.tipped_arrow.effect.magic.mana": "Arrow of Mana"
 }
