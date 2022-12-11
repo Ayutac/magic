@@ -57,18 +57,18 @@ public class MagicContent {
     public final static EntityType<MediumWaterMissileEntity> MEDIUM_WATER_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_WATER_MISSILE_ID, MediumWaterMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
     public final static EntityType<BigWaterMissileEntity> BIG_WATER_MISSILE_ENTITY_TYPE = registerEntityType(BIG_WATER_MISSILE_ID, BigWaterMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
 
-    public final static Enchantment SMALL_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON);
-    public final static Enchantment MEDIUM_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE);
-    public final static Enchantment BIG_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE);
-    public final static Enchantment SMALL_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON);
-    public final static Enchantment MEDIUM_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE);
-    public final static Enchantment BIG_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE);
-    public final static Enchantment SMALL_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON);
-    public final static Enchantment MEDIUM_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE);
-    public final static Enchantment BIG_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE);
-    public final static Enchantment SMALL_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON);
-    public final static Enchantment MEDIUM_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE);
-    public final static Enchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE);
+    public final static WandEnchantment SMALL_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
+    public final static WandEnchantment MEDIUM_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
+    public final static WandEnchantment BIG_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
+    public final static WandEnchantment SMALL_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
+    public final static WandEnchantment MEDIUM_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
+    public final static WandEnchantment BIG_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
+    public final static WandEnchantment SMALL_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
+    public final static WandEnchantment MEDIUM_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
+    public final static WandEnchantment BIG_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
+    public final static WandEnchantment SMALL_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
+    public final static WandEnchantment MEDIUM_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
+    public final static WandEnchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
 
     private MagicContent() {
         /* No instantiation. */
