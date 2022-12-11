@@ -14,5 +14,10 @@
   "enchantment.magic.big_fire_missile": "Fire Ball",
   "enchantment.magic.small_water_missile": "Water Bolt",
   "enchantment.magic.medium_water_missile": "Water Orb",
-  "enchantment.magic.big_water_missile": "Water Ball"
+  "enchantment.magic.big_water_missile": "Water Ball",
+
+  "effect.magic.instant_mana": "Instant Mana",
+  "item.minecraft.potion.effect.magic.mana": "Potion of Mana",
+  "item.minecraft.splash_potion.effect.magic.mana": "Splash Potion of Mana",
+  "item.minecraft.lingering_potion.effect.magic.mana": "Lingering Potion of Mana"
 }

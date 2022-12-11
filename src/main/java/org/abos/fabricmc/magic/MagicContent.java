@@ -10,14 +10,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.effect.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import org.abos.fabricmc.magic.effects.InstantManaEffect;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.items.WandItem;
@@ -44,6 +48,10 @@ public class MagicContent {
     public final static Identifier MEDIUM_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_water_missile");
     public final static Identifier BIG_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_water_missile");
 
+    public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
+
+    public final static Identifier STRONG_MANA_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana");
+
     public final static EntityType<SmallAirMissileEntity> SMALL_AIR_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_AIR_MISSILE_ID, SmallAirMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
     public final static EntityType<MediumAirMissileEntity> MEDIUM_AIR_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_AIR_MISSILE_ID, MediumAirMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
     public final static EntityType<BigAirMissileEntity> BIG_AIR_MISSILE_ENTITY_TYPE = registerEntityType(BIG_AIR_MISSILE_ID, BigAirMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
@@ -69,6 +77,12 @@ public class MagicContent {
     public final static WandEnchantment SMALL_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
     public final static WandEnchantment MEDIUM_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
     public final static WandEnchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
+
+    public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
+
+    public final static Potion MANA_POTION = Registry.register(Registries.POTION, MANA_POTION_ID, new Potion(Magic.MOD_ID+".mana", new StatusEffectInstance(INSTANT_MANA_EFFECT, 1)));
+    public final static Potion STRONG_MANA_POTION = Registry.register(Registries.POTION, STRONG_MANA_POTION_ID, new Potion(Magic.MOD_ID+".mana", new StatusEffectInstance(INSTANT_MANA_EFFECT, 1, 1)));
+
 
     private MagicContent() {
         /* No instantiation. */
@@ -115,6 +129,25 @@ public class MagicContent {
 
     private static void registerItemGroup(FabricItemGroupEntries entries) {
         entries.add(BEGINNER_WAND);
+
+        ItemStack potion = new ItemStack(Items.POTION);
+        PotionUtil.setPotion(potion, MANA_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.POTION);
+        PotionUtil.setPotion(potion, STRONG_MANA_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.SPLASH_POTION);
+        PotionUtil.setPotion(potion, MANA_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.SPLASH_POTION);
+        PotionUtil.setPotion(potion, STRONG_MANA_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.LINGERING_POTION);
+        PotionUtil.setPotion(potion, MANA_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.LINGERING_POTION);
+        PotionUtil.setPotion(potion, STRONG_MANA_POTION);
+        entries.add(potion);
 
         for (Enchantment enchantment : Registries.ENCHANTMENT) {
             Identifier id = Registries.ENCHANTMENT.getId(enchantment);
