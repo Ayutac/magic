@@ -23,12 +23,20 @@
     ],
     "client": [
       "org.abos.fabricmc.magic.client.MagicClient"
+    ],
+    "cardinal-components": [
+      "org.abos.fabricmc.magic.cca.CcaInitializer"
     ]
   },
   "mixins": [
     "magic.mixins.json"
   ],
   "accessWidener": "magic.accesswidener",
+  "custom": {
+    "cardinal-components": [
+      "magic:mana"
+    ]
+  },
 
   "depends": {
     "fabricloader": ">=0.14.11",
