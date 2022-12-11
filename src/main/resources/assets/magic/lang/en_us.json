@@ -23,5 +23,11 @@
   "item.minecraft.potion.effect.magic.mana": "Potion of Mana",
   "item.minecraft.splash_potion.effect.magic.mana": "Splash Potion of Mana",
   "item.minecraft.lingering_potion.effect.magic.mana": "Lingering Potion of Mana",
-  "item.minecraft.tipped_arrow.effect.magic.mana": "Arrow of Mana"
+  "item.minecraft.tipped_arrow.effect.magic.mana": "Arrow of Mana",
+
+  "effect.magic.instant_mana_drain": "Instant Mana Drain",
+  "item.minecraft.potion.effect.magic.mana_drain": "Potion of Mana Drain",
+  "item.minecraft.splash_potion.effect.magic.mana_drain": "Splash Potion of Mana Drain",
+  "item.minecraft.lingering_potion.effect.magic.mana_drain": "Lingering Potion of Mana Drain",
+  "item.minecraft.tipped_arrow.effect.magic.mana_drain": "Arrow of Mana Drain"
 }

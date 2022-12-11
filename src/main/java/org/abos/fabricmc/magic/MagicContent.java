@@ -54,8 +54,10 @@ public class MagicContent {
     public final static Identifier BIG_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_water_missile");
 
     public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
-
     public final static Identifier STRONG_MANA_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana");
+
+    public final static Identifier MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "mana_drain");
+    public final static Identifier STRONG_MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana_drain");
 
     public final static EntityType<SmallAirMissileEntity> SMALL_AIR_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_AIR_MISSILE_ID, SmallAirMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
     public final static EntityType<MediumAirMissileEntity> MEDIUM_AIR_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_AIR_MISSILE_ID, MediumAirMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
@@ -84,9 +86,12 @@ public class MagicContent {
     public final static WandEnchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
+    public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
 
     public final static Potion MANA_POTION = Registry.register(Registries.POTION, MANA_POTION_ID, new Potion(Magic.MOD_ID+".mana", new StatusEffectInstance(INSTANT_MANA_EFFECT, 1)));
     public final static Potion STRONG_MANA_POTION = Registry.register(Registries.POTION, STRONG_MANA_POTION_ID, new Potion(Magic.MOD_ID+".mana", new StatusEffectInstance(INSTANT_MANA_EFFECT, 1, 1)));
+    public final static Potion MANA_DRAIN_POTION = Registry.register(Registries.POTION, MANA_DRAIN_POTION_ID, new Potion(Magic.MOD_ID+".mana_drain", new StatusEffectInstance(INSTANT_MANA_DRAIN_EFFECT, 1)));
+    public final static Potion STRONG_MANA_DRAIN_POTION = Registry.register(Registries.POTION, STRONG_MANA_DRAIN_POTION_ID, new Potion(Magic.MOD_ID+".mana_drain", new StatusEffectInstance(INSTANT_MANA_DRAIN_EFFECT, 1, 1)));
 
 
     private MagicContent() {
@@ -110,6 +115,9 @@ public class MagicContent {
     private static void registerBrewingRecipes() {
         BrewingRecipeRegistry.registerPotionRecipe(Potions.AWKWARD, Items.LAPIS_LAZULI, MANA_POTION);
         BrewingRecipeRegistry.registerPotionRecipe(MANA_POTION, Items.GLOWSTONE_DUST, STRONG_MANA_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(MANA_POTION, Items.FERMENTED_SPIDER_EYE, MANA_DRAIN_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(MANA_DRAIN_POTION, Items.GLOWSTONE_DUST, STRONG_MANA_DRAIN_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(STRONG_MANA_POTION, Items.FERMENTED_SPIDER_EYE, STRONG_MANA_DRAIN_POTION);
     }
 
     private static void registerEnchantments() {
@@ -153,17 +161,35 @@ public class MagicContent {
         potion = new ItemStack(Items.POTION);
         PotionUtil.setPotion(potion, STRONG_MANA_POTION);
         entries.add(potion);
+        potion = new ItemStack(Items.POTION);
+        PotionUtil.setPotion(potion, MANA_DRAIN_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.POTION);
+        PotionUtil.setPotion(potion, STRONG_MANA_DRAIN_POTION);
+        entries.add(potion);
         potion = new ItemStack(Items.SPLASH_POTION);
         PotionUtil.setPotion(potion, MANA_POTION);
         entries.add(potion);
         potion = new ItemStack(Items.SPLASH_POTION);
         PotionUtil.setPotion(potion, STRONG_MANA_POTION);
         entries.add(potion);
+        potion = new ItemStack(Items.SPLASH_POTION);
+        PotionUtil.setPotion(potion, MANA_DRAIN_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.SPLASH_POTION);
+        PotionUtil.setPotion(potion, STRONG_MANA_DRAIN_POTION);
+        entries.add(potion);
         potion = new ItemStack(Items.LINGERING_POTION);
         PotionUtil.setPotion(potion, MANA_POTION);
         entries.add(potion);
         potion = new ItemStack(Items.LINGERING_POTION);
         PotionUtil.setPotion(potion, STRONG_MANA_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.LINGERING_POTION);
+        PotionUtil.setPotion(potion, MANA_DRAIN_POTION);
+        entries.add(potion);
+        potion = new ItemStack(Items.LINGERING_POTION);
+        PotionUtil.setPotion(potion, STRONG_MANA_DRAIN_POTION);
         entries.add(potion);
 
         ItemStack arrow = new ItemStack(Items.TIPPED_ARROW);
@@ -171,6 +197,12 @@ public class MagicContent {
         entries.add(arrow);
         arrow = new ItemStack(Items.TIPPED_ARROW);
         PotionUtil.setPotion(arrow, STRONG_MANA_POTION);
+        entries.add(arrow);
+        new ItemStack(Items.TIPPED_ARROW);
+        PotionUtil.setPotion(arrow, MANA_DRAIN_POTION);
+        entries.add(arrow);
+        arrow = new ItemStack(Items.TIPPED_ARROW);
+        PotionUtil.setPotion(arrow, STRONG_MANA_DRAIN_POTION);
         entries.add(arrow);
 
 
