@@ -18,6 +18,8 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
+import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -90,12 +92,18 @@ public class MagicContent {
 
     public static void init() {
         registerItems();
+        registerBrewingRecipes();
         registerEnchantments();
         registerCreativeMenu();
     }
 
     private static void registerItems() {
         Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "beginner_wand"), BEGINNER_WAND);
+    }
+
+    private static void registerBrewingRecipes() {
+        BrewingRecipeRegistry.registerPotionRecipe(Potions.AWKWARD, Items.LAPIS_LAZULI, MANA_POTION);
+        BrewingRecipeRegistry.registerPotionRecipe(MANA_POTION, Items.GLOWSTONE_DUST, STRONG_MANA_POTION);
     }
 
     private static void registerEnchantments() {
