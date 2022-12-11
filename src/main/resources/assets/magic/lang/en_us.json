@@ -2,6 +2,9 @@
   "itemGroup.magic.item_group": "Magic",
 
   "item.magic.beginner_wand": "Beginner Wand",
+  "item.magic.novice_wand": "Novice Wand",
+  "item.magic.expert_wand": "Expert Wand",
+  "item.magic.master_wand": "Master Wand",
 
   "enchantment.magic.small_air_missile": "Air Bolt",
   "enchantment.magic.medium_air_missile": "Air Orb",

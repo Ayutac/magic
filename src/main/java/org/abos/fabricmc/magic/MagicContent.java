@@ -31,7 +31,10 @@ import org.abos.fabricmc.magic.utils.MissileSize;
 
 public class MagicContent {
 
-    public final static WandItem BEGINNER_WAND = new WandItem(ToolMaterials.IRON, new FabricItemSettings());
+    public final static WandItem BEGINNER_WAND = new WandItem(ToolMaterials.STONE, 2d, new FabricItemSettings());
+    public final static WandItem NOVICE_WAND = new WandItem(ToolMaterials.IRON, 1.5d, new FabricItemSettings());
+    public final static WandItem EXPERT_WAND = new WandItem(ToolMaterials.DIAMOND, 1d, new FabricItemSettings());
+    public final static WandItem MASTER_WAND = new WandItem(ToolMaterials.NETHERITE, 0.5d, new FabricItemSettings().fireproof());
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroup.builder(new Identifier(Magic.MOD_ID, "item_group"))
             .icon(() -> new ItemStack(BEGINNER_WAND))
@@ -99,6 +102,9 @@ public class MagicContent {
 
     private static void registerItems() {
         Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "beginner_wand"), BEGINNER_WAND);
+        Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "novice_wand"), NOVICE_WAND);
+        Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "expert_wand"), EXPERT_WAND);
+        Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "master_wand"), MASTER_WAND);
     }
 
     private static void registerBrewingRecipes() {
@@ -137,6 +143,9 @@ public class MagicContent {
 
     private static void registerItemGroup(FabricItemGroupEntries entries) {
         entries.add(BEGINNER_WAND);
+        entries.add(NOVICE_WAND);
+        entries.add(EXPERT_WAND);
+        entries.add(MASTER_WAND);
 
         ItemStack potion = new ItemStack(Items.POTION);
         PotionUtil.setPotion(potion, MANA_POTION);

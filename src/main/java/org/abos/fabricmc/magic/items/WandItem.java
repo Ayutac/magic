@@ -16,8 +16,14 @@ import org.abos.fabricmc.magic.entities.*;
 
 public class WandItem extends ToolItem {
 
-    public WandItem(ToolMaterial material, Settings settings) {
+    private final double manaFactor;
+
+    public WandItem(ToolMaterial material, double manaFactor, Settings settings) {
         super(material, settings);
+        if (manaFactor <= 0d) {
+            throw new IllegalArgumentException("Mana factor must be positive!");
+        }
+        this.manaFactor = manaFactor;
     }
 
     @Override
@@ -79,11 +85,12 @@ public class WandItem extends ToolItem {
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
-            if (!mana.canSubstract(enchantment.getManaCost())) {
+            int cost = (int)Math.max(1,enchantment.getManaCost()*manaFactor);
+            if (!mana.canSubstract(cost)) {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
             world.spawnEntity(ballEntity);
-            mana.substract(enchantment.getManaCost());
+            mana.substract(cost);
             stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
             return TypedActionResult.consume(user.getStackInHand(hand));
         }
