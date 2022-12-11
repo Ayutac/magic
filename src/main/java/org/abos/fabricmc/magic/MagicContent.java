@@ -149,6 +149,14 @@ public class MagicContent {
         PotionUtil.setPotion(potion, STRONG_MANA_POTION);
         entries.add(potion);
 
+        ItemStack arrow = new ItemStack(Items.TIPPED_ARROW);
+        PotionUtil.setPotion(arrow, MANA_POTION);
+        entries.add(arrow);
+        arrow = new ItemStack(Items.TIPPED_ARROW);
+        PotionUtil.setPotion(arrow, STRONG_MANA_POTION);
+        entries.add(arrow);
+
+
         for (Enchantment enchantment : Registries.ENCHANTMENT) {
             Identifier id = Registries.ENCHANTMENT.getId(enchantment);
             if (id.getNamespace().equals(Magic.MOD_ID)) {
