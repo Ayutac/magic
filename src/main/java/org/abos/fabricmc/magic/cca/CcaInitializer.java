@@ -9,7 +9,7 @@ public class CcaInitializer implements EntityComponentInitializer {
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.registerForPlayers(Magic.MANA, it -> new ManaComponent(), RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(Magic.MANA, ManaComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 
 }

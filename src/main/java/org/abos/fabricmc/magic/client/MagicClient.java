@@ -2,6 +2,7 @@ package org.abos.fabricmc.magic.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import org.abos.fabricmc.magic.MagicContent;
 
 public class MagicClient implements ClientModInitializer {
@@ -19,5 +20,8 @@ public class MagicClient implements ClientModInitializer {
         EntityRendererRegistry.register(MagicContent.SMALL_WATER_MISSILE_ENTITY_TYPE, context -> new MagicMissileEntityRenderer<>(context, "water_missile.png"));
         EntityRendererRegistry.register(MagicContent.MEDIUM_WATER_MISSILE_ENTITY_TYPE, context -> new MagicMissileEntityRenderer<>(context, "water_missile.png"));
         EntityRendererRegistry.register(MagicContent.BIG_WATER_MISSILE_ENTITY_TYPE, context -> new MagicMissileEntityRenderer<>(context, "water_missile.png"));
+
+        HudRenderCallback.EVENT.register(new ManaHud());
     }
+
 }

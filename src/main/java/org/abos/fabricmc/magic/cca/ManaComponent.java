@@ -1,13 +1,23 @@
 package org.abos.fabricmc.magic.cca;
 
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.abos.fabricmc.magic.Magic;
 
-public class ManaComponent implements NatMaxComponent {
+import java.util.Objects;
+
+public class ManaComponent implements NatMaxComponent, AutoSyncedComponent {
 
     public static final int MAX_MANA = 100;
 
     private int max = MAX_MANA;
     private int value = max;
+
+    private final Object provider;
+
+    public ManaComponent(final Object provider) {
+        Objects.requireNonNull(provider, "Provider for "+ManaComponent.class.getSimpleName()+" needs to be non null!");
+        this.provider = provider;
+    }
 
     @Override
     public int getValue() {
@@ -20,6 +30,7 @@ public class ManaComponent implements NatMaxComponent {
             throw new IllegalArgumentException("Mana value is out of bounds!");
         }
         this.value = value;
+        Magic.MANA.sync(provider);
     }
 
     @Override
@@ -36,6 +47,7 @@ public class ManaComponent implements NatMaxComponent {
         if (value > max)  {
             value = max;
         }
+        Magic.MANA.sync(provider);
     }
 
     @Override
@@ -47,4 +59,5 @@ public class ManaComponent implements NatMaxComponent {
     public String getMaxKey() {
         return Magic.MAX_MANA_ID.toString();
     }
+
 }
