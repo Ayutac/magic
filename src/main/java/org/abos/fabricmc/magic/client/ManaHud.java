@@ -25,7 +25,8 @@ class ManaHud implements HudRenderCallback {
             final int manaWidth = Math.round((HUD_WIDTH - 2) * manaPercent);
             final int manaOffset = (HUD_WIDTH - 2) - manaWidth;
             final int rightStartPoint = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2 + 91 - HUD_WIDTH;
-            final int downStartPoint = MinecraftClient.getInstance().getWindow().getScaledHeight() - 39 - 3 * 10;
+            final int yOffset = player.isSubmergedInWater() ? 30 : 10;
+            final int downStartPoint = MinecraftClient.getInstance().getWindow().getScaledHeight() - 39 - yOffset;
 
             RenderSystem.setShader(GameRenderer::getPositionTexProgram);
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
