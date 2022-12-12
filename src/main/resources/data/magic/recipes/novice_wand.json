@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:diamond"
+  },
+  "base": {
+    "item": "magic:beginner_wand"
+  },
+  "result": {
+    "item": "magic:novice_wand"
+  }
+}

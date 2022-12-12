@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "base": {
+    "item": "magic:novice_wand"
+  },
+  "result": {
+    "item": "magic:expert_wand"
+  }
+}
