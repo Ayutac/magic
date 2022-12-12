@@ -24,14 +24,14 @@ class ManaHud implements HudRenderCallback {
             final float manaPercent = (float) Magic.MANA.get(player).getValue() / Magic.MANA.get(player).getMax();
             final int manaWidth = Math.round((HUD_WIDTH - 2) * manaPercent);
             final int manaOffset = (HUD_WIDTH - 2) - manaWidth;
-            final int rightStartpoint = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2 + 91 - HUD_WIDTH;
+            final int rightStartPoint = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2 + 91 - HUD_WIDTH;
             final int downStartPoint = MinecraftClient.getInstance().getWindow().getScaledHeight() - 39 - 2 * 30;
 
             RenderSystem.setShader(GameRenderer::getPositionTexProgram);
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             RenderSystem.setShaderTexture(0, new Identifier(Magic.MOD_ID, "textures/gui/hud_elements.png"));
-            DrawableHelper.drawTexture(matrixStack, rightStartpoint, downStartPoint, 0, 0, 0, HUD_WIDTH, HUD_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
-            DrawableHelper.drawTexture(matrixStack, rightStartpoint + manaOffset + 1, downStartPoint, 0, manaOffset + 1, HUD_HEIGHT, manaWidth, HUD_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            DrawableHelper.drawTexture(matrixStack, rightStartPoint, downStartPoint, 0, 0, 0, HUD_WIDTH, HUD_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            DrawableHelper.drawTexture(matrixStack, rightStartPoint + manaOffset + 1, downStartPoint, 0, manaOffset + 1, HUD_HEIGHT, manaWidth, HUD_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
     }
 }
