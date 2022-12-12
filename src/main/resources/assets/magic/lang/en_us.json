@@ -38,5 +38,9 @@
   "advancements.magic.any_wand": "Is this thing on?",
   "advancements.magic.any_wand.desc": "Acquire any wand",
   "advancements.magic.all_wands": "Avid Collector",
-  "advancements.magic.all_wands.desc": "Acquire all wands"
+  "advancements.magic.all_wands.desc": "Acquire all wands",
+  "advancements.magic.any_spell": "Abracadabra",
+  "advancements.magic.any_spell.desc": "Acquire a wand enchantment",
+  "advancements.magic.all_spells": "Librarian",
+  "advancements.magic.all_spells.desc": "Acquire all wand enchantments"
 }

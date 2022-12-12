@@ -1,0 +1,216 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:bookshelf"
+    },
+    "title": {
+      "translate": "advancements.magic.all_spells"
+    },
+    "description": {
+      "translate": "advancements.magic.all_spells.desc"
+    },
+    "show_toast": true,
+    "frame": "challenge",
+    "announce_to_chat": true
+  },
+  "rewards": {
+    "experience": 500
+  },
+  "parent": "magic:any_spell",
+  "criteria": {
+    "has_small_air_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:small_air_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_medium_air_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:medium_air_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_big_air_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:big_air_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_small_earth_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:small_earth_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_medium_earth_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:medium_earth_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_big_earth_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:big_earth_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_small_fire_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:small_fire_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_medium_fire_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:medium_fire_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_big_fire_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:big_fire_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_small_water_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:small_water_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_medium_water_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:medium_water_missile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_big_water_missile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:big_water_missile"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_small_air_missile"],
+    ["has_medium_air_missile"],
+    ["has_big_air_missile"],
+    ["has_small_earth_missile"],
+    ["has_medium_earth_missile"],
+    ["has_big_earth_missile"],
+    ["has_small_fire_missile"],
+    ["has_medium_fire_missile"],
+    ["has_big_fire_missile"],
+    ["has_small_water_missile"],
+    ["has_medium_water_missile"],
+    ["has_big_water_missile"]
+  ]
+}
