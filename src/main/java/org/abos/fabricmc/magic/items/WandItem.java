@@ -93,29 +93,76 @@ public class WandItem extends ToolItem {
                 enchantment = MagicContent.SHIELD_ENCHANTMENT;
                 ballEntity = null;
             }
+            else if (EnchantmentHelper.getLevel(MagicContent.NIGHT_VISION_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.NIGHT_VISION_ENCHANTMENT;
+                ballEntity = null;
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.GILLS_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.GILLS_ENCHANTMENT;
+                ballEntity = null;
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.OCEANS_FRIEND_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.OCEANS_FRIEND_ENCHANTMENT;
+                ballEntity = null;
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.LEVITATE_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.LEVITATE_ENCHANTMENT;
+                ballEntity = null;
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.FEATHER_FALL_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.FEATHER_FALL_ENCHANTMENT;
+                ballEntity = null;
+            }
+            else if (EnchantmentHelper.getLevel(MagicContent.FIRE_IMMUNITY_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.FIRE_IMMUNITY_ENCHANTMENT;
+                ballEntity = null;
+            }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
+
             // check if can cast
             int cost = (int)Math.max(1,enchantment.getManaCost()*manaFactor);
             if (!mana.canSubtract(cost) && !user.isCreative()) {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
+
             // apply effect
             if (ballEntity != null) {
                 world.spawnEntity(ballEntity);
             }
             else if (enchantment == MagicContent.INSTANT_HEAL_ENCHANTMENT) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1));
-                user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 1f, 1f);
+                //user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 1f, 1f);
             }
             else if (enchantment == MagicContent.SHIELD_ENCHANTMENT) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 1));
-                user.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1f, 1f);
+                //user.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1f, 1f);
+            }
+            else if (enchantment == MagicContent.NIGHT_VISION_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1200));
+            }
+            else if (enchantment == MagicContent.GILLS_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 600));
+            }
+            else if (enchantment == MagicContent.OCEANS_FRIEND_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1200));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 1200));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1200));
+            }
+            else if (enchantment == MagicContent.LEVITATE_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100));
+            }
+            else if (enchantment == MagicContent.FEATHER_FALL_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 100));
+            }
+            else if (enchantment == MagicContent.FIRE_IMMUNITY_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 300));
             }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
+
             // subtract cost
             if (!user.isCreative()) {
                 mana.subtract(cost);

@@ -223,6 +223,96 @@
           }
         ]
       }
+    },
+    "has_night_vision": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:night_vision"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_gills": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:gills"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_oceans_friend": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:oceans_friend"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_levitate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:levitate"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_feather_fall": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:feather_fall"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "has_fire_immunity": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:fire_immunity"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -240,7 +330,13 @@
       "has_medium_water_missile",
       "has_big_water_missile",
       "has_instant_heal",
-      "has_shield"
+      "has_shield",
+      "has_night_vision",
+      "has_gills",
+      "has_oceans_friend",
+      "has_levitate",
+      "has_feather_fall",
+      "has_fire_immunity"
     ]
   ]
 }

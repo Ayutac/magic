@@ -20,6 +20,12 @@
   "enchantment.magic.big_water_missile": "Water Ball",
   "enchantment.magic.instant_heal": "Heal Self",
   "enchantment.magic.shield": "Magic Shield",
+  "enchantment.magic.night_vision": "Night Vision",
+  "enchantment.magic.gills": "Gills",
+  "enchantment.magic.oceans_friend": "Ocean's Friend",
+  "enchantment.magic.levitate": "Levitate",
+  "enchantment.magic.feather_fall": "Feather Fall",
+  "enchantment.magic.fire_immunity": "Fire Immunity",
 
   "effect.magic.instant_mana": "Instant Mana",
   "item.minecraft.potion.effect.magic.mana": "Potion of Mana",

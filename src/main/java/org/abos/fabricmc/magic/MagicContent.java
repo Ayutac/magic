@@ -86,6 +86,12 @@ public class MagicContent {
     public final static WandEnchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
     public final static WandEnchantment INSTANT_HEAL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, 25);
     public final static WandEnchantment SHIELD_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, 25);
+    public final static WandEnchantment NIGHT_VISION_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.COMMON, 8);
+    public final static WandEnchantment GILLS_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, 10);
+    public final static WandEnchantment OCEANS_FRIEND_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, 30);
+    public final static WandEnchantment LEVITATE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, 30);
+    public final static WandEnchantment FEATHER_FALL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, 10);
+    public final static WandEnchantment FIRE_IMMUNITY_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, 15);
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
@@ -137,6 +143,12 @@ public class MagicContent {
         Registry.register(Registries.ENCHANTMENT, BIG_WATER_MISSILE_ID, BIG_WATER_MISSILE_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "instant_heal"), INSTANT_HEAL_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "shield"), SHIELD_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "night_vision"), NIGHT_VISION_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "gills"), GILLS_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "oceans_friend"), OCEANS_FRIEND_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "levitate"), LEVITATE_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "feather_fall"), FEATHER_FALL_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "fire_immunity"), FIRE_IMMUNITY_ENCHANTMENT);
     }
 
     private static void registerCreativeMenu() {
