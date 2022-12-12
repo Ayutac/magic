@@ -79,11 +79,13 @@ public class WandItem extends ToolItem {
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
-            if (!mana.canSubstract(enchantment.getManaCost())) {
+            if (!user.isCreative() && !mana.canSubstract(enchantment.getManaCost())) {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
             world.spawnEntity(ballEntity);
-            mana.substract(enchantment.getManaCost());
+            if (!user.isCreative()) {
+                mana.substract(enchantment.getManaCost());
+            }
             stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
             return TypedActionResult.consume(user.getStackInHand(hand));
         }
