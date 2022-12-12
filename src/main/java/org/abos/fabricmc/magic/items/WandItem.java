@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -88,6 +89,10 @@ public class WandItem extends ToolItem {
                 enchantment = MagicContent.INSTANT_HEAL_ENCHANTMENT;
                 ballEntity = null;
             }
+            else if (EnchantmentHelper.getLevel(MagicContent.SHIELD_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.SHIELD_ENCHANTMENT;
+                ballEntity = null;
+            }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
@@ -102,6 +107,11 @@ public class WandItem extends ToolItem {
             }
             else if (enchantment == MagicContent.INSTANT_HEAL_ENCHANTMENT) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1));
+                user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 1f, 1f);
+            }
+            else if (enchantment == MagicContent.SHIELD_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 1));
+                user.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1f, 1f);
             }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
@@ -115,7 +125,7 @@ public class WandItem extends ToolItem {
                 user.getItemCooldownManager().set(MagicContent.MASTER_WAND, 20);
             }
             stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
-            return TypedActionResult.consume(user.getStackInHand(hand));
+            return TypedActionResult.success(user.getStackInHand(hand));
         }
         return TypedActionResult.pass(user.getStackInHand(hand));
     }

@@ -18,6 +18,8 @@
   "enchantment.magic.small_water_missile": "Water Bolt",
   "enchantment.magic.medium_water_missile": "Water Orb",
   "enchantment.magic.big_water_missile": "Water Ball",
+  "enchantment.magic.instant_heal": "Heal Self",
+  "enchantment.magic.shield": "Magic Shield",
 
   "effect.magic.instant_mana": "Instant Mana",
   "item.minecraft.potion.effect.magic.mana": "Potion of Mana",
