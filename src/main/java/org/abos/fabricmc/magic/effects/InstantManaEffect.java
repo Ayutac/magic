@@ -6,7 +6,6 @@ import net.minecraft.entity.effect.InstantStatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import org.abos.fabricmc.magic.Magic;
-import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,13 +18,23 @@ public class InstantManaEffect extends InstantStatusEffect {
     @Override
     public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
         if (target instanceof PlayerEntity player) {
-            int amount = (int)(proximity * (double)(25 << amplifier) + 0.5);
-            NatMaxComponent mana = Magic.MANA.get(player);
-            if (mana.canAdd(amount)) {
-                mana.add(amount);
+            if (isBeneficial()) {
+                int amount = (int) (proximity * (double) (25 << amplifier) + 0.5);
+                NatMaxComponent mana = Magic.MANA.get(player);
+                if (mana.canAdd(amount)) {
+                    mana.add(amount);
+                } else {
+                    mana.fill();
+                }
             }
             else {
-                mana.fill();
+                int amount = (int) (proximity * (double) (25 << amplifier) + 0.5);
+                NatMaxComponent mana = Magic.MANA.get(player);
+                if (mana.canSubstract(amount)) {
+                    mana.substract(amount);
+                } else {
+                    mana.setValue(0);
+                }
             }
         }
     }
