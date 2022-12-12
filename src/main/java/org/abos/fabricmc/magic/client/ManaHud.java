@@ -25,7 +25,7 @@ class ManaHud implements HudRenderCallback {
             final int manaWidth = Math.round((HUD_WIDTH - 2) * manaPercent);
             final int manaOffset = (HUD_WIDTH - 2) - manaWidth;
             final int rightStartPoint = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2 + 91 - HUD_WIDTH;
-            final int downStartPoint = MinecraftClient.getInstance().getWindow().getScaledHeight() - 39 - 2 * 30;
+            final int downStartPoint = MinecraftClient.getInstance().getWindow().getScaledHeight() - 39 - 3 * 10;
 
             RenderSystem.setShader(GameRenderer::getPositionTexProgram);
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
