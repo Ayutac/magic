@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
+import org.abos.fabricmc.magic.commands.CommandInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +27,12 @@ public class Magic implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initializing the Magic Mod...");
         MagicContent.init();
+        CommandInitializer.init();
         EntitySleepEvents.STOP_SLEEPING.register((livingEntity, blockPos) -> {
             if (livingEntity instanceof PlayerEntity && livingEntity.world.isDay()) {
                 MANA.get(livingEntity).fill();
             }
         });
+        LOGGER.info("Magic Mod has been initialized!");
     }
 }
