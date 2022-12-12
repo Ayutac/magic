@@ -1,10 +1,12 @@
 package org.abos.fabricmc.magic.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,6 +41,9 @@ public class MagicClient implements ClientModInitializer {
                     int m = k;
                     int n = 0;
 
+//                    RenderSystem.setShader(GameRenderer::getPositionTexShader); // The shader you want to use
+//                    RenderSystem.setShaderColor(1.0f,1.0f,1.0f,1.0f);
+//                    RenderSystem.setShaderTexture(0,YOUR_TEXTURE_IDENTIFIER);
                     for(boolean bl = false; manaMax > 0; n += 20) {
                         int o = Math.min(manaMax, 10);
                         manaMax -= o;
@@ -46,9 +51,10 @@ public class MagicClient implements ClientModInitializer {
                         for(int p = 0; p < o; ++p) {
                             int r = 0;
                             int s = l - p * 8 - 9;
-                            DrawableHelper.drawTexture(matrixStack, s, m, 0, (float)52 + r * 9, (float)9, 9, 9, 256, 256);
+                            // draw the full stuff
+                            DrawableHelper.drawTexture(matrixStack, s, m, 0, 52f, 9f, 9, 9, 256, 256);
                             if (p * 2 + 1 + n < mana) {
-                                DrawableHelper.drawTexture(matrixStack, s, m, 0, (float)88, (float)9, 9, 9, 256, 256);
+                                DrawableHelper.drawTexture(matrixStack, s, m, 0, 88f, 9f, 9, 9, 256, 256);
                             }
 
                             if (p * 2 + 1 + n == mana) {
