@@ -84,6 +84,7 @@ public class MagicContent {
     public final static WandEnchantment SMALL_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
     public final static WandEnchantment MEDIUM_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
     public final static WandEnchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
+    public final static WandEnchantment INSTANT_HEAL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, 25);
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
@@ -133,6 +134,7 @@ public class MagicContent {
         Registry.register(Registries.ENCHANTMENT, SMALL_WATER_MISSILE_ID, SMALL_WATER_MISSILE_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, MEDIUM_WATER_MISSILE_ID, MEDIUM_WATER_MISSILE_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, BIG_WATER_MISSILE_ID, BIG_WATER_MISSILE_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "instant_heal"), INSTANT_HEAL_ENCHANTMENT);
     }
 
     private static void registerCreativeMenu() {

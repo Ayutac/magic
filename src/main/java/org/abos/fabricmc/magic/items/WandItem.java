@@ -1,6 +1,8 @@
 package org.abos.fabricmc.magic.items;
 
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
@@ -82,16 +84,29 @@ public class WandItem extends ToolItem {
                 enchantment = MagicContent.BIG_WATER_MISSILE_ENCHANTMENT;
                 ballEntity = BigWaterMissileEntity.create(world, user);
             }
+            else if (EnchantmentHelper.getLevel(MagicContent.INSTANT_HEAL_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.INSTANT_HEAL_ENCHANTMENT;
+                ballEntity = null;
+            }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
+            // check if can cast
             int cost = (int)Math.max(1,enchantment.getManaCost()*manaFactor);
             if (!mana.canSubstract(cost) && !user.isCreative()) {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
+            // apply effect
             if (ballEntity != null) {
                 world.spawnEntity(ballEntity);
             }
+            else if (enchantment == MagicContent.INSTANT_HEAL_ENCHANTMENT) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1));
+            }
+            else {
+                return TypedActionResult.pass(user.getStackInHand(hand));
+            }
+            // subtract cost
             if (!user.isCreative()) {
                 mana.substract(cost);
                 user.getItemCooldownManager().set(MagicContent.BEGINNER_WAND, 20);

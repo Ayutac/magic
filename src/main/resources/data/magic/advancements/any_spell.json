@@ -193,6 +193,21 @@
           }
         ]
       }
+    },
+    "has_instant_heal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:instant_heal"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -208,7 +223,8 @@
       "has_big_fire_missile",
       "has_small_water_missile",
       "has_medium_water_missile",
-      "has_big_water_missile"
+      "has_big_water_missile",
+      "has_instant_heal"
     ]
   ]
 }
