@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"magic:mana\"}"
+    },
+    "title": {
+      "translate": "advancements.magic.mana_potion"
+    },
+    "description": {
+      "translate": "advancements.magic.mana_potion.desc"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "magic:root",
+  "criteria": {
+    "brewed_potion": {
+      "trigger": "minecraft:brewed_potion",
+      "conditions": {
+        "potion": "magic:mana"
+      }
+    }
+  },
+  "requirements": [
+    ["brewed_potion"]
+  ]
+}

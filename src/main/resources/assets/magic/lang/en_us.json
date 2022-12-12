@@ -29,5 +29,10 @@
   "item.minecraft.potion.effect.magic.mana_drain": "Potion of Mana Drain",
   "item.minecraft.splash_potion.effect.magic.mana_drain": "Splash Potion of Mana Drain",
   "item.minecraft.lingering_potion.effect.magic.mana_drain": "Lingering Potion of Mana Drain",
-  "item.minecraft.tipped_arrow.effect.magic.mana_drain": "Arrow of Mana Drain"
+  "item.minecraft.tipped_arrow.effect.magic.mana_drain": "Arrow of Mana Drain",
+
+  "advancements.magic.root": "The Source of Magic",
+  "advancements.magic.root.desc": "Acquire Lapis Lazuli",
+  "advancements.magic.mana_potion": "It's blue!",
+  "advancements.magic.mana_potion.desc": "Brew a Mana Potion"
 }
