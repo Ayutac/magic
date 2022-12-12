@@ -32,7 +32,11 @@
   "item.minecraft.tipped_arrow.effect.magic.mana_drain": "Arrow of Mana Drain",
 
   "advancements.magic.root": "The Source of Magic",
-  "advancements.magic.root.desc": "Acquire Lapis Lazuli",
+  "advancements.magic.root.desc": "Obtain Lapis Lazuli",
   "advancements.magic.mana_potion": "It's blue!",
-  "advancements.magic.mana_potion.desc": "Brew a Mana Potion"
+  "advancements.magic.mana_potion.desc": "Brew a Mana Potion",
+  "advancements.magic.any_wand": "Is this thing on?",
+  "advancements.magic.any_wand.desc": "Acquire any wand",
+  "advancements.magic.all_wands": "Avid Collector",
+  "advancements.magic.all_wands.desc": "Acquire all wands"
 }

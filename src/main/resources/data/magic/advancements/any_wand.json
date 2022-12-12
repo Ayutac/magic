@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "magic:beginner_wand"
+    },
+    "title": {
+      "translate": "advancements.magic.any_wand"
+    },
+    "description": {
+      "translate": "advancements.magic.any_wand.desc"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "magic:root",
+  "criteria": {
+    "has_any_wand": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "magic:beginner_wand",
+              "magic:novice_wand",
+              "magic:expert_wand",
+              "magic:master_wand"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_any_wand"]
+  ]
+}

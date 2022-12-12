@@ -1,0 +1,76 @@
+{
+  "display": {
+    "icon": {
+      "item": "magic:master_wand"
+    },
+    "title": {
+      "translate": "advancements.magic.all_wands"
+    },
+    "description": {
+      "translate": "advancements.magic.all_wands.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "rewards": {
+    "experience": 500
+  },
+  "parent": "magic:any_wand",
+  "criteria": {
+    "has_beginner_wand": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "magic:beginner_wand"
+            ]
+          }
+        ]
+      }
+    },
+    "has_novice_wand": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "magic:novice_wand"
+            ]
+          }
+        ]
+      }
+    },
+    "has_expert_wand": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "magic:expert_wand"
+            ]
+          }
+        ]
+      }
+    },
+    "has_master_wand": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "magic:master_wand"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_beginner_wand"],
+    ["has_novice_wand"],
+    ["has_expert_wand"],
+    ["has_master_wand"]
+  ]
+}
