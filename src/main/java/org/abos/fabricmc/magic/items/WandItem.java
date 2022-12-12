@@ -93,7 +93,7 @@ public class WandItem extends ToolItem {
             }
             // check if can cast
             int cost = (int)Math.max(1,enchantment.getManaCost()*manaFactor);
-            if (!mana.canSubstract(cost) && !user.isCreative()) {
+            if (!mana.canSubtract(cost) && !user.isCreative()) {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
             // apply effect
@@ -108,7 +108,7 @@ public class WandItem extends ToolItem {
             }
             // subtract cost
             if (!user.isCreative()) {
-                mana.substract(cost);
+                mana.subtract(cost);
                 user.getItemCooldownManager().set(MagicContent.BEGINNER_WAND, 20);
                 user.getItemCooldownManager().set(MagicContent.NOVICE_WAND, 20);
                 user.getItemCooldownManager().set(MagicContent.EXPERT_WAND, 20);

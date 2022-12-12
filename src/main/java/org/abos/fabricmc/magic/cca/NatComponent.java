@@ -21,12 +21,16 @@ public interface NatComponent extends Component {
         return getValue() + amount >= 0;
     }
 
-    default void substract(int amount) {
+    default void subtract(int amount) {
         add(-amount);
     }
 
-    default boolean canSubstract(int amount) {
+    default boolean canSubtract(int amount) {
         return canAdd(-amount);
+    }
+
+    default void clear() {
+        setValue(0);
     }
 
     String getValueKey();

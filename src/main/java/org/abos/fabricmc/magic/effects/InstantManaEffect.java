@@ -30,10 +30,10 @@ public class InstantManaEffect extends InstantStatusEffect {
             else {
                 int amount = (int) (proximity * (double) (25 << amplifier) + 0.5);
                 NatMaxComponent mana = Magic.MANA.get(player);
-                if (mana.canSubstract(amount)) {
-                    mana.substract(amount);
+                if (mana.canSubtract(amount)) {
+                    mana.subtract(amount);
                 } else {
-                    mana.setValue(0);
+                    mana.clear();
                 }
             }
         }
