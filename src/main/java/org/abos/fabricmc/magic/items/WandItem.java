@@ -89,9 +89,15 @@ public class WandItem extends ToolItem {
             if (!mana.canSubstract(cost) && !user.isCreative()) {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
-            world.spawnEntity(ballEntity);
+            if (ballEntity != null) {
+                world.spawnEntity(ballEntity);
+            }
             if (!user.isCreative()) {
                 mana.substract(cost);
+                user.getItemCooldownManager().set(MagicContent.BEGINNER_WAND, 20);
+                user.getItemCooldownManager().set(MagicContent.NOVICE_WAND, 20);
+                user.getItemCooldownManager().set(MagicContent.EXPERT_WAND, 20);
+                user.getItemCooldownManager().set(MagicContent.MASTER_WAND, 20);
             }
             stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
             return TypedActionResult.consume(user.getStackInHand(hand));
