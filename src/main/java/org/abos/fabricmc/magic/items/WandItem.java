@@ -12,6 +12,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.Magic;
+import org.abos.fabricmc.magic.MagicConfig;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
@@ -136,28 +137,28 @@ public class WandItem extends ToolItem {
                 //user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 1f, 1f);
             }
             else if (enchantment == MagicContent.SHIELD_ENCHANTMENT) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 1));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, MagicConfig.SHIELD_DURATION, 1));
                 //user.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1f, 1f);
             }
             else if (enchantment == MagicContent.NIGHT_VISION_ENCHANTMENT) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1200));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, MagicConfig.NIGHT_VISION_DURATION));
             }
             else if (enchantment == MagicContent.GILLS_ENCHANTMENT) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 600));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, MagicConfig.GILLS_DURATION));
             }
             else if (enchantment == MagicContent.OCEANS_FRIEND_ENCHANTMENT) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1200));
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 1200));
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1200));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, MagicConfig.OCEANS_FRIEND_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, MagicConfig.OCEANS_FRIEND_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, MagicConfig.OCEANS_FRIEND_DURATION));
             }
             else if (enchantment == MagicContent.LEVITATE_ENCHANTMENT) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, MagicConfig.LEVITATE_DURATION));
             }
             else if (enchantment == MagicContent.FEATHER_FALL_ENCHANTMENT) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 100));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, MagicConfig.FEATHER_DURATION));
             }
             else if (enchantment == MagicContent.FIRE_IMMUNITY_ENCHANTMENT) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 300));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, MagicConfig.FIRE_IMMUNITY_DURATION));
             }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
@@ -166,10 +167,10 @@ public class WandItem extends ToolItem {
             // subtract cost
             if (!user.isCreative()) {
                 mana.subtract(cost);
-                user.getItemCooldownManager().set(MagicContent.BEGINNER_WAND, 20);
-                user.getItemCooldownManager().set(MagicContent.NOVICE_WAND, 20);
-                user.getItemCooldownManager().set(MagicContent.EXPERT_WAND, 20);
-                user.getItemCooldownManager().set(MagicContent.MASTER_WAND, 20);
+                user.getItemCooldownManager().set(MagicContent.BEGINNER_WAND, MagicConfig.WAND_COOL_DOWN);
+                user.getItemCooldownManager().set(MagicContent.NOVICE_WAND, MagicConfig.WAND_COOL_DOWN);
+                user.getItemCooldownManager().set(MagicContent.EXPERT_WAND, MagicConfig.WAND_COOL_DOWN);
+                user.getItemCooldownManager().set(MagicContent.MASTER_WAND, MagicConfig.WAND_COOL_DOWN);
             }
             stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
             return TypedActionResult.success(user.getStackInHand(hand));

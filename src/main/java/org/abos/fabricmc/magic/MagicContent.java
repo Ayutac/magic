@@ -31,10 +31,10 @@ import org.abos.fabricmc.magic.utils.MissileSize;
 
 public class MagicContent {
 
-    public final static WandItem BEGINNER_WAND = new WandItem(ToolMaterials.STONE, 2d, new FabricItemSettings());
-    public final static WandItem NOVICE_WAND = new WandItem(ToolMaterials.IRON, 1.5d, new FabricItemSettings());
-    public final static WandItem EXPERT_WAND = new WandItem(ToolMaterials.DIAMOND, 1d, new FabricItemSettings());
-    public final static WandItem MASTER_WAND = new WandItem(ToolMaterials.NETHERITE, 0.5d, new FabricItemSettings().fireproof());
+    public final static WandItem BEGINNER_WAND = new WandItem(ToolMaterials.STONE, MagicConfig.BEGINNER_MANA_FACTOR, new FabricItemSettings());
+    public final static WandItem NOVICE_WAND = new WandItem(ToolMaterials.IRON, MagicConfig.NOVICE_MANA_FACTOR, new FabricItemSettings());
+    public final static WandItem EXPERT_WAND = new WandItem(ToolMaterials.DIAMOND, MagicConfig.EXPERT_MANA_FACTOR, new FabricItemSettings());
+    public final static WandItem MASTER_WAND = new WandItem(ToolMaterials.NETHERITE, MagicConfig.MASTER_MANA_FACTOR, new FabricItemSettings().fireproof());
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroup.builder(new Identifier(Magic.MOD_ID, "item_group"))
             .icon(() -> new ItemStack(BEGINNER_WAND))
@@ -55,7 +55,6 @@ public class MagicContent {
 
     public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
     public final static Identifier STRONG_MANA_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana");
-
     public final static Identifier MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "mana_drain");
     public final static Identifier STRONG_MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana_drain");
 
@@ -84,14 +83,14 @@ public class MagicContent {
     public final static WandEnchantment SMALL_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
     public final static WandEnchantment MEDIUM_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
     public final static WandEnchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
-    public final static WandEnchantment INSTANT_HEAL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, 25);
-    public final static WandEnchantment SHIELD_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, 25);
-    public final static WandEnchantment NIGHT_VISION_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.COMMON, 8);
-    public final static WandEnchantment GILLS_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, 10);
-    public final static WandEnchantment OCEANS_FRIEND_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, 30);
-    public final static WandEnchantment LEVITATE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, 30);
-    public final static WandEnchantment FEATHER_FALL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, 10);
-    public final static WandEnchantment FIRE_IMMUNITY_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, 15);
+    public final static WandEnchantment INSTANT_HEAL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.INSTANT_HEAL_COST);
+    public final static WandEnchantment SHIELD_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.SHIELD_COST);
+    public final static WandEnchantment NIGHT_VISION_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.COMMON, MagicConfig.NIGHT_VISION_COST);
+    public final static WandEnchantment GILLS_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.GILLS_COST);
+    public final static WandEnchantment OCEANS_FRIEND_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.OCEANS_FRIEND_COST);
+    public final static WandEnchantment LEVITATE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.LEVITATE_COST);
+    public final static WandEnchantment FEATHER_FALL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.FEATHER_FALL_COST);
+    public final static WandEnchantment FIRE_IMMUNITY_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.FIRE_IMMUNITY_COST);
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
