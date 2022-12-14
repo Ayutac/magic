@@ -35,8 +35,7 @@ public class WorldUtils {
         if (!targetPos.equals(groundPos.up())) {
             List<Entity> entities = world.getNonSpectatingEntities(Entity.class, new Box(0d,1d,0d,1d,2d,1d).offset(groundPos));
             for (Entity entity : entities) {
-                BlockPos diff = targetPos.subtract(groundPos.up());
-                entity.setPos(entity.getX(), entity.getY() + diff.getY(), entity.getZ());
+                entity.setPos(entity.getX(), entity.getY() + actualHeight, entity.getZ());
             }
         }
     }
