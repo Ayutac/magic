@@ -4,9 +4,9 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.Magic;
-import org.abos.fabricmc.magic.entities.MagicMissileEntity;
+import org.abos.fabricmc.magic.entities.MagicProjectileEntity;
 
-public class MagicMissileEntityRenderer<T extends MagicMissileEntity> extends ProjectileEntityRenderer<T> {
+public class MagicMissileEntityRenderer<T extends MagicProjectileEntity> extends ProjectileEntityRenderer<T> {
 
     private final String fileName;
 

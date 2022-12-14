@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public abstract class MagicMissileEntity extends PersistentProjectileEntity {
+public abstract class MagicProjectileEntity extends PersistentProjectileEntity {
 
     private int maxAge = 50;
     private boolean extinguishing = false;
@@ -30,11 +30,11 @@ public abstract class MagicMissileEntity extends PersistentProjectileEntity {
 
     private float knockupSpeed = 0f;
 
-    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, World world) {
+    protected MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> type, World world) {
         super(type, world);
     }
 
-    protected MagicMissileEntity(EntityType<? extends MagicMissileEntity> type, LivingEntity owner, World world) {
+    protected MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> type, LivingEntity owner, World world) {
         super(type, owner, world);
     }
 

@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -35,7 +34,7 @@ public class WandItem extends ToolItem {
 
         if (!world.isClient) {
             final ItemStack stack = user.getStackInHand(hand);
-            final MagicMissileEntity ballEntity;
+            final MagicProjectileEntity ballEntity;
             final WandEnchantment enchantment;
             final NatMaxComponent mana = Magic.MANA.get(user);
             if (EnchantmentHelper.getLevel(MagicContent.SMALL_AIR_MISSILE_ENCHANTMENT, stack) > 0) {

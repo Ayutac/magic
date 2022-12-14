@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.utils.MissileSize;
 
-public class MediumFireMissileEntity extends MagicMissileEntity {
+public class MediumFireMissileEntity extends MagicProjectileEntity {
 
     public MediumFireMissileEntity(EntityType<MediumFireMissileEntity> type, World world) {
         super(type, world);
