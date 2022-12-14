@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
@@ -22,6 +23,8 @@ import net.minecraft.potion.Potions;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.effects.InstantManaEffect;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
@@ -53,6 +56,8 @@ public class MagicContent {
     public final static Identifier MEDIUM_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_water_missile");
     public final static Identifier BIG_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_water_missile");
 
+    public final static Identifier EARTH_PILLAR_ID = new Identifier(Magic.MOD_ID, "earth_pillar");
+
     public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
     public final static Identifier STRONG_MANA_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana");
     public final static Identifier MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "mana_drain");
@@ -70,6 +75,8 @@ public class MagicContent {
     public final static EntityType<SmallWaterMissileEntity> SMALL_WATER_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_WATER_MISSILE_ID, SmallWaterMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
     public final static EntityType<MediumWaterMissileEntity> MEDIUM_WATER_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_WATER_MISSILE_ID, MediumWaterMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
     public final static EntityType<BigWaterMissileEntity> BIG_WATER_MISSILE_ENTITY_TYPE = registerEntityType(BIG_WATER_MISSILE_ID, BigWaterMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
+
+    public final static EntityType<EarthPillarProjectileEntity> EARTH_PILLAR_PROJECTILE_ENTITY_TYPE = registerEntityType(EARTH_PILLAR_ID, EarthPillarProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
 
     public final static WandEnchantment SMALL_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
     public final static WandEnchantment MEDIUM_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
@@ -91,6 +98,7 @@ public class MagicContent {
     public final static WandEnchantment LEVITATE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.LEVITATE_COST);
     public final static WandEnchantment FEATHER_FALL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.FEATHER_FALL_COST);
     public final static WandEnchantment FIRE_IMMUNITY_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.FIRE_IMMUNITY_COST);
+    public final static WandEnchantment EARTH_PILLAR_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.EARTH_WALL_COST);
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
@@ -100,6 +108,7 @@ public class MagicContent {
     public final static Potion MANA_DRAIN_POTION = Registry.register(Registries.POTION, MANA_DRAIN_POTION_ID, new Potion(Magic.MOD_ID+".mana_drain", new StatusEffectInstance(INSTANT_MANA_DRAIN_EFFECT, 1)));
     public final static Potion STRONG_MANA_DRAIN_POTION = Registry.register(Registries.POTION, STRONG_MANA_DRAIN_POTION_ID, new Potion(Magic.MOD_ID+".mana_drain", new StatusEffectInstance(INSTANT_MANA_DRAIN_EFFECT, 1, 1)));
 
+    public static final TagKey<Block> EARTH_PILLAR_TARGETS = TagKey.of(RegistryKeys.BLOCK, new Identifier(Magic.MOD_ID, "earth_pillar_targets"));
 
     private MagicContent() {
         /* No instantiation. */
@@ -148,6 +157,7 @@ public class MagicContent {
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "levitate"), LEVITATE_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "feather_fall"), FEATHER_FALL_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "fire_immunity"), FIRE_IMMUNITY_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, EARTH_PILLAR_ID, EARTH_PILLAR_ENCHANTMENT);
     }
 
     private static void registerCreativeMenu() {

@@ -20,6 +20,7 @@ public class MagicClient implements ClientModInitializer {
         EntityRendererRegistry.register(MagicContent.SMALL_WATER_MISSILE_ENTITY_TYPE, context -> new MagicMissileEntityRenderer<>(context, "water_missile.png"));
         EntityRendererRegistry.register(MagicContent.MEDIUM_WATER_MISSILE_ENTITY_TYPE, context -> new MagicMissileEntityRenderer<>(context, "water_missile.png"));
         EntityRendererRegistry.register(MagicContent.BIG_WATER_MISSILE_ENTITY_TYPE, context -> new MagicMissileEntityRenderer<>(context, "water_missile.png"));
+        EntityRendererRegistry.register(MagicContent.EARTH_PILLAR_PROJECTILE_ENTITY_TYPE, context -> new MagicMissileEntityRenderer<>(context, "earth_missile.png"));
 
         HudRenderCallback.EVENT.register(new ManaHud());
     }

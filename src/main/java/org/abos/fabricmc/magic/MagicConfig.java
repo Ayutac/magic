@@ -28,6 +28,8 @@ public class MagicConfig {
     public static int FIRE_IMMUNITY_COST = 15;
     public static int FIRE_IMMUNITY_DURATION = 15*20; // in ticks
 
+    public static int EARTH_WALL_COST = 20;
+
     private MagicConfig() {
         /* No instantiation. */
     }

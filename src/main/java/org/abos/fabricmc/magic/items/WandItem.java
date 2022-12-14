@@ -85,6 +85,10 @@ public class WandItem extends ToolItem {
                 enchantment = MagicContent.BIG_WATER_MISSILE_ENCHANTMENT;
                 ballEntity = BigWaterMissileEntity.create(world, user);
             }
+            else if (EnchantmentHelper.getLevel(MagicContent.EARTH_PILLAR_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.EARTH_PILLAR_ENCHANTMENT;
+                ballEntity = EarthPillarProjectileEntity.create(world, user);
+            }
             else if (EnchantmentHelper.getLevel(MagicContent.INSTANT_HEAL_ENCHANTMENT, stack) > 0) {
                 enchantment = MagicContent.INSTANT_HEAL_ENCHANTMENT;
                 ballEntity = null;

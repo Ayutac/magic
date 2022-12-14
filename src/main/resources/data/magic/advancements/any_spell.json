@@ -313,6 +313,21 @@
           }
         ]
       }
+    },
+    "has_earth_pillar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:earth_pillar"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -336,7 +351,8 @@
       "has_oceans_friend",
       "has_levitate",
       "has_feather_fall",
-      "has_fire_immunity"
+      "has_fire_immunity",
+      "has_earth_pillar"
     ]
   ]
 }
