@@ -2,7 +2,7 @@
   "values": [
     "#minecraft:base_stone_overworld",
     "#minecraft:base_stone_nether",
-    "minecraft:endstone",
+    "minecraft:end_stone",
     "minecraft:cobblestone",
     "minecraft:cobbled_deepslate",
     "minecraft:dirt"

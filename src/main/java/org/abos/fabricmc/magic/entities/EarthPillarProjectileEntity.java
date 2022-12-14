@@ -1,15 +1,21 @@
 package org.abos.fabricmc.magic.entities;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.utils.MissileSize;
+
+import java.util.List;
 
 public class EarthPillarProjectileEntity extends MagicProjectileEntity {
 
@@ -51,7 +57,11 @@ public class EarthPillarProjectileEntity extends MagicProjectileEntity {
         }
         targetPos = targetPos.up();
         if (!targetPos.equals(blockPos.up())) {
-
+            List<Entity> entities = world.getNonSpectatingEntities(Entity.class, new Box(0d,1d,0d,1d,2d,1d).offset(blockPos));
+            for (Entity entity : entities) {
+                BlockPos diff = targetPos.subtract(blockPos.up());
+                entity.setPos(entity.getX(), entity.getY() + diff.getY(), entity.getZ());
+            }
         }
     }
 
