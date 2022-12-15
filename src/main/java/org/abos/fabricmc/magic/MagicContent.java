@@ -4,12 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -24,9 +19,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.effects.InstantManaEffect;
-import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.items.WandItem;
-import org.abos.fabricmc.magic.utils.MissileSize;
 
 public class MagicContent {
 
@@ -44,21 +37,6 @@ public class MagicContent {
     public final static Identifier MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "mana_drain");
     public final static Identifier STRONG_MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana_drain");
 
-    public final static EntityType<MagicProjectileEntity> SMALL_AIR_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_AIR_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> MEDIUM_AIR_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_AIR_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> BIG_AIR_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_AIR_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> SMALL_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_EARTH_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> MEDIUM_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_EARTH_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> BIG_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_EARTH_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> SMALL_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_FIRE_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> MEDIUM_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_FIRE_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> BIG_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_FIRE_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> SMALL_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_WATER_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> MEDIUM_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_WATER_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<MagicProjectileEntity> BIG_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_WATER_MISSILE.getId(), MagicProjectileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
-
-    public final static EntityType<EarthPillarProjectileEntity> EARTH_PILLAR_PROJECTILE_ENTITY_TYPE = registerEntityType(Spell.EARTH_PILLAR.getId(), EarthPillarProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
 
@@ -74,6 +52,7 @@ public class MagicContent {
     }
 
     public static void init() {
+        registerEntityTypes();
         registerItems();
         registerBrewingRecipes();
         registerEnchantments();
@@ -106,13 +85,12 @@ public class MagicContent {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(MagicContent::registerCombat);
     }
 
-    private static <T extends Entity> EntityType<T> registerEntityType(Identifier id, EntityType.EntityFactory<T> factory, float width, float height, int maxTrackingRange, int trackingTickInterval) {
-        return Registry.register(Registries.ENTITY_TYPE, id,
-                FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory)
-                        .dimensions(new EntityDimensions(width, height, true))
-                        .trackRangeBlocks(maxTrackingRange)
-                        .trackedUpdateRate(trackingTickInterval)
-                        .build());
+    private static void registerEntityTypes() {
+        for (Spell spell : Spell.values()) {
+            if (spell.isProjectile()) {
+                Registry.register(Registries.ENTITY_TYPE, spell.getId(), spell.getEntityType());
+            }
+        }
     }
 
     private static void registerItemGroup(FabricItemGroupEntries entries) {

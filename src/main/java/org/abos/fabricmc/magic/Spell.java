@@ -1,9 +1,13 @@
 package org.abos.fabricmc.magic;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.enchantment.Enchantment;
 import static net.minecraft.enchantment.Enchantment.Rarity.*;
 
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -16,24 +20,25 @@ import net.minecraft.world.World;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.utils.MissileSize;
+import org.abos.fabricmc.magic.utils.MissileType;
 
 import java.util.Locale;
 import java.util.function.BiFunction;
 
 public enum Spell {
     
-    SMALL_AIR_MISSILE(UNCOMMON, MissileSize.SMALL.getManaCost(), MagicProjectileEntity::createSmallAirMissile),
-    MEDIUM_AIR_MISSILE(RARE, MissileSize.MEDIUM.getManaCost(), MagicProjectileEntity::createMediumAirMissile),
-    BIG_AIR_MISSILE(VERY_RARE, MissileSize.BIG.getManaCost(), MagicProjectileEntity::createBigAirMissile),
-    SMALL_EARTH_MISSILE(UNCOMMON, MissileSize.SMALL.getManaCost(), MagicProjectileEntity::createSmallEarthMissile),
-    MEDIUM_EARTH_MISSILE(RARE, MissileSize.MEDIUM.getManaCost(), MagicProjectileEntity::createMediumEarthMissile),
-    BIG_EARTH_MISSILE(VERY_RARE, MissileSize.BIG.getManaCost(), MagicProjectileEntity::createBigEarthMissile),
-    SMALL_FIRE_MISSILE(UNCOMMON, MissileSize.SMALL.getManaCost(), MagicProjectileEntity::createSmallFireMissile),
-    MEDIUM_FIRE_MISSILE(RARE, MissileSize.MEDIUM.getManaCost(), MagicProjectileEntity::createMediumFireMissile),
-    BIG_FIRE_MISSILE(VERY_RARE, MissileSize.BIG.getManaCost(), MagicProjectileEntity::createBigFireMissile),
-    SMALL_WATER_MISSILE(UNCOMMON, MissileSize.SMALL.getManaCost(), MagicProjectileEntity::createSmallWaterMissile),
-    MEDIUM_WATER_MISSILE(RARE, MissileSize.MEDIUM.getManaCost(), MagicProjectileEntity::createMediumWaterMissile),
-    BIG_WATER_MISSILE(VERY_RARE, MissileSize.BIG.getManaCost(), MagicProjectileEntity::createBigWaterMissile),
+    SMALL_AIR_MISSILE(UNCOMMON, MissileType.AIR, MissileSize.SMALL, MagicProjectileEntity::createSmallAirMissile),
+    MEDIUM_AIR_MISSILE(RARE, MissileType.AIR, MissileSize.MEDIUM, MagicProjectileEntity::createMediumAirMissile),
+    BIG_AIR_MISSILE(VERY_RARE, MissileType.AIR, MissileSize.BIG, MagicProjectileEntity::createBigAirMissile),
+    SMALL_EARTH_MISSILE(UNCOMMON, MissileType.EARTH, MissileSize.SMALL, MagicProjectileEntity::createSmallEarthMissile),
+    MEDIUM_EARTH_MISSILE(RARE, MissileType.EARTH, MissileSize.MEDIUM, MagicProjectileEntity::createMediumEarthMissile),
+    BIG_EARTH_MISSILE(VERY_RARE, MissileType.EARTH, MissileSize.BIG, MagicProjectileEntity::createBigEarthMissile),
+    SMALL_FIRE_MISSILE(UNCOMMON, MissileType.FIRE, MissileSize.SMALL, MagicProjectileEntity::createSmallFireMissile),
+    MEDIUM_FIRE_MISSILE(RARE, MissileType.FIRE, MissileSize.MEDIUM, MagicProjectileEntity::createMediumFireMissile),
+    BIG_FIRE_MISSILE(VERY_RARE, MissileType.FIRE, MissileSize.BIG, MagicProjectileEntity::createBigFireMissile),
+    SMALL_WATER_MISSILE(UNCOMMON, MissileType.WATER, MissileSize.SMALL, MagicProjectileEntity::createSmallWaterMissile),
+    MEDIUM_WATER_MISSILE(RARE, MissileType.WATER, MissileSize.MEDIUM, MagicProjectileEntity::createMediumWaterMissile),
+    BIG_WATER_MISSILE(VERY_RARE, MissileType.WATER, MissileSize.BIG, MagicProjectileEntity::createBigWaterMissile),
     INSTANT_HEAL(RARE, MagicConfig.INSTANT_HEAL_COST),
     SHIELD(RARE, MagicConfig.SHIELD_COST),
     NIGHT_VISION(COMMON, MagicConfig.NIGHT_VISION_COST),
@@ -42,26 +47,45 @@ public enum Spell {
     LEVITATE(VERY_RARE, MagicConfig.LEVITATE_COST),
     FEATHER_FALL(UNCOMMON, MagicConfig.FEATHER_FALL_COST),
     FIRE_IMMUNITY(RARE, MagicConfig.FIRE_IMMUNITY_COST),
-    EARTH_PILLAR(UNCOMMON, MagicConfig.EARTH_PILLAR_COST, EarthPillarProjectileEntity::create),
+    EARTH_PILLAR(UNCOMMON, MagicConfig.EARTH_PILLAR_COST, MissileType.EARTH, MissileSize.MEDIUM, EarthPillarProjectileEntity::create, EarthPillarProjectileEntity::new),
     EARTH_CIRCLE(VERY_RARE, MagicConfig.EARTH_CIRCLE_COST),
     FIRE_CIRCLE(RARE, MagicConfig.FIRE_CIRCLE_COST);
 
     private final Identifier id = new Identifier(Magic.MOD_ID, getName());
     private final int manaCost;
-    private final WandEnchantment enchantment;
+    private final MissileType type;
+    private final MissileSize size;
     private final BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory;
+    private final EntityType<MagicProjectileEntity> entityType;
+    private final WandEnchantment enchantment;
 
-    Spell(Enchantment.Rarity rarity, int manaCost, BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory) {
+    Spell(Enchantment.Rarity rarity, int manaCost, MissileType type, MissileSize size, BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory, EntityType.EntityFactory<MagicProjectileEntity> projectileFactory2) {
         if (manaCost < 0) {
             throw new IllegalArgumentException("Mana cost cannot be negative!");
         }
         this.manaCost = manaCost;
+        this.type = type;
+        this.size = size;
         this.projectileFactory = projectileFactory;
         enchantment = new WandEnchantment(rarity);
+        if (projectileFactory == null) {
+            entityType = null;
+        }
+        else {
+            entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, projectileFactory2 == null ? MagicProjectileEntity::new : projectileFactory2)
+                    .dimensions(new EntityDimensions(size.getWidth(), size.getHeight(), true))
+                    .trackRangeBlocks(4)
+                    .trackedUpdateRate(10)
+                    .build();
+        }
+    }
+
+    Spell(Enchantment.Rarity rarity, MissileType type, MissileSize size, BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory) {
+        this(rarity, size.getManaCost(), type, size, projectileFactory, null);
     }
 
     Spell(Enchantment.Rarity rarity, int cost) {
-        this(rarity, cost, null);
+        this(rarity, cost, null, null, null, null);
     }
 
     public String getName() {
@@ -74,6 +98,14 @@ public enum Spell {
 
     public int getManaCost() {
         return manaCost;
+    }
+
+    public MissileType getType() {
+        return type;
+    }
+
+    public MissileSize getSize() {
+        return size;
     }
 
     public WandEnchantment getEnchantment() {
@@ -100,6 +132,10 @@ public enum Spell {
             return null;
         }
         return projectileFactory.apply(world, user);
+    }
+
+    public EntityType<MagicProjectileEntity> getEntityType() {
+        return entityType;
     }
 
     public static Spell getEnchantedSpell(final ItemStack stack) {

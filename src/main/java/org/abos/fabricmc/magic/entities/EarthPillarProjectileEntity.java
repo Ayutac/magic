@@ -8,17 +8,18 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.MagicContent;
+import org.abos.fabricmc.magic.Spell;
 import org.abos.fabricmc.magic.utils.MissileSize;
 import org.abos.fabricmc.magic.utils.WorldUtils;
 
 public class EarthPillarProjectileEntity extends MagicProjectileEntity {
 
-    public EarthPillarProjectileEntity(EntityType<EarthPillarProjectileEntity> type, World world) {
+    public EarthPillarProjectileEntity(EntityType<MagicProjectileEntity> type, World world) {
         super(type, world);
         finishConstructor();
     }
 
-    public EarthPillarProjectileEntity(EntityType<EarthPillarProjectileEntity> type, LivingEntity owner, World world) {
+    public EarthPillarProjectileEntity(EntityType<MagicProjectileEntity> type, LivingEntity owner, World world) {
         super(type, owner, world);
         finishConstructor();
     }
@@ -39,7 +40,7 @@ public class EarthPillarProjectileEntity extends MagicProjectileEntity {
     }
 
     public static EarthPillarProjectileEntity create(World world, PlayerEntity user) {
-        EarthPillarProjectileEntity entity = new EarthPillarProjectileEntity(MagicContent.EARTH_PILLAR_PROJECTILE_ENTITY_TYPE, user, world);
+        EarthPillarProjectileEntity entity = new EarthPillarProjectileEntity(Spell.EARTH_PILLAR.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.SMALL.getSpeed(), MissileSize.SMALL.getDivergence());
         return entity;
     }

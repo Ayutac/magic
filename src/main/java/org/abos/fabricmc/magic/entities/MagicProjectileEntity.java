@@ -23,7 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.MagicConfig;
-import org.abos.fabricmc.magic.MagicContent;
+import org.abos.fabricmc.magic.Spell;
 import org.abos.fabricmc.magic.utils.MissileSize;
 
 public class MagicProjectileEntity extends PersistentProjectileEntity {
@@ -45,7 +45,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createSmallAirMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.SMALL_AIR_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.SMALL_AIR_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.SMALL.getSpeed(), MissileSize.SMALL.getDivergence());
         entity.setDamage(MagicConfig.SMALL_AIR_MISSILE_DAMAGE);
         entity.setNoGravity(true);
@@ -55,7 +55,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createMediumAirMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.MEDIUM_AIR_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.MEDIUM_AIR_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.MEDIUM.getSpeed(), MissileSize.MEDIUM.getDivergence());
         entity.setDamage(MagicConfig.MEDIUM_AIR_MISSILE_DAMAGE);
         entity.setNoGravity(true);
@@ -65,7 +65,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createBigAirMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.BIG_AIR_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.BIG_AIR_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.BIG.getSpeed(), MissileSize.BIG.getDivergence());
         entity.setDamage(MagicConfig.BIG_AIR_MISSILE_DAMAGE);
         entity.setKnockUpSpeed(1.2f);
@@ -75,7 +75,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createSmallEarthMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.SMALL_EARTH_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.SMALL_EARTH_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.SMALL.getSpeed(), MissileSize.SMALL.getDivergence());
         entity.setDamage(MagicConfig.SMALL_EARTH_MISSILE_DAMAGE);
         entity.setSound(SoundEvents.BLOCK_ROOTED_DIRT_PLACE);
@@ -83,7 +83,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createMediumEarthMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.MEDIUM_EARTH_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.MEDIUM_EARTH_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.MEDIUM.getSpeed(), MissileSize.MEDIUM.getDivergence());
         entity.setDamage(MagicConfig.MEDIUM_EARTH_MISSILE_DAMAGE);
         entity.setSound(SoundEvents.BLOCK_ROOTED_DIRT_PLACE);
@@ -91,7 +91,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createBigEarthMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.BIG_EARTH_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.BIG_EARTH_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.BIG.getSpeed(), MissileSize.BIG.getDivergence());
         entity.setDamage(MagicConfig.BIG_EARTH_MISSILE_DAMAGE);
         entity.setSound(SoundEvents.BLOCK_ROOTED_DIRT_PLACE);
@@ -99,7 +99,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createSmallFireMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.SMALL_FIRE_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.SMALL_FIRE_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.SMALL.getSpeed(), MissileSize.SMALL.getDivergence());
         entity.setDamage(MagicConfig.SMALL_FIRE_MISSILE_DAMAGE);
         entity.setFireTicks(1);
@@ -109,7 +109,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createMediumFireMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.MEDIUM_FIRE_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.MEDIUM_FIRE_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.MEDIUM.getSpeed(), MissileSize.MEDIUM.getDivergence());
         entity.setDamage(MagicConfig.MEDIUM_FIRE_MISSILE_DAMAGE);
         entity.setFireTicks(5);
@@ -119,7 +119,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createBigFireMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.BIG_FIRE_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.BIG_FIRE_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.BIG.getSpeed(), MissileSize.BIG.getDivergence());
         entity.setDamage(MagicConfig.BIG_FIRE_MISSILE_DAMAGE);
         entity.setFireTicks(10);
@@ -129,7 +129,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createSmallWaterMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.SMALL_WATER_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.SMALL_WATER_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.SMALL.getSpeed(), MissileSize.SMALL.getDivergence());
         entity.setDamage(MagicConfig.SMALL_WATER_MISSILE_DAMAGE);
         entity.setExtinguishing(true);
@@ -138,7 +138,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createMediumWaterMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.MEDIUM_WATER_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.MEDIUM_WATER_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.MEDIUM.getSpeed(), MissileSize.MEDIUM.getDivergence());
         entity.setDamage(MagicConfig.MEDIUM_WATER_MISSILE_DAMAGE);
         entity.setExtinguishing(true);
@@ -147,7 +147,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static MagicProjectileEntity createBigWaterMissile(World world, PlayerEntity user) {
-        MagicProjectileEntity entity = new MagicProjectileEntity(MagicContent.BIG_WATER_MISSILE_ENTITY_TYPE, user, world);
+        MagicProjectileEntity entity = new MagicProjectileEntity(Spell.BIG_WATER_MISSILE.getEntityType(), user, world);
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.BIG.getSpeed(), MissileSize.BIG.getDivergence());
         entity.setDamage(MagicConfig.BIG_WATER_MISSILE_DAMAGE);
         entity.setExtinguishing(true);
