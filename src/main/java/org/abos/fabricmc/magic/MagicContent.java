@@ -98,7 +98,8 @@ public class MagicContent {
     public final static WandEnchantment LEVITATE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.LEVITATE_COST);
     public final static WandEnchantment FEATHER_FALL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.FEATHER_FALL_COST);
     public final static WandEnchantment FIRE_IMMUNITY_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.FIRE_IMMUNITY_COST);
-    public final static WandEnchantment EARTH_PILLAR_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.EARTH_WALL_COST);
+    public final static WandEnchantment EARTH_PILLAR_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.EARTH_PILLAR_COST);
+    public final static WandEnchantment EARTH_CYLINDER_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.EARTH_CYLINDER_COST);
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
@@ -108,7 +109,7 @@ public class MagicContent {
     public final static Potion MANA_DRAIN_POTION = Registry.register(Registries.POTION, MANA_DRAIN_POTION_ID, new Potion(Magic.MOD_ID+".mana_drain", new StatusEffectInstance(INSTANT_MANA_DRAIN_EFFECT, 1)));
     public final static Potion STRONG_MANA_DRAIN_POTION = Registry.register(Registries.POTION, STRONG_MANA_DRAIN_POTION_ID, new Potion(Magic.MOD_ID+".mana_drain", new StatusEffectInstance(INSTANT_MANA_DRAIN_EFFECT, 1, 1)));
 
-    public static final TagKey<Block> EARTH_PILLAR_TARGETS = TagKey.of(RegistryKeys.BLOCK, new Identifier(Magic.MOD_ID, "earth_pillar_targets"));
+    public static final TagKey<Block> EARTH_TAG = TagKey.of(RegistryKeys.BLOCK, new Identifier(Magic.MOD_ID, "earth"));
 
     private MagicContent() {
         /* No instantiation. */
@@ -158,6 +159,7 @@ public class MagicContent {
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "feather_fall"), FEATHER_FALL_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "fire_immunity"), FIRE_IMMUNITY_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, EARTH_PILLAR_ID, EARTH_PILLAR_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "earth_cylinder"), EARTH_CYLINDER_ENCHANTMENT);
     }
 
     private static void registerCreativeMenu() {

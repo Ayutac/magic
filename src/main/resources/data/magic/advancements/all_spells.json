@@ -332,6 +332,21 @@
           }
         ]
       }
+    },
+    "has_earth_cylinder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:enchanted_book"],
+            "stored_enchantments": [
+              {
+                "enchantment": "magic:earth_cylinder"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -355,6 +370,7 @@
     ["has_levitate"],
     ["has_feather_fall"],
     ["has_fire_immunity"],
-    ["has_earth_pillar"]
+    ["has_earth_pillar"],
+    ["has_earth_cylinder"]
   ]
 }

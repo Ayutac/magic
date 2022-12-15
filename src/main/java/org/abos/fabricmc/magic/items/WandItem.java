@@ -9,6 +9,7 @@ import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.Magic;
 import org.abos.fabricmc.magic.MagicConfig;
@@ -16,6 +17,7 @@ import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.*;
+import org.abos.fabricmc.magic.utils.WorldUtils;
 
 public class WandItem extends ToolItem {
 
@@ -121,6 +123,10 @@ public class WandItem extends ToolItem {
                 enchantment = MagicContent.FIRE_IMMUNITY_ENCHANTMENT;
                 ballEntity = null;
             }
+            else if (EnchantmentHelper.getLevel(MagicContent.EARTH_CYLINDER_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.EARTH_CYLINDER_ENCHANTMENT;
+                ballEntity = null;
+            }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
@@ -162,6 +168,13 @@ public class WandItem extends ToolItem {
             }
             else if (enchantment == MagicContent.FIRE_IMMUNITY_ENCHANTMENT) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, MagicConfig.FIRE_IMMUNITY_DURATION));
+            }
+            else if (enchantment == MagicContent.EARTH_CYLINDER_ENCHANTMENT) {
+                for (BlockPos pos : WorldUtils.circleAround(user.getBlockPos().down(),3)) {
+                    if (world.getBlockState(pos).isIn(MagicContent.EARTH_TAG)) {
+                        WorldUtils.raiseBlock(world, pos, 3);
+                    }
+                }
             }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));

@@ -33,7 +33,7 @@ public class EarthPillarProjectileEntity extends MagicProjectileEntity {
     protected void applyBlockEffects(BlockHitResult blockHitResult) {
         super.applyBlockEffects(blockHitResult);
         BlockPos blockPos = blockHitResult.getBlockPos();
-        if (world.getBlockState(blockPos).isIn(MagicContent.EARTH_PILLAR_TARGETS)) {
+        if (world.getBlockState(blockPos).isIn(MagicContent.EARTH_TAG)) {
             WorldUtils.raiseBlock(world, blockPos, 3);
         }
     }
