@@ -28,7 +28,7 @@ import org.abos.fabricmc.magic.utils.MissileSize;
 
 public class MagicProjectileEntity extends PersistentProjectileEntity {
 
-    private int maxAge = 50;
+    private int maxAge = 20*60;
     private boolean extinguishing = false;
     private int fireTicks = 0;
 
@@ -36,12 +36,10 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     public MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> type, World world) {
         super(type, world);
-        setMaxAge(20*60);
     }
 
     protected MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> type, LivingEntity owner, World world) {
         super(type, owner, world);
-        setMaxAge(20*60);
     }
 
     public static MagicProjectileEntity createSmallAirMissile(World world, PlayerEntity user) {
