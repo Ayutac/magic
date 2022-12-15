@@ -36,8 +36,7 @@ public class WandItem extends ToolItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-
-        if (!world.isClient) {
+        if (!world.isClient()) {
             final ItemStack stack = user.getStackInHand(hand);
             final NatMaxComponent mana = Magic.MANA.get(user);
             final Spell spell = Spell.getEnchantedSpell(stack);
@@ -54,6 +53,7 @@ public class WandItem extends ToolItem {
             }
 
             // apply effect
+            spell.playSound(world, user);
             if (ballEntity != null) {
                 world.spawnEntity(ballEntity);
             }
