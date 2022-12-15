@@ -7,6 +7,13 @@ class MagicDataGeneratorEntry implements DataGeneratorEntrypoint {
 
     @Override
     void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+        def pack = fabricDataGenerator.createPack()
+
+        def add = { FabricDataGenerator.Pack.RegistryDependentFactory factory ->
+            pack.addProvider factory
+        }
+
+        add MagicAdvancementProvider::new
 
     }
 
