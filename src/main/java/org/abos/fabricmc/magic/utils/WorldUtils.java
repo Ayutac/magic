@@ -27,7 +27,7 @@ public class WorldUtils {
         BlockPos targetPos = groundPos;
         int actualHeight = 0;
         for (; actualHeight < height; actualHeight++) {
-            if (!isReplaceable(world, targetPos.up())) {
+            if (isSolid(world, targetPos.up())) {
                 break;
             }
             targetPos = targetPos.up();
@@ -42,8 +42,11 @@ public class WorldUtils {
         }
     }
 
-    public static boolean isReplaceable(final World world, final BlockPos blockPos) {
-        return world.getBlockState(blockPos).isAir() || !world.getFluidState(blockPos).isEmpty();
+    /**
+     * @return <code>false</code> if the block at the specified position is air or a fluid, <code>true</code> otherwise.
+     */
+    public static boolean isSolid(final World world, final BlockPos blockPos) {
+        return !world.getBlockState(blockPos).isAir() && world.getFluidState(blockPos).isEmpty();
     }
 
     public static Set<BlockPos> circleAroundEighth(BlockPos center, int radius) {
@@ -98,5 +101,40 @@ public class WorldUtils {
             circle.add(new BlockPos(-pos.getZ()+center.getZ()+center.getX(), pos.getY(), -pos.getX()+center.getX()+center.getZ()));
         }
         return circle;
+    }
+
+    public static Set<BlockPos> circleAroundGround(World world, BlockPos center, int radius) {
+        Set<BlockPos> circleGround = new HashSet<>();
+        for (BlockPos pos : circleAround(center, radius)) {
+            if (isSolid(world, pos.up())) {
+                if (!isSolid(world, pos.up(2))) {
+                    circleGround.add(pos.up());
+                    continue;
+                }
+                else {
+                    if (!isSolid(world, pos.up(3))) {
+                        circleGround.add(pos.up(2));
+                        continue;
+                    }
+                }
+            }
+            else {
+                if (isSolid(world, pos)) {
+                    circleGround.add(pos);
+                    continue;
+                }
+            }
+            if (!isSolid(world, pos)) {
+                if (isSolid(world, pos.down())) {
+                    circleGround.add(pos.down());
+                }
+                else {
+                    if (isSolid(world, pos.down(2))) {
+                        circleGround.add((pos.down(2)));
+                    }
+                }
+            }
+        }
+        return circleGround;
     }
 }

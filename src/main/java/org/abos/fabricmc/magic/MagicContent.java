@@ -99,7 +99,7 @@ public class MagicContent {
     public final static WandEnchantment FEATHER_FALL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.FEATHER_FALL_COST);
     public final static WandEnchantment FIRE_IMMUNITY_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.FIRE_IMMUNITY_COST);
     public final static WandEnchantment EARTH_PILLAR_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.EARTH_PILLAR_COST);
-    public final static WandEnchantment EARTH_CYLINDER_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.EARTH_CYLINDER_COST);
+    public final static WandEnchantment EARTH_CIRCLE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.EARTH_CIRCLE_COST);
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
@@ -159,7 +159,7 @@ public class MagicContent {
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "feather_fall"), FEATHER_FALL_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "fire_immunity"), FIRE_IMMUNITY_ENCHANTMENT);
         Registry.register(Registries.ENCHANTMENT, EARTH_PILLAR_ID, EARTH_PILLAR_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "earth_cylinder"), EARTH_CYLINDER_ENCHANTMENT);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "earth_cylinder"), EARTH_CIRCLE_ENCHANTMENT);
     }
 
     private static void registerCreativeMenu() {

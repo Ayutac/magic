@@ -333,7 +333,7 @@
         ]
       }
     },
-    "has_earth_cylinder": {
+    "has_earth_circle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -341,7 +341,7 @@
             "items": ["minecraft:enchanted_book"],
             "stored_enchantments": [
               {
-                "enchantment": "magic:earth_cylinder"
+                "enchantment": "magic:earth_circle"
               }
             ]
           }
@@ -371,6 +371,6 @@
     ["has_feather_fall"],
     ["has_fire_immunity"],
     ["has_earth_pillar"],
-    ["has_earth_cylinder"]
+    ["has_earth_circle"]
   ]
 }
