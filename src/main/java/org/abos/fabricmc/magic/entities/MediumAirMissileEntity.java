@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
+import org.abos.fabricmc.magic.MagicConfig;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.utils.MissileSize;
 
@@ -22,7 +23,7 @@ public class MediumAirMissileEntity extends MagicProjectileEntity {
 
     private void finishConstructor() {
         setMaxAge(20*60);
-        setDamage(1d);
+        setDamage(MagicConfig.MEDIUM_AIR_MISSILE_DAMAGE);
         setNoGravity(true);
         setKnockupSpeed(0.8f);
         setSound(SoundEvents.ENTITY_PHANTOM_FLAP);

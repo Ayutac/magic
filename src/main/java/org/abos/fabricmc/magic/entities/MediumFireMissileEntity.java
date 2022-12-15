@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
+import org.abos.fabricmc.magic.MagicConfig;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.utils.MissileSize;
 
@@ -22,7 +23,7 @@ public class MediumFireMissileEntity extends MagicProjectileEntity {
 
     private void finishConstructor() {
         setMaxAge(20*60);
-        setDamage(4d);
+        setDamage(MagicConfig.MEDIUM_FIRE_MISSILE_DAMAGE);
         setFireTicks(5);
         setNoGravity(true);
         setSound(SoundEvents.ENTITY_BLAZE_SHOOT);

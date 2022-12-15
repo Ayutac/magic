@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
+import org.abos.fabricmc.magic.MagicConfig;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.utils.MissileSize;
 
@@ -22,7 +23,7 @@ public class BigWaterMissileEntity extends MagicProjectileEntity {
 
     private void finishConstructor() {
         setMaxAge(20*60);
-        setDamage(10d);
+        setDamage(MagicConfig.BIG_WATER_MISSILE_DAMAGE);
         setExtinguishing(true);
         setSound(SoundEvents.ITEM_BUCKET_EMPTY);
     }
