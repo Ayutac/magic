@@ -8,18 +8,8 @@ import org.abos.fabricmc.magic.items.WandItem;
 
 public class WandEnchantment extends Enchantment {
 
-    private final int manaCost;
-
-    public WandEnchantment(final Rarity weight, final int manaCost) {
+    public WandEnchantment(final Rarity weight) {
         super(weight, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-        if (manaCost < 0) {
-            throw new IllegalArgumentException("Mana cost must be non-negative!");
-        }
-        this.manaCost = manaCost;
-    }
-
-    public int getManaCost() {
-        return manaCost;
     }
 
     @Override
