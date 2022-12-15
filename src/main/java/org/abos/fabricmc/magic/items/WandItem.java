@@ -19,6 +19,7 @@ import org.abos.fabricmc.magic.Magic;
 import org.abos.fabricmc.magic.MagicConfig;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
+import org.abos.fabricmc.magic.enchantments.Spell;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.utils.WorldUtils;
@@ -43,100 +44,65 @@ public class WandItem extends ToolItem {
             final MagicProjectileEntity ballEntity;
             final WandEnchantment enchantment;
             final NatMaxComponent mana = Magic.MANA.get(user);
-            if (EnchantmentHelper.getLevel(MagicContent.SMALL_AIR_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.SMALL_AIR_MISSILE_ENCHANTMENT;
+            if (EnchantmentHelper.getLevel(Spell.SMALL_AIR_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.SMALL_AIR_MISSILE.getEnchantment();
                 ballEntity = SmallAirMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_AIR_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.MEDIUM_AIR_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.MEDIUM_AIR_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.MEDIUM_AIR_MISSILE.getEnchantment();
                 ballEntity = MediumAirMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.BIG_AIR_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.BIG_AIR_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.BIG_AIR_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.BIG_AIR_MISSILE.getEnchantment();
                 ballEntity = BigAirMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.SMALL_EARTH_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.SMALL_EARTH_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.SMALL_EARTH_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.SMALL_EARTH_MISSILE.getEnchantment();
                 ballEntity = BigEarthMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_EARTH_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.MEDIUM_EARTH_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.MEDIUM_EARTH_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.MEDIUM_EARTH_MISSILE.getEnchantment();
                 ballEntity = MediumEarthMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.BIG_EARTH_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.BIG_EARTH_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.BIG_EARTH_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.BIG_EARTH_MISSILE.getEnchantment();
                 ballEntity = BigEarthMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.SMALL_FIRE_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.SMALL_FIRE_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.SMALL_FIRE_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.SMALL_FIRE_MISSILE.getEnchantment();
                 ballEntity = BigFireMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_FIRE_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.MEDIUM_FIRE_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.MEDIUM_FIRE_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.MEDIUM_FIRE_MISSILE.getEnchantment();
                 ballEntity = MediumFireMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.BIG_FIRE_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.BIG_FIRE_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.BIG_FIRE_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.BIG_FIRE_MISSILE.getEnchantment();
                 ballEntity = BigFireMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.SMALL_WATER_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.SMALL_WATER_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.SMALL_WATER_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.SMALL_WATER_MISSILE.getEnchantment();
                 ballEntity = BigWaterMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.MEDIUM_WATER_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.MEDIUM_WATER_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.MEDIUM_WATER_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.MEDIUM_WATER_MISSILE.getEnchantment();
                 ballEntity = MediumWaterMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.BIG_WATER_MISSILE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.BIG_WATER_MISSILE_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.BIG_WATER_MISSILE.getEnchantment(), stack) > 0) {
+                enchantment = Spell.BIG_WATER_MISSILE.getEnchantment();
                 ballEntity = BigWaterMissileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.EARTH_PILLAR_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.EARTH_PILLAR_ENCHANTMENT;
+            else if (EnchantmentHelper.getLevel(Spell.EARTH_PILLAR.getEnchantment(), stack) > 0) {
+                enchantment = Spell.EARTH_PILLAR.getEnchantment();
                 ballEntity = EarthPillarProjectileEntity.create(world, user);
             }
-            else if (EnchantmentHelper.getLevel(MagicContent.INSTANT_HEAL_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.INSTANT_HEAL_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.SHIELD_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.SHIELD_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.NIGHT_VISION_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.NIGHT_VISION_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.GILLS_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.GILLS_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.OCEANS_FRIEND_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.OCEANS_FRIEND_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.LEVITATE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.LEVITATE_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.FEATHER_FALL_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.FEATHER_FALL_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.FIRE_IMMUNITY_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.FIRE_IMMUNITY_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.EARTH_CIRCLE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.EARTH_CIRCLE_ENCHANTMENT;
-                ballEntity = null;
-            }
-            else if (EnchantmentHelper.getLevel(MagicContent.FIRE_CIRCLE_ENCHANTMENT, stack) > 0) {
-                enchantment = MagicContent.FIRE_CIRCLE_ENCHANTMENT;
-                ballEntity = null;
-            }
             else {
-                return TypedActionResult.pass(user.getStackInHand(hand));
+                Spell spell = Spell.getEnchantedSpell(stack);
+                if (spell == null) {
+                    return TypedActionResult.pass(user.getStackInHand(hand));
+                }
+                enchantment = spell.getEnchantment();
+                ballEntity = null;
             }
 
             // check if can cast
@@ -150,42 +116,42 @@ public class WandItem extends ToolItem {
             if (ballEntity != null) {
                 world.spawnEntity(ballEntity);
             }
-            else if (enchantment == MagicContent.INSTANT_HEAL_ENCHANTMENT) {
+            else if (enchantment == Spell.INSTANT_HEAL.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1));
                 //user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 1f, 1f);
             }
-            else if (enchantment == MagicContent.SHIELD_ENCHANTMENT) {
+            else if (enchantment == Spell.SHIELD.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, MagicConfig.SHIELD_DURATION, 1));
                 //user.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1f, 1f);
             }
-            else if (enchantment == MagicContent.NIGHT_VISION_ENCHANTMENT) {
+            else if (enchantment == Spell.NIGHT_VISION.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, MagicConfig.NIGHT_VISION_DURATION));
             }
-            else if (enchantment == MagicContent.GILLS_ENCHANTMENT) {
+            else if (enchantment == Spell.GILLS.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, MagicConfig.GILLS_DURATION));
             }
-            else if (enchantment == MagicContent.OCEANS_FRIEND_ENCHANTMENT) {
+            else if (enchantment == Spell.OCEANS_FRIEND.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, MagicConfig.OCEANS_FRIEND_DURATION));
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, MagicConfig.OCEANS_FRIEND_DURATION));
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, MagicConfig.OCEANS_FRIEND_DURATION));
             }
-            else if (enchantment == MagicContent.LEVITATE_ENCHANTMENT) {
+            else if (enchantment == Spell.LEVITATE.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, MagicConfig.LEVITATE_DURATION));
             }
-            else if (enchantment == MagicContent.FEATHER_FALL_ENCHANTMENT) {
+            else if (enchantment == Spell.FEATHER_FALL.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, MagicConfig.FEATHER_DURATION));
             }
-            else if (enchantment == MagicContent.FIRE_IMMUNITY_ENCHANTMENT) {
+            else if (enchantment == Spell.FIRE_IMMUNITY.getEnchantment()) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, MagicConfig.FIRE_IMMUNITY_DURATION));
             }
-            else if (enchantment == MagicContent.EARTH_CIRCLE_ENCHANTMENT) {
+            else if (enchantment == Spell.EARTH_CIRCLE.getEnchantment()) {
                 for (BlockPos pos : WorldUtils.circleAroundGround(world, user.getBlockPos().down(),3)) {
                     if (world.getBlockState(pos).isIn(MagicContent.EARTH_TAG)) {
                         WorldUtils.raiseBlock(world, pos, 3);
                     }
                 }
             }
-            else if (enchantment == MagicContent.FIRE_CIRCLE_ENCHANTMENT) {
+            else if (enchantment == Spell.FIRE_CIRCLE.getEnchantment()) {
                 for (BlockPos pos : WorldUtils.circleAroundGround(world, user.getBlockPos().down(),4)) {
                     BlockPos blockPos2 = pos.up();
                     if (AbstractFireBlock.canPlaceAt(world, blockPos2, Direction.UP)) {

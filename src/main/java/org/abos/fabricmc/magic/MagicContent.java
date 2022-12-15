@@ -6,17 +6,14 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.effect.*;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.*;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtInt;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
@@ -27,7 +24,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.effects.InstantManaEffect;
-import org.abos.fabricmc.magic.enchantments.WandEnchantment;
+import org.abos.fabricmc.magic.enchantments.Spell;
 import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.items.WandItem;
 import org.abos.fabricmc.magic.utils.MissileSize;
@@ -78,30 +75,6 @@ public class MagicContent {
 
     public final static EntityType<EarthPillarProjectileEntity> EARTH_PILLAR_PROJECTILE_ENTITY_TYPE = registerEntityType(EARTH_PILLAR_ID, EarthPillarProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
 
-    public final static WandEnchantment SMALL_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
-    public final static WandEnchantment MEDIUM_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
-    public final static WandEnchantment BIG_AIR_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
-    public final static WandEnchantment SMALL_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
-    public final static WandEnchantment MEDIUM_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
-    public final static WandEnchantment BIG_EARTH_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
-    public final static WandEnchantment SMALL_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
-    public final static WandEnchantment MEDIUM_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
-    public final static WandEnchantment BIG_FIRE_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
-    public final static WandEnchantment SMALL_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MissileSize.SMALL.getManaCost());
-    public final static WandEnchantment MEDIUM_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MissileSize.MEDIUM.getManaCost());
-    public final static WandEnchantment BIG_WATER_MISSILE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MissileSize.BIG.getManaCost());
-    public final static WandEnchantment INSTANT_HEAL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.INSTANT_HEAL_COST);
-    public final static WandEnchantment SHIELD_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.SHIELD_COST);
-    public final static WandEnchantment NIGHT_VISION_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.COMMON, MagicConfig.NIGHT_VISION_COST);
-    public final static WandEnchantment GILLS_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.GILLS_COST);
-    public final static WandEnchantment OCEANS_FRIEND_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.OCEANS_FRIEND_COST);
-    public final static WandEnchantment LEVITATE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.LEVITATE_COST);
-    public final static WandEnchantment FEATHER_FALL_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.FEATHER_FALL_COST);
-    public final static WandEnchantment FIRE_IMMUNITY_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.FIRE_IMMUNITY_COST);
-    public final static WandEnchantment EARTH_PILLAR_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.UNCOMMON, MagicConfig.EARTH_PILLAR_COST);
-    public final static WandEnchantment EARTH_CIRCLE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.VERY_RARE, MagicConfig.EARTH_CIRCLE_COST);
-    public final static WandEnchantment FIRE_CIRCLE_ENCHANTMENT = new WandEnchantment(Enchantment.Rarity.RARE, MagicConfig.FIRE_CIRCLE_COST);
-
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
 
@@ -139,29 +112,9 @@ public class MagicContent {
     }
 
     private static void registerEnchantments() {
-        Registry.register(Registries.ENCHANTMENT, SMALL_AIR_MISSILE_ID, SMALL_AIR_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, MEDIUM_AIR_MISSILE_ID, MEDIUM_AIR_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, BIG_AIR_MISSILE_ID, BIG_AIR_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, SMALL_EARTH_MISSILE_ID, SMALL_EARTH_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, MEDIUM_EARTH_MISSILE_ID, MEDIUM_EARTH_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, BIG_EARTH_MISSILE_ID, BIG_EARTH_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, SMALL_FIRE_MISSILE_ID, SMALL_FIRE_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, MEDIUM_FIRE_MISSILE_ID, MEDIUM_FIRE_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, BIG_FIRE_MISSILE_ID, BIG_FIRE_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, SMALL_WATER_MISSILE_ID, SMALL_WATER_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, MEDIUM_WATER_MISSILE_ID, MEDIUM_WATER_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, BIG_WATER_MISSILE_ID, BIG_WATER_MISSILE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "instant_heal"), INSTANT_HEAL_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "shield"), SHIELD_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "night_vision"), NIGHT_VISION_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "gills"), GILLS_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "oceans_friend"), OCEANS_FRIEND_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "levitate"), LEVITATE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "feather_fall"), FEATHER_FALL_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "fire_immunity"), FIRE_IMMUNITY_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, EARTH_PILLAR_ID, EARTH_PILLAR_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "earth_circle"), EARTH_CIRCLE_ENCHANTMENT);
-        Registry.register(Registries.ENCHANTMENT, new Identifier(Magic.MOD_ID, "fire_circle"), FIRE_CIRCLE_ENCHANTMENT);
+        for (Spell spell : Spell.values()) {
+            Registry.register(Registries.ENCHANTMENT, spell.getId(), spell.getEnchantment());
+        }
     }
 
     private static void registerCreativeMenu() {
@@ -234,19 +187,8 @@ public class MagicContent {
         PotionUtil.setPotion(arrow, STRONG_MANA_DRAIN_POTION);
         entries.add(arrow);
 
-
-        for (Enchantment enchantment : Registries.ENCHANTMENT) {
-            Identifier id = Registries.ENCHANTMENT.getId(enchantment);
-            if (id.getNamespace().equals(Magic.MOD_ID)) {
-                NbtCompound spell = new NbtCompound();
-                spell.put("id", NbtString.of(id.toString()));
-                spell.put("lvl", NbtInt.of(1));
-                NbtList list = new NbtList();
-                list.add(spell);
-                ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
-                book.setSubNbt("StoredEnchantments", list);
-                entries.add(book);
-            }
+        for (Spell spell : Spell.values()) {
+            entries.add(spell.asEnchantedBook());
         }
     }
 
