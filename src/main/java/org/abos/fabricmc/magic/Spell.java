@@ -1,4 +1,4 @@
-package org.abos.fabricmc.magic.enchantments;
+package org.abos.fabricmc.magic;
 
 import net.minecraft.enchantment.Enchantment;
 import static net.minecraft.enchantment.Enchantment.Rarity.*;
@@ -11,8 +11,7 @@ import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Identifier;
-import org.abos.fabricmc.magic.Magic;
-import org.abos.fabricmc.magic.MagicConfig;
+import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.utils.MissileSize;
 
 import java.util.Locale;

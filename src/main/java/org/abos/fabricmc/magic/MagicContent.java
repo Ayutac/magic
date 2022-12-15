@@ -24,7 +24,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.effects.InstantManaEffect;
-import org.abos.fabricmc.magic.enchantments.Spell;
 import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.items.WandItem;
 import org.abos.fabricmc.magic.utils.MissileSize;

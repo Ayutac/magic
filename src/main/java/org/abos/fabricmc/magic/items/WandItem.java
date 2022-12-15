@@ -19,7 +19,7 @@ import org.abos.fabricmc.magic.Magic;
 import org.abos.fabricmc.magic.MagicConfig;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
-import org.abos.fabricmc.magic.enchantments.Spell;
+import org.abos.fabricmc.magic.Spell;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.*;
 import org.abos.fabricmc.magic.utils.WorldUtils;
