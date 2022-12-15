@@ -1,24 +1,29 @@
-package org.abos.fabricmc.magic.client;
+package org.abos.fabricmc.magic.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.Magic;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-class ManaHud implements HudRenderCallback {
+@Mixin(InGameHud.class)
+public class InGameHudMixin {
 
-    public static final int HUD_WIDTH = 81;
-    public static final int TEXTURE_WIDTH = HUD_WIDTH;
-    public static final int HUD_HEIGHT = 9;
-    public static final int TEXTURE_HEIGHT = HUD_HEIGHT * 2;
+    private static final int HUD_WIDTH = 81;
+    private static final int TEXTURE_WIDTH = HUD_WIDTH;
+    private static final int HUD_HEIGHT = 9;
+    private static final int TEXTURE_HEIGHT = HUD_HEIGHT * 2;
 
-    @Override
-    public void onHudRender(MatrixStack matrixStack, float tickDelta) {
+    @Inject(method = "renderStatusBars(Lnet/minecraft/client/util/math/MatrixStack;)V", at = @At("RETURN"))
+    private void magic$renderManaBar(MatrixStack matrixStack, CallbackInfo callbackInfo) {
         PlayerEntity player = MinecraftClient.getInstance().player;
         if (player != null && !player.isCreative()) {
             final float manaPercent = (float) Magic.MANA.get(player).getValue() / Magic.MANA.get(player).getMax();
@@ -35,4 +40,5 @@ class ManaHud implements HudRenderCallback {
             DrawableHelper.drawTexture(matrixStack, rightStartPoint + manaOffset + 1, downStartPoint, 0, manaOffset + 1, HUD_HEIGHT, manaWidth, HUD_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
     }
+
 }

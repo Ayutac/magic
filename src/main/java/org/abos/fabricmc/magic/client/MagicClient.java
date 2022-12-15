@@ -2,7 +2,6 @@ package org.abos.fabricmc.magic.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import org.abos.fabricmc.magic.Spell;
 
 public class MagicClient implements ClientModInitializer {
@@ -13,8 +12,6 @@ public class MagicClient implements ClientModInitializer {
                 EntityRendererRegistry.register(spell.getEntityType(), context -> new MagicMissileEntityRenderer<>(context, spell.getType().getTexture()));
             }
         }
-
-        HudRenderCallback.EVENT.register(new ManaHud());
     }
 
 }
