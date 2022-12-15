@@ -27,9 +27,9 @@ public class MagicConfig {
     public static int FEATHER_DURATION = 5*20; // in ticks
     public static int FIRE_IMMUNITY_COST = 15;
     public static int FIRE_IMMUNITY_DURATION = 15*20; // in ticks
-
     public static int EARTH_PILLAR_COST = 20;
     public static int EARTH_CIRCLE_COST = 50;
+    public static int FIRE_CIRCLE_COST = 40;
 
     private MagicConfig() {
         /* No instantiation. */

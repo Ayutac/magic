@@ -1,5 +1,7 @@
 package org.abos.fabricmc.magic.items;
 
+import net.minecraft.block.AbstractFireBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -10,6 +12,7 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.Magic;
 import org.abos.fabricmc.magic.MagicConfig;
@@ -127,6 +130,10 @@ public class WandItem extends ToolItem {
                 enchantment = MagicContent.EARTH_CIRCLE_ENCHANTMENT;
                 ballEntity = null;
             }
+            else if (EnchantmentHelper.getLevel(MagicContent.FIRE_CIRCLE_ENCHANTMENT, stack) > 0) {
+                enchantment = MagicContent.FIRE_CIRCLE_ENCHANTMENT;
+                ballEntity = null;
+            }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
@@ -173,6 +180,15 @@ public class WandItem extends ToolItem {
                 for (BlockPos pos : WorldUtils.circleAroundGround(world, user.getBlockPos().down(),3)) {
                     if (world.getBlockState(pos).isIn(MagicContent.EARTH_TAG)) {
                         WorldUtils.raiseBlock(world, pos, 3);
+                    }
+                }
+            }
+            else if (enchantment == MagicContent.FIRE_CIRCLE_ENCHANTMENT) {
+                for (BlockPos pos : WorldUtils.circleAroundGround(world, user.getBlockPos().down(),4)) {
+                    BlockPos blockPos2 = pos.up();
+                    if (AbstractFireBlock.canPlaceAt(world, blockPos2, Direction.UP)) {
+                        BlockState blockState2 = AbstractFireBlock.getState(world, blockPos2);
+                        world.setBlockState(blockPos2, blockState2, 11); // set on fire
                     }
                 }
             }
