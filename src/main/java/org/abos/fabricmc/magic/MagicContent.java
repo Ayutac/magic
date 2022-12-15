@@ -39,19 +39,6 @@ public class MagicContent {
             .icon(() -> new ItemStack(BEGINNER_WAND))
             .build();
 
-    public final static Identifier SMALL_AIR_MISSILE_ID = new Identifier(Magic.MOD_ID, "small_air_missile");
-    public final static Identifier MEDIUM_AIR_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_air_missile");
-    public final static Identifier BIG_AIR_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_air_missile");
-    public final static Identifier SMALL_EARTH_MISSILE_ID = new Identifier(Magic.MOD_ID, "small_earth_missile");
-    public final static Identifier MEDIUM_EARTH_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_earth_missile");
-    public final static Identifier BIG_EARTH_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_earth_missile");
-    public final static Identifier SMALL_FIRE_MISSILE_ID = new Identifier(Magic.MOD_ID, "small_fire_missile");
-    public final static Identifier MEDIUM_FIRE_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_fire_missile");
-    public final static Identifier BIG_FIRE_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_fire_missile");
-    public final static Identifier SMALL_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "small_water_missile");
-    public final static Identifier MEDIUM_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "medium_water_missile");
-    public final static Identifier BIG_WATER_MISSILE_ID = new Identifier(Magic.MOD_ID, "big_water_missile");
-
     public final static Identifier EARTH_PILLAR_ID = new Identifier(Magic.MOD_ID, "earth_pillar");
 
     public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
@@ -59,18 +46,18 @@ public class MagicContent {
     public final static Identifier MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "mana_drain");
     public final static Identifier STRONG_MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana_drain");
 
-    public final static EntityType<SmallAirMissileEntity> SMALL_AIR_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_AIR_MISSILE_ID, SmallAirMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MediumAirMissileEntity> MEDIUM_AIR_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_AIR_MISSILE_ID, MediumAirMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<BigAirMissileEntity> BIG_AIR_MISSILE_ENTITY_TYPE = registerEntityType(BIG_AIR_MISSILE_ID, BigAirMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
-    public final static EntityType<SmallEarthMissileEntity> SMALL_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_EARTH_MISSILE_ID, SmallEarthMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MediumEarthMissileEntity> MEDIUM_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_EARTH_MISSILE_ID, MediumEarthMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<BigEarthMissileEntity> BIG_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(BIG_EARTH_MISSILE_ID, BigEarthMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
-    public final static EntityType<SmallFireMissileEntity> SMALL_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_FIRE_MISSILE_ID, SmallFireMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MediumFireMissileEntity> MEDIUM_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_FIRE_MISSILE_ID, MediumFireMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<BigFireMissileEntity> BIG_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(BIG_FIRE_MISSILE_ID, BigFireMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
-    public final static EntityType<SmallWaterMissileEntity> SMALL_WATER_MISSILE_ENTITY_TYPE = registerEntityType(SMALL_WATER_MISSILE_ID, SmallWaterMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
-    public final static EntityType<MediumWaterMissileEntity> MEDIUM_WATER_MISSILE_ENTITY_TYPE = registerEntityType(MEDIUM_WATER_MISSILE_ID, MediumWaterMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
-    public final static EntityType<BigWaterMissileEntity> BIG_WATER_MISSILE_ENTITY_TYPE = registerEntityType(BIG_WATER_MISSILE_ID, BigWaterMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
+    public final static EntityType<SmallAirMissileEntity> SMALL_AIR_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_AIR_MISSILE.getId(), SmallAirMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
+    public final static EntityType<MediumAirMissileEntity> MEDIUM_AIR_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_AIR_MISSILE.getId(), MediumAirMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
+    public final static EntityType<BigAirMissileEntity> BIG_AIR_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_AIR_MISSILE.getId(), BigAirMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
+    public final static EntityType<SmallEarthMissileEntity> SMALL_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_EARTH_MISSILE.getId(), SmallEarthMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
+    public final static EntityType<MediumEarthMissileEntity> MEDIUM_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_EARTH_MISSILE.getId(), MediumEarthMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
+    public final static EntityType<BigEarthMissileEntity> BIG_EARTH_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_EARTH_MISSILE.getId(), BigEarthMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
+    public final static EntityType<SmallFireMissileEntity> SMALL_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_FIRE_MISSILE.getId(), SmallFireMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
+    public final static EntityType<MediumFireMissileEntity> MEDIUM_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_FIRE_MISSILE.getId(), MediumFireMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
+    public final static EntityType<BigFireMissileEntity> BIG_FIRE_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_FIRE_MISSILE.getId(), BigFireMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
+    public final static EntityType<SmallWaterMissileEntity> SMALL_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.SMALL_WATER_MISSILE.getId(), SmallWaterMissileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
+    public final static EntityType<MediumWaterMissileEntity> MEDIUM_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_WATER_MISSILE.getId(), MediumWaterMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
+    public final static EntityType<BigWaterMissileEntity> BIG_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_WATER_MISSILE.getId(), BigWaterMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
 
     public final static EntityType<EarthPillarProjectileEntity> EARTH_PILLAR_PROJECTILE_ENTITY_TYPE = registerEntityType(EARTH_PILLAR_ID, EarthPillarProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
 
