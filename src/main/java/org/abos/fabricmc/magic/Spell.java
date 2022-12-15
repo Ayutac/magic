@@ -46,7 +46,7 @@ public enum Spell {
     EARTH_CIRCLE(VERY_RARE, MagicConfig.EARTH_CIRCLE_COST),
     FIRE_CIRCLE(RARE, MagicConfig.FIRE_CIRCLE_COST);
 
-    private final Identifier id = new Identifier(Magic.MOD_ID, name().toLowerCase(Locale.ROOT));
+    private final Identifier id = new Identifier(Magic.MOD_ID, getName());
     private final int manaCost;
     private final WandEnchantment enchantment;
     private final BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory;
@@ -62,6 +62,10 @@ public enum Spell {
 
     Spell(Enchantment.Rarity rarity, int cost) {
         this(rarity, cost, null);
+    }
+
+    public String getName() {
+        return name().toLowerCase(Locale.ROOT);
     }
 
     public Identifier getId() {
