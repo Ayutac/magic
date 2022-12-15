@@ -39,8 +39,6 @@ public class MagicContent {
             .icon(() -> new ItemStack(BEGINNER_WAND))
             .build();
 
-    public final static Identifier EARTH_PILLAR_ID = new Identifier(Magic.MOD_ID, "earth_pillar");
-
     public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
     public final static Identifier STRONG_MANA_POTION_ID = new Identifier(Magic.MOD_ID, "strong_mana");
     public final static Identifier MANA_DRAIN_POTION_ID = new Identifier(Magic.MOD_ID, "mana_drain");
@@ -59,7 +57,7 @@ public class MagicContent {
     public final static EntityType<MediumWaterMissileEntity> MEDIUM_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.MEDIUM_WATER_MISSILE.getId(), MediumWaterMissileEntity::new, MissileSize.MEDIUM.getWidth(), MissileSize.MEDIUM.getHeight(), 4, 10);
     public final static EntityType<BigWaterMissileEntity> BIG_WATER_MISSILE_ENTITY_TYPE = registerEntityType(Spell.BIG_WATER_MISSILE.getId(), BigWaterMissileEntity::new, MissileSize.BIG.getWidth(), MissileSize.BIG.getHeight(), 4, 10);
 
-    public final static EntityType<EarthPillarProjectileEntity> EARTH_PILLAR_PROJECTILE_ENTITY_TYPE = registerEntityType(EARTH_PILLAR_ID, EarthPillarProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
+    public final static EntityType<EarthPillarProjectileEntity> EARTH_PILLAR_PROJECTILE_ENTITY_TYPE = registerEntityType(Spell.EARTH_PILLAR.getId(), EarthPillarProjectileEntity::new, MissileSize.SMALL.getWidth(), MissileSize.SMALL.getHeight(), 4, 10);
 
     public final static StatusEffect INSTANT_MANA_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana"), new InstantManaEffect(StatusEffectCategory.BENEFICIAL, 0x22aeff));
     public final static StatusEffect INSTANT_MANA_DRAIN_EFFECT = Registry.register(Registries.STATUS_EFFECT, new Identifier(Magic.MOD_ID, "instant_mana_drain"), new InstantManaEffect(StatusEffectCategory.HARMFUL, 0x8713fd));
