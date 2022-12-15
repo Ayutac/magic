@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "modid-datagen",
-  "name": "Example Mod Datagen",
+  "id": "magic-datagen",
+  "name": "Magic Mod Datagen",
   "version": "1.0.0",
   "environment": "*",
   "entrypoints": {
