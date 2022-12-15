@@ -3,7 +3,7 @@
 1. Add cost and possibly other configurable stuff about the enchantment to `MagicConfig.java`.
 2. Add an enum entry to `Spell.java`.
 3. Add the enchantment effect to `WandItem.java`.
-4. Add the enchantment to `any_spell.json` and `all_spells.json` following the respective format of the other enchantments there.
+4. Run datagen for good measure.
 5. Add the enchantment description to `en_us.json`.
 
 ## Adding a Projectile Enchantment
