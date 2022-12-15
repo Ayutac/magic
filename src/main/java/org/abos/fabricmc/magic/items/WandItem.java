@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -141,6 +142,7 @@ public class WandItem extends ToolItem {
             // check if can cast
             int cost = (int)Math.max(1,enchantment.getManaCost()*manaFactor);
             if (!mana.canSubtract(cost) && !user.isCreative()) {
+                user.sendMessage(Text.translatable("messages.magic.not_enough_mana"), true);
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }
 

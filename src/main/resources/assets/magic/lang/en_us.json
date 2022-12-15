@@ -53,5 +53,7 @@
   "advancements.magic.any_spell": "Abracadabra",
   "advancements.magic.any_spell.desc": "Acquire a wand enchantment",
   "advancements.magic.all_spells": "Librarian",
-  "advancements.magic.all_spells.desc": "Acquire all wand enchantments"
+  "advancements.magic.all_spells.desc": "Acquire all wand enchantments",
+
+  "messages.magic.not_enough_mana": "Not enough Mana!"
 }
