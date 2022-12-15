@@ -28,14 +28,16 @@ public abstract class MagicProjectileEntity extends PersistentProjectileEntity {
     private boolean extinguishing = false;
     private int fireTicks = 0;
 
-    private float knockupSpeed = 0f;
+    private float knockUpSpeed = 0f;
 
     protected MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> type, World world) {
         super(type, world);
+        setDamage(0d);
     }
 
     protected MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> type, LivingEntity owner, World world) {
         super(type, owner, world);
+        setDamage(0d);
     }
 
     public int getMaxAge() {
@@ -70,15 +72,15 @@ public abstract class MagicProjectileEntity extends PersistentProjectileEntity {
         this.fireTicks = fireTicks;
     }
 
-    public float getKnockupSpeed() {
-        return knockupSpeed;
+    public float getKnockUpSpeed() {
+        return knockUpSpeed;
     }
 
-    public void setKnockupSpeed(float knockupSpeed) {
-        if (knockupSpeed < 0) {
+    public void setKnockUpSpeed(float knockUpSpeed) {
+        if (knockUpSpeed < 0) {
             throw new IllegalArgumentException("Knockup speed must be non-negative!");
         }
-        this.knockupSpeed = knockupSpeed;
+        this.knockUpSpeed = knockUpSpeed;
     }
 
     @Override
@@ -149,8 +151,8 @@ public abstract class MagicProjectileEntity extends PersistentProjectileEntity {
         if (getFireTicks() > target.getFireTicks()) {
             target.setFireTicks(getFireTicks());
         }
-        if (getKnockupSpeed() != 0) {
-            target.addVelocity(new Vec3d(0d, getKnockupSpeed(), 0d));
+        if (getKnockUpSpeed() != 0) {
+            target.addVelocity(new Vec3d(0d, getKnockUpSpeed(), 0d));
         }
     }
 
@@ -176,7 +178,7 @@ public abstract class MagicProjectileEntity extends PersistentProjectileEntity {
                 world.setBlockState(blockPos2, blockState2, 11); // set on fire
             }
         }
-        if (getKnockupSpeed() != 0) {
+        if (getKnockUpSpeed() != 0) {
             // TODO detachable blocks like torches should fall off
         }
     }

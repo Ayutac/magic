@@ -24,7 +24,7 @@ public class BigAirMissileEntity extends MagicProjectileEntity {
     private void finishConstructor() {
         setMaxAge(20*60);
         setDamage(MagicConfig.BIG_AIR_MISSILE_DAMAGE);
-        setKnockupSpeed(1.2f);
+        setKnockUpSpeed(1.2f);
         setNoGravity(true);
         setSound(SoundEvents.ENTITY_PHANTOM_FLAP);
     }

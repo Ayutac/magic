@@ -25,7 +25,7 @@ public class MediumAirMissileEntity extends MagicProjectileEntity {
         setMaxAge(20*60);
         setDamage(MagicConfig.MEDIUM_AIR_MISSILE_DAMAGE);
         setNoGravity(true);
-        setKnockupSpeed(0.8f);
+        setKnockUpSpeed(0.8f);
         setSound(SoundEvents.ENTITY_PHANTOM_FLAP);
     }
 
