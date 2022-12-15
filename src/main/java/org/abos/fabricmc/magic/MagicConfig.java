@@ -42,6 +42,8 @@ public class MagicConfig {
     public static int EARTH_PILLAR_COST = 20;
     public static int EARTH_CIRCLE_COST = 50;
     public static int FIRE_CIRCLE_COST = 40;
+    public static int CHARM_COST = 15;
+    public static int CHARM_DURATION = 10*20; // in ticks
 
     private MagicConfig() {
         /* No instantiation. */

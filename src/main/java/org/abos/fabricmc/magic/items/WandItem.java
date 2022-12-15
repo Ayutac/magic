@@ -101,6 +101,9 @@ public class WandItem extends ToolItem {
                     }
                 }
             }
+            else if (spell == Spell.CHARM) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.HERO_OF_THE_VILLAGE, MagicConfig.CHARM_DURATION));
+            }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));
             }

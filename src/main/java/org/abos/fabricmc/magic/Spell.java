@@ -49,7 +49,8 @@ public enum Spell {
     FIRE_IMMUNITY(RARE, MagicConfig.FIRE_IMMUNITY_COST),
     EARTH_PILLAR(UNCOMMON, MagicConfig.EARTH_PILLAR_COST, MissileType.EARTH, MissileSize.MEDIUM, EarthPillarProjectileEntity::create, EarthPillarProjectileEntity::new),
     EARTH_CIRCLE(VERY_RARE, MagicConfig.EARTH_CIRCLE_COST),
-    FIRE_CIRCLE(RARE, MagicConfig.FIRE_CIRCLE_COST);
+    FIRE_CIRCLE(RARE, MagicConfig.FIRE_CIRCLE_COST),
+    CHARM(VERY_RARE, MagicConfig.CHARM_COST);
 
     private final Identifier id = new Identifier(Magic.MOD_ID, getName());
     private final int manaCost;
