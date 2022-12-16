@@ -44,7 +44,9 @@ public class MagicConfig {
     public static int EARTH_REMOVAL_COST = 25;
     public static int EARTH_REMOVAL_RADIUS = 4;
     public static int FIRE_CIRCLE_COST = 40;
-    public static int WATER_REMOVAL_COST = 55;
+    public static int WATER_DOME_COST = 30;
+    public static int WATER_DOME_RADIUS = 3;
+    public static int WATER_REMOVAL_COST = 15;
     public static int WATER_REMOVAL_RADIUS = 4;
     public static int CHARM_COST = 15;
     public static int CHARM_DURATION = 10*20; // in ticks

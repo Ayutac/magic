@@ -56,6 +56,7 @@ public class WandItem extends ToolItem {
 
             // apply effect
             spell.playSound(world, user);
+            // this takes care of all projectiles
             if (ballEntity != null) {
                 world.spawnEntity(ballEntity);
             }
@@ -110,8 +111,15 @@ public class WandItem extends ToolItem {
                     }
                 }
             }
+            else if (spell == Spell.WATER_DOME) {
+                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(), MagicConfig.WATER_DOME_RADIUS)) {
+                    if (world.getBlockState(pos).canBucketPlace(Fluids.WATER)) {
+                        world.setBlockState(pos, Blocks.WATER.getDefaultState(), 11);
+                    }
+                }
+            }
             else if (spell == Spell.WATER_REMOVAL) {
-                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(),MagicConfig.EARTH_REMOVAL_RADIUS)) {
+                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(),MagicConfig.WATER_REMOVAL_RADIUS)) {
                     if (world.getBlockState(pos).isOf(Blocks.WATER)) {
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());
                     }

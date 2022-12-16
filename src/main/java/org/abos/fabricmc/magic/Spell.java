@@ -53,7 +53,8 @@ public enum Spell {
     EARTH_CIRCLE(VERY_RARE, MagicConfig.EARTH_CIRCLE_COST, MagicType.EARTH),
     EARTH_REMOVAL(VERY_RARE, MagicConfig.EARTH_REMOVAL_COST, MagicType.EARTH),
     FIRE_CIRCLE(RARE, MagicConfig.FIRE_CIRCLE_COST, MagicType.FIRE),
-    WATER_REMOVAL(UNCOMMON, MagicConfig.WATER_REMOVAL_RADIUS, MagicType.WATER),
+    WATER_DOME(RARE, MagicConfig.WATER_DOME_COST, MagicType.WATER),
+    WATER_REMOVAL(UNCOMMON, MagicConfig.WATER_REMOVAL_COST, MagicType.WATER),
     CHARM(VERY_RARE, MagicConfig.CHARM_COST, MagicType.LIGHT);
 
     private final Identifier id = new Identifier(Magic.MOD_ID, getName());
