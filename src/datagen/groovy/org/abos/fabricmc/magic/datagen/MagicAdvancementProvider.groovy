@@ -29,7 +29,7 @@ class MagicAdvancementProvider extends FabricAdvancementProvider {
         Advancement.Builder builder
 
         var rootAdv = Advancement.Builder.create()
-                .display(getDisplay(Items.LAPIS_LAZULI, "root", AdvancementFrame.TASK, new Identifier("bookshelf")))
+                .display(getDisplay(Items.LAPIS_LAZULI, "root", AdvancementFrame.TASK, new Identifier("textures/block/bookshelf.png")))
                 .rewards(AdvancementRewards.NONE)
                 .criterion("has_lapis", InventoryChangedCriterion.Conditions.items(Items.LAPIS_LAZULI))
                 .build(consumer, Magic.MOD_ID + ":root")
