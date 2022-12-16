@@ -17,6 +17,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.stat.StatFormatter;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.effects.InstantManaEffect;
 import org.abos.fabricmc.magic.items.WandItem;
@@ -77,6 +79,8 @@ public class MagicContent {
     private static void registerEnchantments() {
         for (Spell spell : Spell.values()) {
             Registry.register(Registries.ENCHANTMENT, spell.getId(), spell.getEnchantment());
+            Registry.register(Registries.CUSTOM_STAT, spell.getName(), spell.getId());
+            Stats.CUSTOM.getOrCreateStat(spell.getId(), StatFormatter.DEFAULT);
         }
     }
 

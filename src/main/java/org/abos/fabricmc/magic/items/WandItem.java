@@ -147,6 +147,7 @@ public class WandItem extends ToolItem {
                 user.getItemCooldownManager().set(MagicContent.MASTER_WAND, MagicConfig.WAND_COOL_DOWN);
             }
             user.incrementStat(Stats.USED.getOrCreateStat(this));
+            user.incrementStat(spell.getId());
             stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
             return TypedActionResult.success(user.getStackInHand(hand));
         }
