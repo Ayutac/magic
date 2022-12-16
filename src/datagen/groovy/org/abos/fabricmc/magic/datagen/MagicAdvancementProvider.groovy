@@ -29,13 +29,13 @@ class MagicAdvancementProvider extends FabricAdvancementProvider {
         Advancement.Builder builder
 
         var rootAdv = Advancement.Builder.create()
-                .display(getDisplay(Items.BOOKSHELF, "root", AdvancementFrame.TASK, new Identifier("bookshelf")))
+                .display(getDisplay(Items.LAPIS_LAZULI, "root", AdvancementFrame.TASK, new Identifier("bookshelf")))
                 .rewards(AdvancementRewards.NONE)
                 .criterion("has_lapis", InventoryChangedCriterion.Conditions.items(Items.LAPIS_LAZULI))
                 .build(consumer, Magic.MOD_ID + ":root")
 
         builder = Advancement.Builder.create()
-                .display(getDisplay(Items.BOOKSHELF, "any_spell", AdvancementFrame.TASK))
+                .display(getDisplay(Items.ENCHANTED_BOOK, "any_spell", AdvancementFrame.TASK))
                 .parent(rootAdv)
                 .rewards(AdvancementRewards.NONE)
         for (Spell spell : Spell.values()) {
