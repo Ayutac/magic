@@ -28,7 +28,9 @@
   "enchantment.magic.fire_immunity": "Fire Immunity",
   "enchantment.magic.earth_pillar": "Earth Pillar",
   "enchantment.magic.earth_circle": "Earth Circle",
+  "enchantment.magic.earth_removal": "Earth Removal",
   "enchantment.magic.fire_circle": "Fire Circle",
+  "enchantment.magic.water_removal": "Water Removal",
   "enchantment.magic.charm": "Charm Villager",
 
   "effect.magic.instant_mana": "Instant Mana",

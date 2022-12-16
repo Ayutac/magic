@@ -41,7 +41,11 @@ public class MagicConfig {
     public static int FIRE_IMMUNITY_DURATION = 15*20; // in ticks
     public static int EARTH_PILLAR_COST = 20;
     public static int EARTH_CIRCLE_COST = 50;
+    public static int EARTH_REMOVAL_COST = 25;
+    public static int EARTH_REMOVAL_RADIUS = 4;
     public static int FIRE_CIRCLE_COST = 40;
+    public static int WATER_REMOVAL_COST = 55;
+    public static int WATER_REMOVAL_RADIUS = 4;
     public static int CHARM_COST = 15;
     public static int CHARM_DURATION = 10*20; // in ticks
 

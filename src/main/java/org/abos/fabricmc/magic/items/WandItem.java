@@ -2,9 +2,11 @@ package org.abos.fabricmc.magic.items;
 
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
@@ -92,12 +94,26 @@ public class WandItem extends ToolItem {
                     }
                 }
             }
+            else if (spell == Spell.EARTH_REMOVAL) {
+                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(),MagicConfig.EARTH_REMOVAL_RADIUS)) {
+                    if (world.getBlockState(pos).isIn(MagicContent.EARTH_TAG)) {
+                        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    }
+                }
+            }
             else if (spell == Spell.FIRE_CIRCLE) {
                 for (BlockPos pos : WorldUtils.circleGround(world, user.getBlockPos().down(),4)) {
                     BlockPos blockPos2 = pos.up();
                     if (AbstractFireBlock.canPlaceAt(world, blockPos2, Direction.UP)) {
                         BlockState blockState2 = AbstractFireBlock.getState(world, blockPos2);
                         world.setBlockState(blockPos2, blockState2, 11); // set on fire
+                    }
+                }
+            }
+            else if (spell == Spell.WATER_REMOVAL) {
+                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(),MagicConfig.EARTH_REMOVAL_RADIUS)) {
+                    if (world.getBlockState(pos).isOf(Blocks.WATER)) {
+                        world.setBlockState(pos, Blocks.AIR.getDefaultState());
                     }
                 }
             }
