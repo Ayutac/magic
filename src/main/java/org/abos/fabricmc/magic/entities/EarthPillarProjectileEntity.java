@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.Spell;
-import org.abos.fabricmc.magic.utils.MissileSize;
+import org.abos.fabricmc.magic.utils.ProjectileSize;
 import org.abos.fabricmc.magic.utils.WorldUtils;
 
 public class EarthPillarProjectileEntity extends MagicProjectileEntity {
@@ -41,7 +41,7 @@ public class EarthPillarProjectileEntity extends MagicProjectileEntity {
 
     public static EarthPillarProjectileEntity create(World world, PlayerEntity user) {
         EarthPillarProjectileEntity entity = new EarthPillarProjectileEntity(Spell.EARTH_PILLAR.getEntityType(), user, world);
-        entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, MissileSize.SMALL.getSpeed(), MissileSize.SMALL.getDivergence());
+        entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, ProjectileSize.SMALL.getSpeed(), ProjectileSize.SMALL.getDivergence());
         return entity;
     }
 

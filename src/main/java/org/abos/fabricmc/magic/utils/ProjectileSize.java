@@ -2,7 +2,7 @@ package org.abos.fabricmc.magic.utils;
 
 import org.abos.fabricmc.magic.MagicConfig;
 
-public enum MissileSize {
+public enum ProjectileSize {
 
     SMALL(0.8f, 0.8f, 6f, 0.05f, MagicConfig.SMALL_MISSILE_COST),
     MEDIUM(1f, 1f, 4f, 0.2f, MagicConfig.MEDIUM_MISSILE_COST),
@@ -15,7 +15,7 @@ public enum MissileSize {
 
     private final int manaCost;
 
-    MissileSize(float width, float height, float speed, float divergence, int manaCost) {
+    ProjectileSize(float width, float height, float speed, float divergence, int manaCost) {
         this.width = width;
         this.height = height;
         this.speed = speed;
