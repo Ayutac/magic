@@ -10,6 +10,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -145,6 +146,7 @@ public class WandItem extends ToolItem {
                 user.getItemCooldownManager().set(MagicContent.EXPERT_WAND, MagicConfig.WAND_COOL_DOWN);
                 user.getItemCooldownManager().set(MagicContent.MASTER_WAND, MagicConfig.WAND_COOL_DOWN);
             }
+            user.incrementStat(Stats.USED.getOrCreateStat(this));
             stack.damage(1, user, p -> p.sendToolBreakStatus(hand));
             return TypedActionResult.success(user.getStackInHand(hand));
         }
