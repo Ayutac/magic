@@ -49,7 +49,7 @@ public class WorldUtils {
         return !world.getBlockState(blockPos).isAir() && world.getFluidState(blockPos).isEmpty();
     }
 
-    public static Set<BlockPos> circleAroundEighth(BlockPos center, int radius) {
+    public static Set<BlockPos> circleEighth(final BlockPos center, final int radius) {
         if (radius < 0) {
             throw new IllegalArgumentException("Radius must be non-negative!");
         }
@@ -73,14 +73,14 @@ public class WorldUtils {
         throw new IllegalArgumentException("Radius > 4 is not supported!");
     }
 
-    public static Set<BlockPos> circleAround(BlockPos center, int radius) {
+    public static Set<BlockPos> circle(final BlockPos center, final int radius) {
         if (radius == 0) {
             return Set.of(center);
         }
         if (radius == 1) {
             return Set.of(center.north(), center.north().east(), center.east(), center.south().east(), center.south(), center.south().west(), center.west(), center.north().west());
         }
-        Set<BlockPos> circleEighth = circleAroundEighth(center, radius);
+        Set<BlockPos> circleEighth = circleEighth(center, radius);
         Set<BlockPos> circle = new HashSet<>();
         for (BlockPos pos : circleEighth) {
             //  x, z
@@ -103,9 +103,9 @@ public class WorldUtils {
         return circle;
     }
 
-    public static Set<BlockPos> circleAroundGround(World world, BlockPos center, int radius) {
+    public static Set<BlockPos> circleGround(final World world, final BlockPos center, final int radius) {
         Set<BlockPos> circleGround = new HashSet<>();
-        for (BlockPos pos : circleAround(center, radius)) {
+        for (BlockPos pos : circle(center, radius)) {
             if (isSolid(world, pos.up())) {
                 if (!isSolid(world, pos.up(2))) {
                     circleGround.add(pos.up());
@@ -136,5 +136,48 @@ public class WorldUtils {
             }
         }
         return circleGround;
+    }
+
+    public static Set<BlockPos> filledDomeQuarter(final BlockPos center, final int radius) {
+        if (radius < 0) {
+            throw new IllegalArgumentException("Radius must be non-negative!");
+        }
+        if (radius == 0) {
+            return Set.of(center);
+        }
+        Set<BlockPos> domeQuarter = new HashSet<>();
+        final int r2 = radius*radius;
+        for (int x = 0; x <= radius; x++) {
+            final int x2 = x*x;
+            for (int z = 0; z <= radius; z++) {
+                final int z2 = z*z;
+                for (int y = 0; y <= radius; y++) {
+                    if (x2 + y*y + z2 <= r2) {
+                        domeQuarter.add(center.add(x,y,z));
+                    }
+                }
+            }
+        }
+        return domeQuarter;
+    }
+
+    public static Set<BlockPos> filledDome(final BlockPos center, final int radius) {
+        if (radius == 0) {
+            return Set.of(center);
+        }
+        Set<BlockPos> domeQuarter = filledDomeQuarter(center, radius);
+        Set<BlockPos> dome = new HashSet<>();
+        for (BlockPos pos : domeQuarter) {
+            //  x, z
+            dome.add(pos);
+            // -x, z
+            dome.add(new BlockPos(-pos.getX()+2*center.getX(), pos.getY(), pos.getZ()));
+            //  x,-z
+            dome.add(new BlockPos(pos.getX(), pos.getY(), -pos.getZ()+2*center.getZ()));
+            // -x,-z
+            dome.add(new BlockPos(-pos.getX()+2*center.getX(), pos.getY(), -pos.getZ()+2*center.getZ()));
+        }
+        return dome;
+
     }
 }

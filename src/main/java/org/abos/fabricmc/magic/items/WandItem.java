@@ -86,14 +86,14 @@ public class WandItem extends ToolItem {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, MagicConfig.FIRE_IMMUNITY_DURATION));
             }
             else if (spell == Spell.EARTH_CIRCLE) {
-                for (BlockPos pos : WorldUtils.circleAroundGround(world, user.getBlockPos().down(),3)) {
+                for (BlockPos pos : WorldUtils.circleGround(world, user.getBlockPos().down(),3)) {
                     if (world.getBlockState(pos).isIn(MagicContent.EARTH_TAG)) {
                         WorldUtils.raiseBlock(world, pos, 3);
                     }
                 }
             }
             else if (spell == Spell.FIRE_CIRCLE) {
-                for (BlockPos pos : WorldUtils.circleAroundGround(world, user.getBlockPos().down(),4)) {
+                for (BlockPos pos : WorldUtils.circleGround(world, user.getBlockPos().down(),4)) {
                     BlockPos blockPos2 = pos.up();
                     if (AbstractFireBlock.canPlaceAt(world, blockPos2, Direction.UP)) {
                         BlockState blockState2 = AbstractFireBlock.getState(world, blockPos2);
