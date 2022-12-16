@@ -146,7 +146,7 @@ public enum Spell {
     }
 
     public boolean isProjectile() {
-        return projectileFactory != null;
+        return settings != null;
     }
 
     public MagicProjectileEntity createProjectile(World world, PlayerEntity user) {
