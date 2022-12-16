@@ -111,6 +111,13 @@ public class WandItem extends ToolItem {
                     }
                 }
             }
+            else if (spell == Spell.LAVA_REMOVAL) {
+                for (BlockPos pos : WorldUtils.filledSphere(user.getBlockPos(),MagicConfig.LAVA_REMOVAL_RADIUS)) {
+                    if (world.getBlockState(pos).isOf(Blocks.LAVA)) {
+                        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    }
+                }
+            }
             else if (spell == Spell.WATER_DOME) {
                 for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(), MagicConfig.WATER_DOME_RADIUS)) {
                     if (world.getBlockState(pos).canBucketPlace(Fluids.WATER)) {
@@ -119,7 +126,7 @@ public class WandItem extends ToolItem {
                 }
             }
             else if (spell == Spell.WATER_REMOVAL) {
-                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(),MagicConfig.WATER_REMOVAL_RADIUS)) {
+                for (BlockPos pos : WorldUtils.filledSphere(user.getBlockPos(),MagicConfig.WATER_REMOVAL_RADIUS)) {
                     if (world.getBlockState(pos).isOf(Blocks.WATER)) {
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());
                     }

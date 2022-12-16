@@ -178,6 +178,20 @@ public class WorldUtils {
             dome.add(new BlockPos(-pos.getX()+2*center.getX(), pos.getY(), -pos.getZ()+2*center.getZ()));
         }
         return dome;
+    }
 
+    public static Set<BlockPos> filledSphere(final BlockPos center, final int radius) {
+        if (radius == 0) {
+            return Set.of(center);
+        }
+        Set<BlockPos> dome = filledDome(center, radius);
+        Set<BlockPos> sphere = new HashSet<>();
+        for (BlockPos pos : dome) {
+            //  x, y, z
+            sphere.add(pos);
+            //  x,-y, z
+            sphere.add(new BlockPos(pos.getX(), -pos.getY()+2*center.getY(), pos.getZ()));
+        }
+        return sphere;
     }
 }
