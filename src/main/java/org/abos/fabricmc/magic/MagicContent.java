@@ -82,7 +82,7 @@ public class MagicContent {
 
     private static void registerCreativeMenu() {
         ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP).register(MagicContent::registerItemGroup);
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(MagicContent::registerCombat);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> entries.addBefore(Items.SHIELD, Wand.values()));
     }
 
     private static void registerEntityTypes() {
@@ -151,10 +151,6 @@ public class MagicContent {
         for (Spell spell : Spell.values()) {
             entries.add(spell.asEnchantedBook());
         }
-    }
-
-    private static void registerCombat(FabricItemGroupEntries entries) {
-        entries.addBefore(Items.SHIELD, Wand.values());
     }
 
 }
