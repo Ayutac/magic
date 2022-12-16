@@ -62,11 +62,9 @@ public class WandItem extends ToolItem {
             }
             else if (spell == Spell.INSTANT_HEAL) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1));
-                //user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 1f, 1f);
             }
             else if (spell == Spell.SHIELD) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, MagicConfig.SHIELD_DURATION, 1));
-                //user.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1f, 1f);
             }
             else if (spell == Spell.NIGHT_VISION) {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, MagicConfig.NIGHT_VISION_DURATION));
