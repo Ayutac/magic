@@ -76,7 +76,7 @@ public enum Spell {
         this.settings = settings;
         this.projectileFactory = projectileFactory;
         enchantment = new WandEnchantment(rarity);
-        if (projectileFactory == null) {
+        if (settings == null) {
             entityType = null;
         }
         else {
