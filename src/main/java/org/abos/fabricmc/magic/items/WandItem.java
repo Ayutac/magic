@@ -141,10 +141,9 @@ public class WandItem extends ToolItem {
             // subtract cost
             if (!user.isCreative()) {
                 mana.subtract(cost);
-                user.getItemCooldownManager().set(MagicContent.BEGINNER_WAND, MagicConfig.WAND_COOL_DOWN);
-                user.getItemCooldownManager().set(MagicContent.NOVICE_WAND, MagicConfig.WAND_COOL_DOWN);
-                user.getItemCooldownManager().set(MagicContent.EXPERT_WAND, MagicConfig.WAND_COOL_DOWN);
-                user.getItemCooldownManager().set(MagicContent.MASTER_WAND, MagicConfig.WAND_COOL_DOWN);
+                for (Wand wand : Wand.values()) {
+                    user.getItemCooldownManager().set(wand.asItem(), MagicConfig.WAND_COOL_DOWN);
+                }
             }
             user.incrementStat(Stats.USED.getOrCreateStat(this));
             user.incrementStat(spell.getId());

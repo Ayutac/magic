@@ -1,6 +1,5 @@
 package org.abos.fabricmc.magic;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -8,7 +7,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
@@ -21,17 +23,12 @@ import net.minecraft.stat.StatFormatter;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.effects.InstantManaEffect;
-import org.abos.fabricmc.magic.items.WandItem;
+import org.abos.fabricmc.magic.items.Wand;
 
 public class MagicContent {
 
-    public final static WandItem BEGINNER_WAND = new WandItem(ToolMaterials.STONE, MagicConfig.BEGINNER_MANA_FACTOR, new FabricItemSettings());
-    public final static WandItem NOVICE_WAND = new WandItem(ToolMaterials.IRON, MagicConfig.NOVICE_MANA_FACTOR, new FabricItemSettings());
-    public final static WandItem EXPERT_WAND = new WandItem(ToolMaterials.DIAMOND, MagicConfig.EXPERT_MANA_FACTOR, new FabricItemSettings());
-    public final static WandItem MASTER_WAND = new WandItem(ToolMaterials.NETHERITE, MagicConfig.MASTER_MANA_FACTOR, new FabricItemSettings().fireproof());
-
     public static final ItemGroup ITEM_GROUP = FabricItemGroup.builder(new Identifier(Magic.MOD_ID, "item_group"))
-            .icon(() -> new ItemStack(BEGINNER_WAND))
+            .icon(() -> new ItemStack(Wand.BEGINNER))
             .build();
 
     public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
@@ -62,10 +59,9 @@ public class MagicContent {
     }
 
     private static void registerItems() {
-        Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "beginner_wand"), BEGINNER_WAND);
-        Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "novice_wand"), NOVICE_WAND);
-        Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "expert_wand"), EXPERT_WAND);
-        Registry.register(Registries.ITEM, new Identifier(Magic.MOD_ID, "master_wand"), MASTER_WAND);
+        for (Wand wand : Wand.values()) {
+            Registry.register(Registries.ITEM, wand.getId(), wand.asItem());
+        }
     }
 
     private static void registerBrewingRecipes() {
@@ -98,10 +94,9 @@ public class MagicContent {
     }
 
     private static void registerItemGroup(FabricItemGroupEntries entries) {
-        entries.add(BEGINNER_WAND);
-        entries.add(NOVICE_WAND);
-        entries.add(EXPERT_WAND);
-        entries.add(MASTER_WAND);
+        for (Wand wand : Wand.values()) {
+            entries.add(wand);
+        }
 
         ItemStack potion = new ItemStack(Items.POTION);
         PotionUtil.setPotion(potion, MANA_POTION);
@@ -159,11 +154,7 @@ public class MagicContent {
     }
 
     private static void registerCombat(FabricItemGroupEntries entries) {
-        entries.addBefore(Items.SHIELD,
-                BEGINNER_WAND,
-                NOVICE_WAND,
-                EXPERT_WAND,
-                MASTER_WAND);
+        entries.addBefore(Items.SHIELD, Wand.values());
     }
 
 }
