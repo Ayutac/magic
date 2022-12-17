@@ -10,7 +10,7 @@ public enum MagicType {
     FIRE(false, "fire_missile.png", SoundEvents.ENTITY_BLAZE_SHOOT),
     LIFE(false, null, SoundEvents.BLOCK_AMETHYST_BLOCK_STEP),
     LIGHT(false, null, SoundEvents.BLOCK_AMETHYST_BLOCK_STEP),
-    LIGHTNING(false, null, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER),
+    LIGHTNING(false, "lightning_missile.png", SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER),
     WATER(true, "water_missile.png", SoundEvents.ITEM_BUCKET_EMPTY);
 
     private final boolean affectedByGravity;
