@@ -24,7 +24,6 @@ import org.abos.fabricmc.magic.utils.MagicType;
 import org.abos.fabricmc.magic.utils.ProjectileSettings;
 
 import java.util.Locale;
-import java.util.function.BiFunction;
 
 import static net.minecraft.enchantment.Enchantment.Rarity.*;
 
@@ -38,7 +37,7 @@ public enum Spell {
     SMALL_EARTH_MISSILE(UNCOMMON, MagicType.EARTH, ProjectileSettings.small().setDamage(MagicConfig.SMALL_EARTH_MISSILE_DAMAGE)),
     MEDIUM_EARTH_MISSILE(RARE, MagicType.EARTH, ProjectileSettings.medium().setDamage(MagicConfig.MEDIUM_EARTH_MISSILE_DAMAGE)),
     BIG_EARTH_MISSILE(VERY_RARE, MagicType.EARTH, ProjectileSettings.big().setDamage(MagicConfig.BIG_EARTH_MISSILE_DAMAGE)),
-    EARTH_PILLAR(UNCOMMON, MagicConfig.EARTH_PILLAR_COST, MagicType.EARTH, ProjectileSettings.medium(), EarthPillarProjectileEntity::create, EarthPillarProjectileEntity::new),
+    EARTH_PILLAR(UNCOMMON, MagicConfig.EARTH_PILLAR_COST, MagicType.EARTH, ProjectileSettings.medium(), EarthPillarProjectileEntity::new),
     EARTH_CIRCLE(VERY_RARE, MagicConfig.EARTH_CIRCLE_COST, MagicType.EARTH),
     EARTH_REMOVAL(VERY_RARE, MagicConfig.EARTH_REMOVAL_COST, MagicType.EARTH),
     SHIELD(RARE, MagicConfig.SHIELD_COST, MagicType.EARTH),
@@ -50,9 +49,12 @@ public enum Spell {
     INSTANT_HEAL(RARE, MagicConfig.INSTANT_HEAL_COST, MagicType.LIFE),
     CHARM(VERY_RARE, MagicConfig.CHARM_COST, MagicType.LIGHT),
     NIGHT_VISION(COMMON, MagicConfig.NIGHT_VISION_COST, MagicType.LIGHT),
+    SMALL_LIGHTNING_MISSILE(UNCOMMON, MagicType.LIGHTNING, ProjectileSettings.small().setParalysisTicks(10).setDamage(MagicConfig.SMALL_LIGHTNING_MISSILE_DAMAGE)),
+    MEDIUM_LIGHTNING_MISSILE(RARE, MagicType.LIGHTNING, ProjectileSettings.medium().setParalysisTicks(20).setDamage(MagicConfig.MEDIUM_LIGHTNING_MISSILE_DAMAGE)),
+    BIG_LIGHTNING_MISSILE(VERY_RARE, MagicType.LIGHTNING, ProjectileSettings.big().setParalysisTicks(40).setDamage(MagicConfig.BIG_LIGHTNING_MISSILE_DAMAGE)),
     SMALL_WATER_MISSILE(UNCOMMON, MagicType.WATER, ProjectileSettings.small().setExtinguishing(true).setDamage(MagicConfig.SMALL_WATER_MISSILE_DAMAGE)),
-    MEDIUM_WATER_MISSILE(RARE, MagicType.WATER, ProjectileSettings.small().setExtinguishing(true).setDamage(MagicConfig.MEDIUM_WATER_MISSILE_DAMAGE)),
-    BIG_WATER_MISSILE(VERY_RARE, MagicType.WATER, ProjectileSettings.small().setExtinguishing(true).setDamage(MagicConfig.BIG_WATER_MISSILE_DAMAGE)),
+    MEDIUM_WATER_MISSILE(RARE, MagicType.WATER, ProjectileSettings.medium().setExtinguishing(true).setDamage(MagicConfig.MEDIUM_WATER_MISSILE_DAMAGE)),
+    BIG_WATER_MISSILE(VERY_RARE, MagicType.WATER, ProjectileSettings.big().setExtinguishing(true).setDamage(MagicConfig.BIG_WATER_MISSILE_DAMAGE)),
     WATER_DOME(RARE, MagicConfig.WATER_DOME_COST, MagicType.WATER),
     WATER_REMOVAL(UNCOMMON, MagicConfig.WATER_REMOVAL_COST, MagicType.WATER),
     GILLS(UNCOMMON, MagicConfig.GILLS_COST, MagicType.WATER),
@@ -63,25 +65,23 @@ public enum Spell {
     private final int manaCost;
     private final MagicType type;
     private final ProjectileSettings settings;
-    private final BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory;
     private final EntityType<MagicProjectileEntity> entityType;
     private final WandEnchantment enchantment;
 
-    Spell(Enchantment.Rarity rarity, int manaCost, MagicType type, ProjectileSettings settings, BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory, EntityType.EntityFactory<MagicProjectileEntity> projectileFactory2) {
+    Spell(Enchantment.Rarity rarity, int manaCost, MagicType type, ProjectileSettings settings, EntityType.EntityFactory<MagicProjectileEntity> projectileFactory) {
         if (manaCost < 0) {
             throw new IllegalArgumentException("Mana cost cannot be negative!");
         }
         this.manaCost = manaCost;
         this.type = type;
         this.settings = settings;
-        this.projectileFactory = projectileFactory;
         enchantment = new WandEnchantment(rarity);
         if (settings == null) {
             entityType = null;
         }
         else {
             EntityType.EntityFactory<MagicProjectileEntity> backup = MagicProjectileEntity::new;
-            entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, projectileFactory2 == null ? backup : projectileFactory2)
+            entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, projectileFactory == null ? backup : projectileFactory)
                     .dimensions(new EntityDimensions(settings.getSize().getWidth(), settings.getSize().getHeight(), true))
                     .trackRangeBlocks(4)
                     .trackedUpdateRate(10)
@@ -90,11 +90,11 @@ public enum Spell {
     }
 
     Spell(Enchantment.Rarity rarity, MagicType type, ProjectileSettings settings) {
-        this(rarity, settings.getSize().getManaCost(), type, settings, null, null);
+        this(rarity, settings.getSize().getManaCost(), type, settings, null);
     }
 
     Spell(Enchantment.Rarity rarity, int manaCost, MagicType type) {
-        this(rarity, manaCost, type, null, null, null);
+        this(rarity, manaCost, type, null, null);
     }
 
     public String getName() {
@@ -153,26 +153,12 @@ public enum Spell {
         if (!isProjectile()) {
             return null;
         }
-        if (projectileFactory == null) {
-            MagicProjectileEntity entity = new MagicProjectileEntity(entityType, user, world);
-            entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, settings.getSize().getSpeed(), settings.getSize().getDivergence());
-            if (settings.getDamage() > 0d) {
-                entity.setDamage(settings.getDamage());
-            }
-            if (settings.getFireTicks() > 0) {
-                entity.setFireTicks(settings.getFireTicks());
-            } // mutually exclusive
-            else if (settings.isExtinguishing()) {
-                entity.setExtinguishing(settings.isExtinguishing());
-            }
-            if (settings.getKnockUpSpeed() > 0f) {
-                entity.setKnockUpSpeed(settings.getKnockUpSpeed());
-            }
-            entity.setNoGravity(!type.isAffectedByGravity());
-            entity.setSound(type.getSound());
-            return entity;
-        }
-        return projectileFactory.apply(world, user);
+        MagicProjectileEntity entity = new MagicProjectileEntity(entityType, user, world);
+        entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, settings.getSize().getSpeed(), settings.getSize().getDivergence());
+        entity.setSettings(settings);
+        entity.setNoGravity(!type.isAffectedByGravity());
+        entity.setSound(type.getSound());
+        return entity;
     }
 
     public EntityType<MagicProjectileEntity> getEntityType() {

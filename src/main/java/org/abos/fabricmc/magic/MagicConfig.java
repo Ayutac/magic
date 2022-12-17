@@ -21,6 +21,9 @@ public class MagicConfig {
     public static double SMALL_FIRE_MISSILE_DAMAGE = 0d;
     public static double MEDIUM_FIRE_MISSILE_DAMAGE = 4d;
     public static double BIG_FIRE_MISSILE_DAMAGE = 10d;
+    public static double SMALL_LIGHTNING_MISSILE_DAMAGE = 0d;
+    public static double MEDIUM_LIGHTNING_MISSILE_DAMAGE = 3d;
+    public static double BIG_LIGHTNING_MISSILE_DAMAGE = 8d;
     public static double SMALL_WATER_MISSILE_DAMAGE = 0d;
     public static double MEDIUM_WATER_MISSILE_DAMAGE = 4d;
     public static double BIG_WATER_MISSILE_DAMAGE = 10d;

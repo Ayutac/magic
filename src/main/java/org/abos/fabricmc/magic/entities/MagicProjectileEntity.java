@@ -10,6 +10,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.ProjectileDamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -21,14 +23,13 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.abos.fabricmc.magic.utils.ProjectileSettings;
 
 public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     private int maxAge = 20*60;
-    private boolean extinguishing = false;
-    private int fireTicks = 0;
 
-    private float knockUpSpeed = 0f;
+    private ProjectileSettings settings;
 
     public MagicProjectileEntity(EntityType<MagicProjectileEntity> type, World world) {
         super(type, world);
@@ -49,36 +50,12 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         this.maxAge = maxAge;
     }
 
-    public boolean isExtinguishing() {
-        return extinguishing;
+    public ProjectileSettings getSettings() {
+        return settings;
     }
 
-    public void setExtinguishing(boolean extinguishing) {
-        this.extinguishing = extinguishing;
-    }
-
-    @Override
-    public int getFireTicks() {
-        return fireTicks;
-    }
-
-    @Override
-    public void setFireTicks(int fireTicks) {
-        if (fireTicks < 0) {
-            throw new IllegalArgumentException("Fire ticks must be non-negative!");
-        }
-        this.fireTicks = fireTicks;
-    }
-
-    public float getKnockUpSpeed() {
-        return knockUpSpeed;
-    }
-
-    public void setKnockUpSpeed(float knockUpSpeed) {
-        if (knockUpSpeed < 0) {
-            throw new IllegalArgumentException("Knockup speed must be non-negative!");
-        }
-        this.knockUpSpeed = knockUpSpeed;
+    public void setSettings(ProjectileSettings settings) {
+        this.settings = settings;
     }
 
     @Override
@@ -91,6 +68,14 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     protected DamageSource getDamageSource(Entity attacker) {
         return new ProjectileDamageSource("magic", this, attacker).setProjectile();
+    }
+
+    @Override
+    public int getFireTicks() {
+        if (settings != null) {
+            return settings.getFireTicks();
+        }
+        return super.getFireTicks();
     }
 
     @Override
@@ -136,26 +121,29 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     protected float calculateDamageOn(Entity entity) {
-        if (entity.getType() == EntityType.BLAZE && isExtinguishing()) {
+        if (entity.getType() == EntityType.BLAZE && settings.isExtinguishing()) {
             return (float)(getDamage()*2);
         }
         return (float)getDamage();
     }
 
     protected void applyEntityEffects(Entity target) {
-        if (isExtinguishing() & target.getFireTicks() > 0) {
+        if (settings.isExtinguishing() & target.getFireTicks() > 0) {
             target.extinguishWithSound();
         }
         if (getFireTicks() > target.getFireTicks()) {
             target.setFireTicks(getFireTicks());
         }
-        if (getKnockUpSpeed() != 0) {
-            target.addVelocity(new Vec3d(0d, getKnockUpSpeed(), 0d));
+        if (settings.getParalysisTicks() > 0 && target instanceof LivingEntity entity) {
+            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, settings.getParalysisTicks(), 4));
+        }
+        if (settings.getKnockUpSpeed() > 0f) {
+            target.addVelocity(new Vec3d(0d, settings.getKnockUpSpeed(), 0d));
         }
     }
 
     protected void applyBlockEffects(BlockHitResult blockHitResult) {
-        if (isExtinguishing()) {
+        if (settings.isExtinguishing()) {
             BlockPos pos = blockHitResult.getBlockPos();
             BlockState blockState = world.getBlockState(pos);
             if (blockState.isIn(BlockTags.FIRE)) {
@@ -176,7 +164,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
                 world.setBlockState(blockPos2, blockState2, 11); // set on fire
             }
         }
-        if (getKnockUpSpeed() != 0) {
+        if (settings.getKnockUpSpeed() != 0) {
             // TODO detachable blocks like torches should fall off
         }
     }

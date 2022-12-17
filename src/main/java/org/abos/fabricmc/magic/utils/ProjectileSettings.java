@@ -12,6 +12,8 @@ public class ProjectileSettings {
 
     private boolean extinguishing = false;
 
+    private int paralysisTicks = 0;
+
     public ProjectileSettings(ProjectileSize size) {
         this.size = size;
     }
@@ -42,6 +44,9 @@ public class ProjectileSettings {
     }
 
     public ProjectileSettings setDamage(double damage) {
+        if (damage < 0d) {
+            throw new IllegalArgumentException("Damage cannot be negative!");
+        }
         this.damage = damage;
         return this;
     }
@@ -51,6 +56,9 @@ public class ProjectileSettings {
     }
 
     public ProjectileSettings setFireTicks(int fireTicks) {
+        if (fireTicks < 0) {
+            throw new IllegalArgumentException("Fire ticks cannot be negative!");
+        }
         this.fireTicks = fireTicks;
         return this;
     }
@@ -60,6 +68,9 @@ public class ProjectileSettings {
     }
 
     public ProjectileSettings setKnockUpSpeed(float knockUpSpeed) {
+        if (knockUpSpeed < 0f) {
+            throw new IllegalArgumentException("Knock up speed cannot be negative!");
+        }
         this.knockUpSpeed = knockUpSpeed;
         return this;
     }
@@ -71,5 +82,17 @@ public class ProjectileSettings {
     public ProjectileSettings setExtinguishing(boolean extinguishing) {
         this.extinguishing = extinguishing;
         return this;
+    }
+
+    public ProjectileSettings setParalysisTicks(int paralysisTicks) {
+        if (paralysisTicks < 0) {
+            throw new IllegalArgumentException("Paralysis ticks cannot be negative!");
+        }
+        this.paralysisTicks = paralysisTicks;
+        return this;
+    }
+
+    public int getParalysisTicks() {
+        return paralysisTicks;
     }
 }
