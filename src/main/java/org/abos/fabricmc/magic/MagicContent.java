@@ -28,7 +28,7 @@ import org.abos.fabricmc.magic.items.Wand;
 public class MagicContent {
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroup.builder(new Identifier(Magic.MOD_ID, "item_group"))
-            .icon(() -> new ItemStack(Wand.BEGINNER))
+            .icon(Items.LAPIS_LAZULI::getDefaultStack)
             .build();
 
     public final static Identifier MANA_POTION_ID = new Identifier(Magic.MOD_ID, "mana");
