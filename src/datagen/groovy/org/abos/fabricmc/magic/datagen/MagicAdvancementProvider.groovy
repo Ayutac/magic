@@ -14,6 +14,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.abos.fabricmc.magic.Magic
 import org.abos.fabricmc.magic.Spell
+import org.abos.fabricmc.magic.items.Wand
 
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -33,6 +34,25 @@ class MagicAdvancementProvider extends FabricAdvancementProvider {
                 .rewards(AdvancementRewards.NONE)
                 .criterion("has_lapis", InventoryChangedCriterion.Conditions.items(Items.LAPIS_LAZULI))
                 .build(consumer, Magic.MOD_ID + ":root")
+
+        var anyWand = Advancement.Builder.create()
+                .display(getDisplay(Wand.BEGINNER.asItem(), "any_wand", AdvancementFrame.TASK))
+                .parent(rootAdv)
+                .rewards(AdvancementRewards.NONE)
+                .criterion("has_any_wand", InventoryChangedCriterion.Conditions.items(ItemPredicate.Builder.create().items(Wand.values()).build()))
+                .criteriaMerger(CriterionMerger.OR).build(consumer, Magic.MOD_ID + ":any_wand")
+
+        builder = Advancement.Builder.create()
+                .display(getDisplay(Wand.MASTER.asItem(), "all_wands", AdvancementFrame.CHALLENGE))
+                .parent(anyWand)
+                .rewards(AdvancementRewards.Builder.experience(500).build())
+        for (Wand wand : Wand.values()) {
+            builder.criterion("has_"+wand.getName(), InventoryChangedCriterion.Conditions.items(
+                    ItemPredicate.Builder.create().items(wand).build()
+            ))
+        }
+        builder.criteriaMerger(CriterionMerger.AND)
+        builder.build(consumer, Magic.MOD_ID + ":all_wands")
 
         builder = Advancement.Builder.create()
                 .display(getDisplay(Items.ENCHANTED_BOOK, "any_spell", AdvancementFrame.TASK))
