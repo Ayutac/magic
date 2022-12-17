@@ -23,18 +23,25 @@ import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.Spell;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
 import org.abos.fabricmc.magic.entities.MagicProjectileEntity;
+import org.abos.fabricmc.magic.utils.MagicType;
 import org.abos.fabricmc.magic.utils.WorldUtils;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 public class WandItem extends ToolItem {
 
-    private final double manaFactor;
+    private final double defaultManaFactor;
 
-    public WandItem(ToolMaterial material, double manaFactor, Settings settings) {
+    private final Map<MagicType, Double> manaFactor;
+
+    public WandItem(ToolMaterial material, double defaultManaFactor, Settings settings) {
         super(material, settings);
-        if (manaFactor <= 0d) {
+        if (defaultManaFactor <= 0d) {
             throw new IllegalArgumentException("Mana factor must be positive!");
         }
-        this.manaFactor = manaFactor;
+        this.defaultManaFactor = defaultManaFactor;
+        this.manaFactor = new EnumMap<>(MagicType.class);
     }
 
     @Override
@@ -49,7 +56,7 @@ public class WandItem extends ToolItem {
             final MagicProjectileEntity ballEntity = spell.createProjectile(world, user);
 
             // check if can cast
-            int cost = (int)Math.max(1,spell.getManaCost()*manaFactor);
+            int cost = (int)Math.max(1, spell.getManaCost() * manaFactor.getOrDefault(spell.getType(), defaultManaFactor));
             if (!mana.canSubtract(cost) && !user.isCreative()) {
                 user.sendMessage(Text.translatable("messages.magic.not_enough_mana"), true);
                 return TypedActionResult.pass(user.getStackInHand(hand));
