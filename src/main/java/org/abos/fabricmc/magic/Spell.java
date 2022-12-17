@@ -24,6 +24,7 @@ import org.abos.fabricmc.magic.utils.MagicType;
 import org.abos.fabricmc.magic.utils.ProjectileSettings;
 
 import java.util.Locale;
+import java.util.function.BiFunction;
 
 import static net.minecraft.enchantment.Enchantment.Rarity.*;
 
@@ -37,7 +38,7 @@ public enum Spell {
     SMALL_EARTH_MISSILE(UNCOMMON, MagicType.EARTH, ProjectileSettings.small().setDamage(MagicConfig.SMALL_EARTH_MISSILE_DAMAGE)),
     MEDIUM_EARTH_MISSILE(RARE, MagicType.EARTH, ProjectileSettings.medium().setDamage(MagicConfig.MEDIUM_EARTH_MISSILE_DAMAGE)),
     BIG_EARTH_MISSILE(VERY_RARE, MagicType.EARTH, ProjectileSettings.big().setDamage(MagicConfig.BIG_EARTH_MISSILE_DAMAGE)),
-    EARTH_PILLAR(UNCOMMON, MagicConfig.EARTH_PILLAR_COST, MagicType.EARTH, ProjectileSettings.medium(), EarthPillarProjectileEntity::new),
+    EARTH_PILLAR(UNCOMMON, MagicConfig.EARTH_PILLAR_COST, MagicType.EARTH, ProjectileSettings.medium(), EarthPillarProjectileEntity::new, EarthPillarProjectileEntity::new),
     EARTH_CIRCLE(VERY_RARE, MagicConfig.EARTH_CIRCLE_COST, MagicType.EARTH),
     EARTH_REMOVAL(VERY_RARE, MagicConfig.EARTH_REMOVAL_COST, MagicType.EARTH),
     SHIELD(RARE, MagicConfig.SHIELD_COST, MagicType.EARTH),
@@ -65,23 +66,25 @@ public enum Spell {
     private final int manaCost;
     private final MagicType type;
     private final ProjectileSettings settings;
+    private final BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory;
     private final EntityType<MagicProjectileEntity> entityType;
     private final WandEnchantment enchantment;
 
-    Spell(Enchantment.Rarity rarity, int manaCost, MagicType type, ProjectileSettings settings, EntityType.EntityFactory<MagicProjectileEntity> projectileFactory) {
+    Spell(Enchantment.Rarity rarity, int manaCost, MagicType type, ProjectileSettings settings, BiFunction<World,PlayerEntity,MagicProjectileEntity> projectileFactory, EntityType.EntityFactory<MagicProjectileEntity> projectileFactory2) {
         if (manaCost < 0) {
             throw new IllegalArgumentException("Mana cost cannot be negative!");
         }
         this.manaCost = manaCost;
         this.type = type;
         this.settings = settings;
+        this.projectileFactory = projectileFactory;
         enchantment = new WandEnchantment(rarity);
         if (settings == null) {
             entityType = null;
         }
         else {
             EntityType.EntityFactory<MagicProjectileEntity> backup = MagicProjectileEntity::new;
-            entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, projectileFactory == null ? backup : projectileFactory)
+            entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, projectileFactory2 == null ? backup : projectileFactory2)
                     .dimensions(new EntityDimensions(settings.getSize().getWidth(), settings.getSize().getHeight(), true))
                     .trackRangeBlocks(4)
                     .trackedUpdateRate(10)
@@ -90,11 +93,11 @@ public enum Spell {
     }
 
     Spell(Enchantment.Rarity rarity, MagicType type, ProjectileSettings settings) {
-        this(rarity, settings.getSize().getManaCost(), type, settings, null);
+        this(rarity, settings.getSize().getManaCost(), type, settings, null, null);
     }
 
     Spell(Enchantment.Rarity rarity, int manaCost, MagicType type) {
-        this(rarity, manaCost, type, null, null);
+        this(rarity, manaCost, type, null, null, null);
     }
 
     public String getName() {
@@ -153,7 +156,13 @@ public enum Spell {
         if (!isProjectile()) {
             return null;
         }
-        MagicProjectileEntity entity = new MagicProjectileEntity(entityType, user, world);
+        final MagicProjectileEntity entity;
+        if (projectileFactory != null) {
+            entity = projectileFactory.apply(world, user);
+        }
+        else {
+            entity = new MagicProjectileEntity(entityType, user, world);
+        }
         entity.setVelocity(user, user.getPitch(), user.getYaw(), 0f, settings.getSize().getSpeed(), settings.getSize().getDivergence());
         entity.setSettings(settings);
         entity.setNoGravity(!type.isAffectedByGravity());

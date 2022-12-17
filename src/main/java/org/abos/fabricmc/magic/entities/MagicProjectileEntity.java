@@ -128,11 +128,14 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     protected void applyEntityEffects(Entity target) {
-        if (settings.isExtinguishing() & target.getFireTicks() > 0) {
+        if (settings != null && settings.isExtinguishing() & target.getFireTicks() > 0) {
             target.extinguishWithSound();
         }
         if (getFireTicks() > target.getFireTicks()) {
             target.setFireTicks(getFireTicks());
+        }
+        if (settings == null) {
+            return;
         }
         if (settings.getParalysisTicks() > 0 && target instanceof LivingEntity entity) {
             entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, settings.getParalysisTicks(), 4));
@@ -143,7 +146,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     protected void applyBlockEffects(BlockHitResult blockHitResult) {
-        if (settings.isExtinguishing()) {
+        if (settings != null && settings.isExtinguishing()) {
             BlockPos pos = blockHitResult.getBlockPos();
             BlockState blockState = world.getBlockState(pos);
             if (blockState.isIn(BlockTags.FIRE)) {
@@ -164,7 +167,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
                 world.setBlockState(blockPos2, blockState2, 11); // set on fire
             }
         }
-        if (settings.getKnockUpSpeed() != 0) {
+        if (settings != null && settings.getKnockUpSpeed() != 0) {
             // TODO detachable blocks like torches should fall off
         }
     }
