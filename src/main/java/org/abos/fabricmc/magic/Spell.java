@@ -47,7 +47,7 @@ public enum Spell {
     BIG_FIRE_MISSILE(VERY_RARE, MagicType.FIRE, ProjectileSettings.big().setFireTicks(10).setDamage(MagicConfig.BIG_FIRE_MISSILE_DAMAGE)),
     FIRE_CIRCLE(RARE, MagicConfig.FIRE_CIRCLE_COST, MagicType.FIRE),
     LAVA_REMOVAL(RARE, MagicConfig.LAVA_REMOVAL_COST, MagicType.FIRE),
-    INSTANT_HEAL(RARE, MagicConfig.INSTANT_HEAL_COST, MagicType.LIGHT),
+    INSTANT_HEAL(RARE, MagicConfig.INSTANT_HEAL_COST, MagicType.LIFE),
     CHARM(VERY_RARE, MagicConfig.CHARM_COST, MagicType.LIGHT),
     NIGHT_VISION(COMMON, MagicConfig.NIGHT_VISION_COST, MagicType.LIGHT),
     SMALL_WATER_MISSILE(UNCOMMON, MagicType.WATER, ProjectileSettings.small().setExtinguishing(true).setDamage(MagicConfig.SMALL_WATER_MISSILE_DAMAGE)),

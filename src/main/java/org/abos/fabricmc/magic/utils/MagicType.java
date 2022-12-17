@@ -8,6 +8,7 @@ public enum MagicType {
     AIR(false, "air_missile.png", SoundEvents.ENTITY_PHANTOM_FLAP),
     EARTH(true, "earth_missile.png", SoundEvents.BLOCK_ROOTED_DIRT_PLACE),
     FIRE(false, "fire_missile.png", SoundEvents.ENTITY_BLAZE_SHOOT),
+    LIFE(false, null, SoundEvents.BLOCK_AMETHYST_BLOCK_STEP),
     LIGHT(false, null, SoundEvents.BLOCK_AMETHYST_BLOCK_STEP),
     LIGHTNING(false, null, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER),
     WATER(true, "water_missile.png", SoundEvents.ITEM_BUCKET_EMPTY);
