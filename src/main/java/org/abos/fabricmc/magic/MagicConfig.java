@@ -27,6 +27,7 @@ public class MagicConfig {
     public static double SMALL_WATER_MISSILE_DAMAGE = 0d;
     public static double MEDIUM_WATER_MISSILE_DAMAGE = 4d;
     public static double BIG_WATER_MISSILE_DAMAGE = 10d;
+    public static final int ACCELERATE_GROWTH_COST = 10;
     public static int INSTANT_HEAL_COST = 25;
     public static int SHIELD_COST = 25;
     public static int SHIELD_DURATION = 60*20; // in ticks

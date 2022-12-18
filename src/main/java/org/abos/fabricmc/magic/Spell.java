@@ -18,6 +18,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
+import org.abos.fabricmc.magic.entities.AccelerateGrowthProjectileEntity;
 import org.abos.fabricmc.magic.entities.EarthPillarProjectileEntity;
 import org.abos.fabricmc.magic.entities.MagicProjectileEntity;
 import org.abos.fabricmc.magic.utils.MagicType;
@@ -47,6 +48,7 @@ public enum Spell {
     BIG_FIRE_MISSILE(VERY_RARE, MagicType.FIRE, ProjectileSettings.big().setFireTicks(10).setDamage(MagicConfig.BIG_FIRE_MISSILE_DAMAGE)),
     FIRE_CIRCLE(RARE, MagicConfig.FIRE_CIRCLE_COST, MagicType.FIRE),
     LAVA_REMOVAL(RARE, MagicConfig.LAVA_REMOVAL_COST, MagicType.FIRE),
+    ACCELERATE_GROWTH(UNCOMMON, MagicConfig.ACCELERATE_GROWTH_COST, MagicType.LIFE, ProjectileSettings.medium(), AccelerateGrowthProjectileEntity::new, AccelerateGrowthProjectileEntity::new),
     INSTANT_HEAL(RARE, MagicConfig.INSTANT_HEAL_COST, MagicType.LIFE),
     CHARM(VERY_RARE, MagicConfig.CHARM_COST, MagicType.LIGHT),
     NIGHT_VISION(COMMON, MagicConfig.NIGHT_VISION_COST, MagicType.LIGHT),
