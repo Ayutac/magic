@@ -1,12 +1,12 @@
 package org.abos.fabricmc.magic.utils;
 
-import org.abos.fabricmc.magic.MagicConfig;
+import org.abos.fabricmc.magic.config.Config;
 
 public enum ProjectileSize {
 
-    SMALL(0.8f, 0.8f, 6f, 0.05f, MagicConfig.SMALL_MISSILE_COST),
-    MEDIUM(1f, 1f, 4f, 0.2f, MagicConfig.MEDIUM_MISSILE_COST),
-    BIG(1.2f, 1.2f, 2f, 0.5f, MagicConfig.BIG_MISSILE_COST);
+    SMALL(0.8f, 0.8f, 6f, 0.05f, Config.SMALL_MISSILE_COST),
+    MEDIUM(1f, 1f, 4f, 0.2f, Config.MEDIUM_MISSILE_COST),
+    BIG(1.2f, 1.2f, 2f, 0.5f, Config.BIG_MISSILE_COST);
 
     private final float width;
     private final float height;

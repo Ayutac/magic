@@ -1,6 +1,6 @@
-package org.abos.fabricmc.magic;
+package org.abos.fabricmc.magic.config;
 
-public class MagicConfig {
+public final class Config {
 
     public static double BEGINNER_MANA_FACTOR = 2d;
     public static double NOVICE_MANA_FACTOR = 1.5d;
@@ -57,7 +57,7 @@ public class MagicConfig {
     public static int CHARM_COST = 15;
     public static int CHARM_DURATION = 10*20; // in ticks
 
-    private MagicConfig() {
+    private Config() {
         /* No instantiation. */
     }
 
