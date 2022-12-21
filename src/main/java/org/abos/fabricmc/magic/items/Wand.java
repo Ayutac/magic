@@ -7,20 +7,22 @@ import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.Magic;
 import org.abos.fabricmc.magic.config.Config;
+import org.abos.fabricmc.magic.config.IntConfigProperty;
+import org.abos.fabricmc.magic.config.PercentageConfigProperty;
 
 import java.util.Locale;
 
 public enum Wand implements ItemConvertible {
 
-    BEGINNER(ToolMaterials.STONE, Config.BEGINNER_MANA_FACTOR),
-    NOVICE(ToolMaterials.IRON, Config.NOVICE_MANA_FACTOR),
-    EXPERT(ToolMaterials.DIAMOND, Config.EXPERT_MANA_FACTOR),
-    MASTER(ToolMaterials.NETHERITE, Config.MASTER_MANA_FACTOR);
+    BEGINNER(ToolMaterials.STONE, Magic.CONFIG.getBeginnerManaFactor()),
+    NOVICE(ToolMaterials.IRON, Magic.CONFIG.getNoviceManaFactor()),
+    EXPERT(ToolMaterials.DIAMOND, Magic.CONFIG.getExpertManaFactor()),
+    MASTER(ToolMaterials.NETHERITE, Magic.CONFIG.getMasterManaFactor());
 
     private final WandItem item;
     private final Identifier id = new Identifier(Magic.MOD_ID, getName());
 
-    Wand(ToolMaterials material, double manaFactor) {
+    Wand(ToolMaterials material, PercentageConfigProperty manaFactor) {
         item = new WandItem(material, manaFactor, new FabricItemSettings());
     }
 

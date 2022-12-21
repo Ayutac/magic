@@ -1,10 +1,14 @@
 package org.abos.fabricmc.magic.utils;
 
+import org.abos.fabricmc.magic.config.IntConfigProperty;
+
+import java.util.Objects;
+
 public class ProjectileSettings {
 
     private ProjectileSize size;
 
-    private double damage = 0;
+    private IntConfigProperty damage = new IntConfigProperty("damage", 0);
 
     private int fireTicks = 0;
 
@@ -39,15 +43,12 @@ public class ProjectileSettings {
         return this;
     }
 
-    public double getDamage() {
+    public IntConfigProperty getDamage() {
         return damage;
     }
 
-    public ProjectileSettings setDamage(double damage) {
-        if (damage < 0d) {
-            throw new IllegalArgumentException("Damage cannot be negative!");
-        }
-        this.damage = damage;
+    public ProjectileSettings setDamage(IntConfigProperty damage) {
+        this.damage = Objects.requireNonNull(damage);
         return this;
     }
 

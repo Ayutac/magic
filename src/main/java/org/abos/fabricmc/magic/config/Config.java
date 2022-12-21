@@ -1,48 +1,59 @@
 package org.abos.fabricmc.magic.config;
 
+import net.minecraft.world.GameRules;
+
 public final class Config {
 
-    public static double BEGINNER_MANA_FACTOR = 2d;
-    public static double NOVICE_MANA_FACTOR = 1.5d;
-    public static double EXPERT_MANA_FACTOR = 1d;
-    public static double MASTER_MANA_FACTOR = 0.5d;
+    private final PercentageConfigProperty beginnerManaFactor = createPercentageProperty("beginner_mana_factor", 200);
+    private final PercentageConfigProperty noviceManaFactor = createPercentageProperty("novice_mana_factor", 150);
+    private final PercentageConfigProperty expertManaFactor = createPercentageProperty("expert_mana_factor", 100);
+    private final PercentageConfigProperty masterManaFactor = createPercentageProperty("master_mana_factor", 50);
 
-    public static int WAND_COOL_DOWN = 20; // in ticks
+    // in ticks
+    private final IntConfigProperty wandCoolDown = createTimeProperty("wand_cool_down", 20);
 
-    public static int SMALL_MISSILE_COST = 2;
-    public static int MEDIUM_MISSILE_COST = 5;
-    public static int BIG_MISSILE_COST = 12;
-    public static double SMALL_AIR_MISSILE_DAMAGE = 0d;
-    public static double MEDIUM_AIR_MISSILE_DAMAGE = 1d;
-    public static double BIG_AIR_MISSILE_DAMAGE = 3d;
-    public static double SMALL_EARTH_MISSILE_DAMAGE = 1d;
-    public static double MEDIUM_EARTH_MISSILE_DAMAGE = 6d;
-    public static double BIG_EARTH_MISSILE_DAMAGE = 15d;
-    public static double SMALL_FIRE_MISSILE_DAMAGE = 0d;
-    public static double MEDIUM_FIRE_MISSILE_DAMAGE = 4d;
-    public static double BIG_FIRE_MISSILE_DAMAGE = 10d;
-    public static double SMALL_LIGHTNING_MISSILE_DAMAGE = 0d;
-    public static double MEDIUM_LIGHTNING_MISSILE_DAMAGE = 3d;
-    public static double BIG_LIGHTNING_MISSILE_DAMAGE = 8d;
-    public static double SMALL_WATER_MISSILE_DAMAGE = 0d;
-    public static double MEDIUM_WATER_MISSILE_DAMAGE = 4d;
-    public static double BIG_WATER_MISSILE_DAMAGE = 10d;
-    public static final int ACCELERATE_GROWTH_COST = 10;
-    public static int INSTANT_HEAL_COST = 25;
-    public static int SHIELD_COST = 25;
-    public static int SHIELD_DURATION = 60*20; // in ticks
-    public static int NIGHT_VISION_COST = 8;
-    public static int NIGHT_VISION_DURATION = 60*20; // in ticks
-    public static int GILLS_COST = 10;
-    public static int GILLS_DURATION = 30*20; // in ticks
-    public static int OCEANS_FRIEND_COST = 30;
-    public static int OCEANS_FRIEND_DURATION = 60*20; // in ticks
-    public static int LEVITATE_COST = 30;
-    public static int LEVITATE_DURATION = 5*20; // in ticks
-    public static int FEATHER_FALL_COST = 10;
-    public static int FEATHER_DURATION = 5*20; // in ticks
-    public static int FIRE_IMMUNITY_COST = 15;
-    public static int FIRE_IMMUNITY_DURATION = 15*20; // in ticks
+
+    private final IntConfigProperty smallMissileCost = createCostProperty("small_missile_cost", 2);
+    private final IntConfigProperty mediumMissileCost = createCostProperty("medium_missile_cost", 5);
+    private final IntConfigProperty bigMissileCost = createCostProperty("big_missile_cost", 12);
+    private final IntConfigProperty smallAirMissileDamage = createDamageProperty("small_air_missile_damage", 0);
+    private final IntConfigProperty mediumAirMissileDamage = createDamageProperty("medium_air_missile_damage", 1);
+    private final IntConfigProperty bigAirMissileDamage = createDamageProperty("big_air_missile_damage", 3);
+    private final IntConfigProperty smallEarthMissileDamage = createDamageProperty("small_earth_missile_damage", 1);
+    private final IntConfigProperty mediumEarthMissileDamage = createDamageProperty("medium_earth_missile_damage", 6);
+    private final IntConfigProperty bigEarthMissileDamage = createDamageProperty("big_earth_missile_damage", 15);
+    private final IntConfigProperty smallFireMissileDamage = createDamageProperty("small_fire_missile_damage", 0);
+    private final IntConfigProperty mediumFireMissileDamage = createDamageProperty("medium_fire_missile_damage", 4);
+    private final IntConfigProperty bigFireMissileDamage = createDamageProperty("big_fire_missile_damage", 10);
+    private final IntConfigProperty smallLightningMissileDamage = createDamageProperty("small_lightning_missile_damage", 0);
+    private final IntConfigProperty mediumLightningMissileDamage = createDamageProperty("medium_lightning_missile_damage", 3);
+    private final IntConfigProperty bigLightningMissileDamage = createDamageProperty("big_lightning_missile_damage", 8);
+    private final IntConfigProperty smallWaterMissileDamage = createDamageProperty("small_water_missile_damage", 0);
+    private final IntConfigProperty mediumWaterMissileDamage = createDamageProperty("medium_water_missile_damage", 4);
+    private final IntConfigProperty bigWaterMissileDamage = createDamageProperty("big_water_missile_damage", 10);
+    private final IntConfigProperty accelerateGrowthCost = createCostProperty("accelerate_growth_cost", 10);
+    private final IntConfigProperty instantHealCost = createCostProperty("instant_heal_cost", 25);
+    private final IntConfigProperty shieldCost = createCostProperty("shield_cost", 25);
+    // in ticks
+    private final IntConfigProperty shieldDuration = createCostProperty("shield_duration", 60*20);
+    private final IntConfigProperty nightVisionCost = createCostProperty("night_vision_cost", 8);
+    // in ticks
+    private final IntConfigProperty nightVisionDuration = createCostProperty("night_vision_duration", 60*20);
+    private final IntConfigProperty gillsCost = createCostProperty("gills_cost", 10);
+    // in ticks
+    private final IntConfigProperty gillsDuration = createCostProperty("gills_duration", 30*20);
+    private final IntConfigProperty oceansFriendCost = createCostProperty("oceans_friend_cost", 30);
+    // in ticks
+    private final IntConfigProperty oceansFriendDuration = createCostProperty("oceans_friend_duration", 60*20);
+    private final IntConfigProperty levitateCost = createCostProperty("levitate_cost", 30);
+    // in ticks
+    private final IntConfigProperty levitateDuration = createCostProperty("levitate_duration", 5*20);
+    private final IntConfigProperty featherFallCost = createCostProperty("feather_fall_cost", 10);
+    // in ticks
+    private final IntConfigProperty featherFallDuration = createCostProperty("feather_fall_duration", 5*20);
+    private final IntConfigProperty fireImmunityCost = createCostProperty("fire_immunity_cost", 15);
+    // in ticks
+    private final IntConfigProperty fireImmunityDuration = createCostProperty("fire_immunity_duration", 15*20);
     public static int EARTH_PILLAR_COST = 20;
     public static int EARTH_CIRCLE_COST = 50;
     public static int EARTH_REMOVAL_COST = 25;
@@ -57,8 +68,118 @@ public final class Config {
     public static int CHARM_COST = 15;
     public static int CHARM_DURATION = 10*20; // in ticks
 
-    private Config() {
-        /* No instantiation. */
+    public Config() {
     }
 
+    public static PercentageConfigProperty createPercentageProperty(String name, int defaultValue) {
+        return new PercentageConfigProperty(name, defaultValue, 0, Integer.MAX_VALUE, GameRules.Category.MISC);
+    }
+
+    public static IntConfigProperty createTimeProperty(String name, int defaultValue) {
+        return new IntConfigProperty(name, defaultValue, 1, Integer.MAX_VALUE, GameRules.Category.MISC);
+    }
+
+    public static IntConfigProperty createCostProperty(String name, int defaultValue) {
+        return new IntConfigProperty(name, defaultValue, 1, Integer.MAX_VALUE, GameRules.Category.MISC);
+    }
+
+    public static IntConfigProperty createRadiusProperty(String name, int defaultValue) {
+        return new IntConfigProperty(name, defaultValue, 1, Integer.MAX_VALUE, GameRules.Category.MISC);
+    }
+
+    public static IntConfigProperty createDamageProperty(String name, int defaultValue) {
+        return new IntConfigProperty(name, defaultValue, 0, Integer.MAX_VALUE, GameRules.Category.MISC);
+    }
+
+    public PercentageConfigProperty getBeginnerManaFactor() {
+        return beginnerManaFactor;
+    }
+
+    public PercentageConfigProperty getNoviceManaFactor() {
+        return noviceManaFactor;
+    }
+
+    public PercentageConfigProperty getExpertManaFactor() {
+        return expertManaFactor;
+    }
+
+    public PercentageConfigProperty getMasterManaFactor() {
+        return masterManaFactor;
+    }
+
+    public IntConfigProperty getWandCoolDown() {
+        return wandCoolDown;
+    }
+
+    public IntConfigProperty getSmallMissileCost() {
+        return smallMissileCost;
+    }
+
+    public IntConfigProperty getMediumMissileCost() {
+        return mediumMissileCost;
+    }
+
+    public IntConfigProperty getBigMissileCost() {
+        return bigMissileCost;
+    }
+
+    public IntConfigProperty getSmallAirMissileDamage() {
+        return smallAirMissileDamage;
+    }
+
+    public IntConfigProperty getMediumAirMissileDamage() {
+        return mediumAirMissileDamage;
+    }
+
+    public IntConfigProperty getBigAirMissileDamage() {
+        return bigAirMissileDamage;
+    }
+
+    public IntConfigProperty getSmallEarthMissileDamage() {
+        return smallEarthMissileDamage;
+    }
+
+    public IntConfigProperty getMediumEarthMissileDamage() {
+        return mediumEarthMissileDamage;
+    }
+
+    public IntConfigProperty getBigEarthMissileDamage() {
+        return bigEarthMissileDamage;
+    }
+
+    public IntConfigProperty getSmallFireMissileDamage() {
+        return smallFireMissileDamage;
+    }
+
+    public IntConfigProperty getMediumFireMissileDamage() {
+        return mediumFireMissileDamage;
+    }
+
+    public IntConfigProperty getBigFireMissileDamage() {
+        return bigFireMissileDamage;
+    }
+
+    public IntConfigProperty getSmallLightningMissileDamage() {
+        return smallLightningMissileDamage;
+    }
+
+    public IntConfigProperty getMediumLightningMissileDamage() {
+        return mediumLightningMissileDamage;
+    }
+
+    public IntConfigProperty getBigLightningMissileDamage() {
+        return bigLightningMissileDamage;
+    }
+
+    public IntConfigProperty getSmallWaterMissileDamage() {
+        return smallWaterMissileDamage;
+    }
+
+    public IntConfigProperty getMediumWaterMissileDamage() {
+        return mediumWaterMissileDamage;
+    }
+
+    public IntConfigProperty getBigWaterMissileDamage() {
+        return bigWaterMissileDamage;
+    }
 }

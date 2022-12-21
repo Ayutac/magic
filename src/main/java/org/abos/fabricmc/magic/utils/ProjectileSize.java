@@ -1,21 +1,22 @@
 package org.abos.fabricmc.magic.utils;
 
+import org.abos.fabricmc.magic.Magic;
 import org.abos.fabricmc.magic.config.Config;
+import org.abos.fabricmc.magic.config.IntConfigProperty;
 
 public enum ProjectileSize {
 
-    SMALL(0.8f, 0.8f, 6f, 0.05f, Config.SMALL_MISSILE_COST),
-    MEDIUM(1f, 1f, 4f, 0.2f, Config.MEDIUM_MISSILE_COST),
-    BIG(1.2f, 1.2f, 2f, 0.5f, Config.BIG_MISSILE_COST);
+    SMALL(0.8f, 0.8f, 6f, 0.05f, Magic.CONFIG.getSmallMissileCost()),
+    MEDIUM(1f, 1f, 4f, 0.2f, Magic.CONFIG.getMediumMissileCost()),
+    BIG(1.2f, 1.2f, 2f, 0.5f, Magic.CONFIG.getBigMissileCost());
 
     private final float width;
     private final float height;
     private final float speed;
     private final float divergence;
+    private final IntConfigProperty manaCost;
 
-    private final int manaCost;
-
-    ProjectileSize(float width, float height, float speed, float divergence, int manaCost) {
+    ProjectileSize(float width, float height, float speed, float divergence, IntConfigProperty manaCost) {
         this.width = width;
         this.height = height;
         this.speed = speed;
@@ -39,7 +40,7 @@ public enum ProjectileSize {
         return divergence;
     }
 
-    public int getManaCost() {
+    public IntConfigProperty getManaCost() {
         return manaCost;
     }
 }

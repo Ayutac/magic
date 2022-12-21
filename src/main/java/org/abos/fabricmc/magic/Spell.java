@@ -18,6 +18,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.config.Config;
+import org.abos.fabricmc.magic.config.IntConfigProperty;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.AccelerateGrowthProjectileEntity;
 import org.abos.fabricmc.magic.entities.EarthPillarProjectileEntity;
@@ -26,58 +27,56 @@ import org.abos.fabricmc.magic.utils.MagicType;
 import org.abos.fabricmc.magic.utils.ProjectileSettings;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 import static net.minecraft.enchantment.Enchantment.Rarity.*;
 
 public enum Spell {
     
-    SMALL_AIR_MISSILE(UNCOMMON, MagicType.AIR, ProjectileSettings.small().setKnockUpSpeed(0.4f).setDamage(Config.SMALL_AIR_MISSILE_DAMAGE)),
-    MEDIUM_AIR_MISSILE(RARE, MagicType.AIR, ProjectileSettings.medium().setKnockUpSpeed(0.8f).setDamage(Config.MEDIUM_AIR_MISSILE_DAMAGE)),
-    BIG_AIR_MISSILE(VERY_RARE, MagicType.AIR, ProjectileSettings.big().setKnockUpSpeed(1.2f).setDamage(Config.BIG_AIR_MISSILE_DAMAGE)),
-    LEVITATE(VERY_RARE, Config.LEVITATE_COST, MagicType.AIR),
-    FEATHER_FALL(UNCOMMON, Config.FEATHER_FALL_COST, MagicType.AIR),
-    SMALL_EARTH_MISSILE(UNCOMMON, MagicType.EARTH, ProjectileSettings.small().setDamage(Config.SMALL_EARTH_MISSILE_DAMAGE)),
-    MEDIUM_EARTH_MISSILE(RARE, MagicType.EARTH, ProjectileSettings.medium().setDamage(Config.MEDIUM_EARTH_MISSILE_DAMAGE)),
-    BIG_EARTH_MISSILE(VERY_RARE, MagicType.EARTH, ProjectileSettings.big().setDamage(Config.BIG_EARTH_MISSILE_DAMAGE)),
-    EARTH_PILLAR(UNCOMMON, Config.EARTH_PILLAR_COST, MagicType.EARTH, ProjectileSettings.medium(), EarthPillarProjectileEntity::new, EarthPillarProjectileEntity::new),
-    EARTH_CIRCLE(VERY_RARE, Config.EARTH_CIRCLE_COST, MagicType.EARTH),
-    EARTH_REMOVAL(VERY_RARE, Config.EARTH_REMOVAL_COST, MagicType.EARTH),
-    SHIELD(RARE, Config.SHIELD_COST, MagicType.EARTH),
-    SMALL_FIRE_MISSILE(UNCOMMON, MagicType.FIRE, ProjectileSettings.small().setFireTicks(1).setDamage(Config.SMALL_FIRE_MISSILE_DAMAGE)),
-    MEDIUM_FIRE_MISSILE(RARE, MagicType.FIRE, ProjectileSettings.medium().setFireTicks(5).setDamage(Config.MEDIUM_FIRE_MISSILE_DAMAGE)),
-    BIG_FIRE_MISSILE(VERY_RARE, MagicType.FIRE, ProjectileSettings.big().setFireTicks(10).setDamage(Config.BIG_FIRE_MISSILE_DAMAGE)),
-    FIRE_CIRCLE(RARE, Config.FIRE_CIRCLE_COST, MagicType.FIRE),
-    LAVA_REMOVAL(RARE, Config.LAVA_REMOVAL_COST, MagicType.FIRE),
-    ACCELERATE_GROWTH(UNCOMMON, Config.ACCELERATE_GROWTH_COST, MagicType.LIFE, ProjectileSettings.medium(), AccelerateGrowthProjectileEntity::new, AccelerateGrowthProjectileEntity::new),
-    INSTANT_HEAL(RARE, Config.INSTANT_HEAL_COST, MagicType.LIFE),
-    CHARM(VERY_RARE, Config.CHARM_COST, MagicType.LIGHT),
-    NIGHT_VISION(COMMON, Config.NIGHT_VISION_COST, MagicType.LIGHT),
-    SMALL_LIGHTNING_MISSILE(UNCOMMON, MagicType.LIGHTNING, ProjectileSettings.small().setParalysisTicks(10).setDamage(Config.SMALL_LIGHTNING_MISSILE_DAMAGE)),
-    MEDIUM_LIGHTNING_MISSILE(RARE, MagicType.LIGHTNING, ProjectileSettings.medium().setParalysisTicks(20).setDamage(Config.MEDIUM_LIGHTNING_MISSILE_DAMAGE)),
-    BIG_LIGHTNING_MISSILE(VERY_RARE, MagicType.LIGHTNING, ProjectileSettings.big().setParalysisTicks(40).setDamage(Config.BIG_LIGHTNING_MISSILE_DAMAGE)),
-    SMALL_WATER_MISSILE(UNCOMMON, MagicType.WATER, ProjectileSettings.small().setExtinguishing(true).setDamage(Config.SMALL_WATER_MISSILE_DAMAGE)),
-    MEDIUM_WATER_MISSILE(RARE, MagicType.WATER, ProjectileSettings.medium().setExtinguishing(true).setDamage(Config.MEDIUM_WATER_MISSILE_DAMAGE)),
-    BIG_WATER_MISSILE(VERY_RARE, MagicType.WATER, ProjectileSettings.big().setExtinguishing(true).setDamage(Config.BIG_WATER_MISSILE_DAMAGE)),
-    WATER_DOME(RARE, Config.WATER_DOME_COST, MagicType.WATER),
-    WATER_REMOVAL(UNCOMMON, Config.WATER_REMOVAL_COST, MagicType.WATER),
-    GILLS(UNCOMMON, Config.GILLS_COST, MagicType.WATER),
-    OCEANS_FRIEND(VERY_RARE, Config.OCEANS_FRIEND_COST, MagicType.WATER),
-    FIRE_IMMUNITY(RARE, Config.FIRE_IMMUNITY_COST, MagicType.WATER);
+    SMALL_AIR_MISSILE(UNCOMMON, MagicType.AIR, ProjectileSettings.small().setKnockUpSpeed(0.4f).setDamage(Magic.CONFIG.getSmallAirMissileDamage())),
+    MEDIUM_AIR_MISSILE(RARE, MagicType.AIR, ProjectileSettings.medium().setKnockUpSpeed(0.8f).setDamage(Magic.CONFIG.getMediumAirMissileDamage())),
+    BIG_AIR_MISSILE(VERY_RARE, MagicType.AIR, ProjectileSettings.big().setKnockUpSpeed(1.2f).setDamage(Magic.CONFIG.getBigAirMissileDamage())),
+    LEVITATE(VERY_RARE, Magic.CONFIG.LEVITATE_COST, MagicType.AIR),
+    FEATHER_FALL(UNCOMMON, Magic.CONFIG.FEATHER_FALL_COST, MagicType.AIR),
+    SMALL_EARTH_MISSILE(UNCOMMON, MagicType.EARTH, ProjectileSettings.small().setDamage(Magic.CONFIG.getSmallEarthMissileDamage())),
+    MEDIUM_EARTH_MISSILE(RARE, MagicType.EARTH, ProjectileSettings.medium().setDamage(Magic.CONFIG.getMediumEarthMissileDamage())),
+    BIG_EARTH_MISSILE(VERY_RARE, MagicType.EARTH, ProjectileSettings.big().setDamage(Magic.CONFIG.getBigEarthMissileDamage())),
+    EARTH_PILLAR(UNCOMMON, Magic.CONFIG.EARTH_PILLAR_COST, MagicType.EARTH, ProjectileSettings.medium(), EarthPillarProjectileEntity::new, EarthPillarProjectileEntity::new),
+    EARTH_CIRCLE(VERY_RARE, Magic.CONFIG.EARTH_CIRCLE_COST, MagicType.EARTH),
+    EARTH_REMOVAL(VERY_RARE, Magic.CONFIG.EARTH_REMOVAL_COST, MagicType.EARTH),
+    SHIELD(RARE, Magic.CONFIG.SHIELD_COST, MagicType.EARTH),
+    SMALL_FIRE_MISSILE(UNCOMMON, MagicType.FIRE, ProjectileSettings.small().setFireTicks(1).setDamage(Magic.CONFIG.getSmallFireMissileDamage())),
+    MEDIUM_FIRE_MISSILE(RARE, MagicType.FIRE, ProjectileSettings.medium().setFireTicks(5).setDamage(Magic.CONFIG.getMediumFireMissileDamage())),
+    BIG_FIRE_MISSILE(VERY_RARE, MagicType.FIRE, ProjectileSettings.big().setFireTicks(10).setDamage(Magic.CONFIG.getBigFireMissileDamage())),
+    FIRE_CIRCLE(RARE, Magic.CONFIG.FIRE_CIRCLE_COST, MagicType.FIRE),
+    LAVA_REMOVAL(RARE, Magic.CONFIG.LAVA_REMOVAL_COST, MagicType.FIRE),
+    ACCELERATE_GROWTH(UNCOMMON, Magic.CONFIG.ACCELERATE_GROWTH_COST, MagicType.LIFE, ProjectileSettings.medium(), AccelerateGrowthProjectileEntity::new, AccelerateGrowthProjectileEntity::new),
+    INSTANT_HEAL(RARE, Magic.CONFIG.INSTANT_HEAL_COST, MagicType.LIFE),
+    CHARM(VERY_RARE, Magic.CONFIG.CHARM_COST, MagicType.LIGHT),
+    NIGHT_VISION(COMMON, Magic.CONFIG.NIGHT_VISION_COST, MagicType.LIGHT),
+    SMALL_LIGHTNING_MISSILE(UNCOMMON, MagicType.LIGHTNING, ProjectileSettings.small().setParalysisTicks(10).setDamage(Magic.CONFIG.getSmallLightningMissileDamage())),
+    MEDIUM_LIGHTNING_MISSILE(RARE, MagicType.LIGHTNING, ProjectileSettings.medium().setParalysisTicks(20).setDamage(Magic.CONFIG.getMediumLightningMissileDamage())),
+    BIG_LIGHTNING_MISSILE(VERY_RARE, MagicType.LIGHTNING, ProjectileSettings.big().setParalysisTicks(40).setDamage(Magic.CONFIG.getBigLightningMissileDamage())),
+    SMALL_WATER_MISSILE(UNCOMMON, MagicType.WATER, ProjectileSettings.small().setExtinguishing(true).setDamage(Magic.CONFIG.getSmallWaterMissileDamage())),
+    MEDIUM_WATER_MISSILE(RARE, MagicType.WATER, ProjectileSettings.medium().setExtinguishing(true).setDamage(Magic.CONFIG.getMediumWaterMissileDamage())),
+    BIG_WATER_MISSILE(VERY_RARE, MagicType.WATER, ProjectileSettings.big().setExtinguishing(true).setDamage(Magic.CONFIG.getBigWaterMissileDamage())),
+    WATER_DOME(RARE, Magic.CONFIG.WATER_DOME_COST, MagicType.WATER),
+    WATER_REMOVAL(UNCOMMON, Magic.CONFIG.WATER_REMOVAL_COST, MagicType.WATER),
+    GILLS(UNCOMMON, Magic.CONFIG.GILLS_COST, MagicType.WATER),
+    OCEANS_FRIEND(VERY_RARE, Magic.CONFIG.OCEANS_FRIEND_COST, MagicType.WATER),
+    FIRE_IMMUNITY(RARE, Magic.CONFIG.FIRE_IMMUNITY_COST, MagicType.WATER);
 
     private final Identifier id = new Identifier(Magic.MOD_ID, getName());
-    private final int manaCost;
+    private final IntConfigProperty manaCost;
     private final MagicType type;
     private final ProjectileSettings settings;
     private final BiFunction<World, PlayerEntity, MagicProjectileEntity> projectileFactory;
     private final EntityType<MagicProjectileEntity> entityType;
     private final WandEnchantment enchantment;
 
-    Spell(Enchantment.Rarity rarity, int manaCost, MagicType type, ProjectileSettings settings, BiFunction<World,PlayerEntity,MagicProjectileEntity> projectileFactory, EntityType.EntityFactory<MagicProjectileEntity> projectileFactory2) {
-        if (manaCost < 0) {
-            throw new IllegalArgumentException("Mana cost cannot be negative!");
-        }
-        this.manaCost = manaCost;
+    Spell(Enchantment.Rarity rarity, IntConfigProperty manaCost, MagicType type, ProjectileSettings settings, BiFunction<World,PlayerEntity,MagicProjectileEntity> projectileFactory, EntityType.EntityFactory<MagicProjectileEntity> projectileFactory2) {
+        this.manaCost = Objects.requireNonNull(manaCost);
         this.type = type;
         this.settings = settings;
         this.projectileFactory = projectileFactory;
@@ -99,7 +98,7 @@ public enum Spell {
         this(rarity, settings.getSize().getManaCost(), type, settings, null, null);
     }
 
-    Spell(Enchantment.Rarity rarity, int manaCost, MagicType type) {
+    Spell(Enchantment.Rarity rarity, IntConfigProperty manaCost, MagicType type) {
         this(rarity, manaCost, type, null, null, null);
     }
 
@@ -111,7 +110,7 @@ public enum Spell {
         return id;
     }
 
-    public int getManaCost() {
+    public IntConfigProperty getManaCost() {
         return manaCost;
     }
 
