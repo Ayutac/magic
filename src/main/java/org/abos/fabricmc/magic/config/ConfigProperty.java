@@ -16,7 +16,7 @@ public abstract class ConfigProperty<T, R extends GameRules.Rule<R>> {
 
     private final boolean withGameRule;
 
-    private final GameRules.Key<R> ruleKey;
+    protected GameRules.Key<R> ruleKey;
 
     private final GameRules.Category ruleCategory;
 
@@ -29,12 +29,6 @@ public abstract class ConfigProperty<T, R extends GameRules.Rule<R>> {
         resetValue();
         this.withGameRule = withGameRule;
         this.ruleCategory = ruleCategory;
-        if (withGameRule) {
-            ruleKey = null;
-        }
-        else {
-            ruleKey = registerRule();
-        }
     }
 
     public ConfigProperty(String name, T defaultValue) {
@@ -122,7 +116,7 @@ public abstract class ConfigProperty<T, R extends GameRules.Rule<R>> {
         return world.getGameRules().get(ruleKey);
     }
 
-    protected abstract GameRules.Key<R> registerRule();
+    public abstract GameRules.Key<R> registerRule();
 
     public GameRules.Category getRuleCategory() {
         return ruleCategory;

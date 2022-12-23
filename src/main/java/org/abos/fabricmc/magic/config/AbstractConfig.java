@@ -18,6 +18,14 @@ public abstract class AbstractConfig implements Iterable<ConfigProperty<?,? exte
 
     public final static Logger LOGGER = LoggerFactory.getLogger("AbosConfig");
 
+    public void initialize() {
+        for (ConfigProperty<?,?> property : this) {
+            if (property.isWithGameRule()) {
+                property.registerRule();
+            }
+        }
+    }
+
     public void saveTo(Path file, World world) throws IllegalStateException {
         if (Files.isDirectory(file)) {
             LOGGER.warn("Please don't offer a directory as a config file!");

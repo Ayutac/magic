@@ -32,6 +32,7 @@ public class Magic implements ModInitializer {
         LOGGER.info("Initializing the Magic Mod...");
         MagicContent.init();
         CommandInitializer.init();
+        CONFIG.initialize();
         ServerLifecycleEvents.SERVER_STARTED.register(server -> CONFIG.loadFrom(Config.PATH, server));
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> CONFIG.saveTo(Config.PATH, server.getOverworld()));
         EntitySleepEvents.STOP_SLEEPING.register((livingEntity, blockPos) -> {

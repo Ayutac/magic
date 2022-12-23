@@ -45,7 +45,7 @@ public class BooleanConfigProperty extends ConfigProperty<Boolean, GameRules.Boo
     }
 
     @Override
-    protected GameRules.Key<GameRules.BooleanRule> registerRule() {
-        return GameRuleRegistry.register(getName(), getRuleCategory(), GameRuleFactory.createBooleanRule(getDefaultValue()));
+    public GameRules.Key<GameRules.BooleanRule> registerRule() {
+        return ruleKey = GameRuleRegistry.register(getName(), getRuleCategory(), GameRuleFactory.createBooleanRule(getDefaultValue()));
     }
 }

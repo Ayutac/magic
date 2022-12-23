@@ -78,7 +78,7 @@ public class IntConfigProperty extends ConfigProperty<Integer, GameRules.IntRule
     }
 
     @Override
-    protected GameRules.Key<GameRules.IntRule> registerRule() {
-        return GameRuleRegistry.register(getName(), getRuleCategory(), GameRuleFactory.createIntRule(getDefaultValue()));
+    public GameRules.Key<GameRules.IntRule> registerRule() {
+        return ruleKey = GameRuleRegistry.register(getName(), getRuleCategory(), GameRuleFactory.createIntRule(getDefaultValue()));
     }
 }
