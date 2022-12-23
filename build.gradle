@@ -21,7 +21,6 @@ repositories {
 		name = "Ladysnake Mods"
 		url = 'https://ladysnake.jfrog.io/artifactory/mods'
 	}
-	mavenCentral()
 }
 
 sourceSets {
@@ -62,9 +61,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "blue.endless:jankson:1.2.1"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
-	include "blue.endless:jankson:1.2.1"
 	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 
 	datagenImplementation 'org.apache.groovy:groovy:4.0.6'

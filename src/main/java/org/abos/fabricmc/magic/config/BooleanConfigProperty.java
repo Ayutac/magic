@@ -21,12 +21,19 @@ public class BooleanConfigProperty extends ConfigProperty<Boolean, GameRules.Boo
         if (!isWithGameRule()) {
             throw new IllegalStateException("This property doesn't have a rule!");
         }
-        return world.getGameRules().get(getRuleKey()).get();
+        GameRules.BooleanRule rule = world.getGameRules().get(getRuleKey());
+        if (rule == null) {
+            return null;
+        }
+        return rule.get();
     }
 
     @Override
     protected void setRuleValue(Boolean value, MinecraftServer server) throws IllegalStateException {
-        getRule(server.getOverworld()).set(value, server);
+        GameRules.BooleanRule rule = getRule(server.getOverworld());
+        if (rule != null) {
+            rule.set(value, server);
+        }
     }
 
     @Override

@@ -61,7 +61,11 @@ public abstract class ConfigProperty<T, R extends GameRules.Rule<R>> {
 
     public T getValue(World world) {
         if (isWithGameRule() && world != null) {
-            return value = getRuleValue(world);
+            T rVal = getRuleValue(world);
+            if (rVal == null) {
+                return value;
+            }
+            return value = rVal;
         }
         return value;
     }

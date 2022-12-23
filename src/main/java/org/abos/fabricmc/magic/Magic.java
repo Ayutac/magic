@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
@@ -30,8 +31,9 @@ public class Magic implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initializing the Magic Mod...");
         MagicContent.init();
-        //CONFIG.init();
         CommandInitializer.init();
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> CONFIG.loadFrom(Config.PATH, server));
+        ServerLifecycleEvents.SERVER_STOPPING.register(server -> CONFIG.saveTo(Config.PATH, server.getOverworld()));
         EntitySleepEvents.STOP_SLEEPING.register((livingEntity, blockPos) -> {
             if (livingEntity instanceof PlayerEntity && livingEntity.world.isDay()) {
                 MANA.get(livingEntity).fill();

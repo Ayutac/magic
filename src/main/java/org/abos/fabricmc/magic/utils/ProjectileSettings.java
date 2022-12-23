@@ -8,7 +8,7 @@ public class ProjectileSettings {
 
     private ProjectileSize size;
 
-    private IntConfigProperty damage = new IntConfigProperty("damage", 0);
+    private IntConfigProperty damage = null;
 
     private int fireTicks = 0;
 

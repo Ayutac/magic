@@ -1,14 +1,17 @@
 package org.abos.fabricmc.magic.config;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.GameRules;
+import org.abos.fabricmc.magic.Magic;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
 
 public final class Config extends AbstractConfig {
+
+    public static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve(Magic.MOD_ID+".json");
 
     private final PercentageConfigProperty beginnerManaFactor = createPercentageProperty("beginner_mana_factor", 200);
     private final PercentageConfigProperty noviceManaFactor = createPercentageProperty("novice_mana_factor", 150);
