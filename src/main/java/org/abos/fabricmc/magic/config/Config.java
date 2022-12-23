@@ -1,8 +1,14 @@
 package org.abos.fabricmc.magic.config;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.GameRules;
+import org.jetbrains.annotations.NotNull;
 
-public final class Config {
+import java.util.Iterator;
+import java.util.List;
+
+public final class Config extends AbstractConfig {
 
     private final PercentageConfigProperty beginnerManaFactor = createPercentageProperty("beginner_mana_factor", 200);
     private final PercentageConfigProperty noviceManaFactor = createPercentageProperty("novice_mana_factor", 150);
@@ -90,6 +96,66 @@ public final class Config {
 
     public static IntConfigProperty createDamageProperty(String name, int defaultValue) {
         return new IntConfigProperty(name, defaultValue, 0, Integer.MAX_VALUE, GameRules.Category.MISC);
+    }
+
+    @NotNull
+    @Override
+    public Iterator<ConfigProperty<?, ? extends GameRules.Rule<?>>> iterator() {
+        // note that these items don't have to be in any particular order
+        return List.of(
+                (ConfigProperty<?,?>)beginnerManaFactor,
+                noviceManaFactor,
+                expertManaFactor,
+                masterManaFactor,
+                wandCoolDown,
+                smallMissileCost,
+                mediumMissileCost,
+                bigMissileCost,
+                smallAirMissileDamage,
+                mediumAirMissileDamage,
+                bigAirMissileDamage,
+                smallEarthMissileDamage,
+                mediumEarthMissileDamage,
+                bigEarthMissileDamage,
+                smallFireMissileDamage,
+                mediumFireMissileDamage,
+                bigFireMissileDamage,
+                smallLightningMissileDamage,
+                mediumLightningMissileDamage,
+                bigLightningMissileDamage,
+                smallWaterMissileDamage,
+                mediumWaterMissileDamage,
+                bigWaterMissileDamage,
+                accelerateGrowthCost,
+                instantHealCost,
+                shieldCost,
+                shieldDuration,
+                nightVisionCost,
+                nightVisionDuration,
+                gillsCost,
+                gillsDuration,
+                oceansFriendCost,
+                oceansFriendDuration,
+                levitateCost,
+                levitateDuration,
+                featherFallCost,
+                featherFallDuration,
+                fireImmunityCost,
+                fireImmunityDuration,
+                earthPillarCost,
+                earthCircleCost,
+                earthRemovalCost,
+                earthRemovalRadius,
+                fireCircleCost,
+                lavaRemovalCost,
+                lavaRemovalRadius,
+                waterDomeCost,
+                waterDomeRadius,
+                waterRemovalCost,
+                waterRemovalRadius,
+                charmCost,
+                charmDuration
+        ).iterator();
     }
 
     public PercentageConfigProperty getBeginnerManaFactor() {
