@@ -14,7 +14,7 @@ public class IntConfigProperty extends ConfigProperty<Integer, GameRules.IntRule
 
     protected IntConfigProperty(String name, Integer defaultValue, int minValue, int maxValue, boolean withGameRule, GameRules.Category ruleCategory) {
         super(name, defaultValue, withGameRule, ruleCategory);
-        if (maxValue > minValue) {
+        if (maxValue < minValue) {
             throw new IllegalArgumentException("Min value must be smaller than or equal to max value!");
         }
         this.minValue = minValue;
