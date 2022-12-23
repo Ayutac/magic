@@ -18,11 +18,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.abos.fabricmc.magic.Magic;
-import org.abos.fabricmc.magic.config.Config;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.Spell;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
-import org.abos.fabricmc.magic.config.IntConfigProperty;
 import org.abos.fabricmc.magic.config.PercentageConfigProperty;
 import org.abos.fabricmc.magic.entities.MagicProjectileEntity;
 import org.abos.fabricmc.magic.utils.MagicType;
@@ -72,27 +70,28 @@ public class WandItem extends ToolItem {
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1));
             }
             else if (spell == Spell.SHIELD) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, Config.SHIELD_DURATION, 1));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, Magic.CONFIG.getShieldDuration().getValue(world), 1));
             }
             else if (spell == Spell.NIGHT_VISION) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, Config.NIGHT_VISION_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, Magic.CONFIG.getNightVisionDuration().getValue(world)));
             }
             else if (spell == Spell.GILLS) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, Config.GILLS_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, Magic.CONFIG.getGillsDuration().getValue(world)));
             }
             else if (spell == Spell.OCEANS_FRIEND) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, Config.OCEANS_FRIEND_DURATION));
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, Config.OCEANS_FRIEND_DURATION));
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, Config.OCEANS_FRIEND_DURATION));
+                final int duration = Magic.CONFIG.getOceansFriendDuration().getValue(world);
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, duration));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, duration));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, duration));
             }
             else if (spell == Spell.LEVITATE) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, Config.LEVITATE_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, Magic.CONFIG.getLevitateDuration().getValue(world)));
             }
             else if (spell == Spell.FEATHER_FALL) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, Config.FEATHER_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, Magic.CONFIG.getFeatherFallDuration().getValue(world)));
             }
             else if (spell == Spell.FIRE_IMMUNITY) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, Config.FIRE_IMMUNITY_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, Magic.CONFIG.getFireImmunityDuration().getValue(world)));
             }
             else if (spell == Spell.EARTH_CIRCLE) {
                 for (BlockPos pos : WorldUtils.circleGround(world, user.getBlockPos().down(),3)) {
@@ -102,7 +101,7 @@ public class WandItem extends ToolItem {
                 }
             }
             else if (spell == Spell.EARTH_REMOVAL) {
-                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(), Config.EARTH_REMOVAL_RADIUS)) {
+                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(), Magic.CONFIG.getEarthRemovalRadius().getValue(world))) {
                     if (world.getBlockState(pos).isIn(MagicContent.EARTH_TAG)) {
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());
                     }
@@ -118,28 +117,28 @@ public class WandItem extends ToolItem {
                 }
             }
             else if (spell == Spell.LAVA_REMOVAL) {
-                for (BlockPos pos : WorldUtils.filledSphere(user.getBlockPos(), Config.LAVA_REMOVAL_RADIUS)) {
+                for (BlockPos pos : WorldUtils.filledSphere(user.getBlockPos(), Magic.CONFIG.getLavaRemovalRadius().getValue(world))) {
                     if (world.getBlockState(pos).isOf(Blocks.LAVA)) {
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());
                     }
                 }
             }
             else if (spell == Spell.WATER_DOME) {
-                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(), Config.WATER_DOME_RADIUS)) {
+                for (BlockPos pos : WorldUtils.filledDome(user.getBlockPos(), Magic.CONFIG.getWaterDomeRadius().getValue(world))) {
                     if (world.getBlockState(pos).canBucketPlace(Fluids.WATER)) {
                         world.setBlockState(pos, Blocks.WATER.getDefaultState(), 11);
                     }
                 }
             }
             else if (spell == Spell.WATER_REMOVAL) {
-                for (BlockPos pos : WorldUtils.filledSphere(user.getBlockPos(), Config.WATER_REMOVAL_RADIUS)) {
+                for (BlockPos pos : WorldUtils.filledSphere(user.getBlockPos(), Magic.CONFIG.getWaterRemovalRadius().getValue(world))) {
                     if (world.getBlockState(pos).isOf(Blocks.WATER)) {
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());
                     }
                 }
             }
             else if (spell == Spell.CHARM) {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.HERO_OF_THE_VILLAGE, Config.CHARM_DURATION));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.HERO_OF_THE_VILLAGE, Magic.CONFIG.getCharmDuration().getValue(world)));
             }
             else {
                 return TypedActionResult.pass(user.getStackInHand(hand));

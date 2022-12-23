@@ -35,38 +35,39 @@ public final class Config {
     private final IntConfigProperty instantHealCost = createCostProperty("instant_heal_cost", 25);
     private final IntConfigProperty shieldCost = createCostProperty("shield_cost", 25);
     // in ticks
-    private final IntConfigProperty shieldDuration = createCostProperty("shield_duration", 60*20);
+    private final IntConfigProperty shieldDuration = createTimeProperty("shield_duration", 60*20);
     private final IntConfigProperty nightVisionCost = createCostProperty("night_vision_cost", 8);
     // in ticks
-    private final IntConfigProperty nightVisionDuration = createCostProperty("night_vision_duration", 60*20);
+    private final IntConfigProperty nightVisionDuration = createTimeProperty("night_vision_duration", 60*20);
     private final IntConfigProperty gillsCost = createCostProperty("gills_cost", 10);
     // in ticks
-    private final IntConfigProperty gillsDuration = createCostProperty("gills_duration", 30*20);
+    private final IntConfigProperty gillsDuration = createTimeProperty("gills_duration", 30*20);
     private final IntConfigProperty oceansFriendCost = createCostProperty("oceans_friend_cost", 30);
     // in ticks
-    private final IntConfigProperty oceansFriendDuration = createCostProperty("oceans_friend_duration", 60*20);
+    private final IntConfigProperty oceansFriendDuration = createTimeProperty("oceans_friend_duration", 60*20);
     private final IntConfigProperty levitateCost = createCostProperty("levitate_cost", 30);
     // in ticks
-    private final IntConfigProperty levitateDuration = createCostProperty("levitate_duration", 5*20);
+    private final IntConfigProperty levitateDuration = createTimeProperty("levitate_duration", 5*20);
     private final IntConfigProperty featherFallCost = createCostProperty("feather_fall_cost", 10);
     // in ticks
-    private final IntConfigProperty featherFallDuration = createCostProperty("feather_fall_duration", 5*20);
+    private final IntConfigProperty featherFallDuration = createTimeProperty("feather_fall_duration", 5*20);
     private final IntConfigProperty fireImmunityCost = createCostProperty("fire_immunity_cost", 15);
     // in ticks
-    private final IntConfigProperty fireImmunityDuration = createCostProperty("fire_immunity_duration", 15*20);
-    public static int EARTH_PILLAR_COST = 20;
-    public static int EARTH_CIRCLE_COST = 50;
-    public static int EARTH_REMOVAL_COST = 25;
-    public static int EARTH_REMOVAL_RADIUS = 4;
-    public static int FIRE_CIRCLE_COST = 40;
-    public static int LAVA_REMOVAL_COST = 18;
-    public static int LAVA_REMOVAL_RADIUS = 3;
-    public static int WATER_DOME_COST = 30;
-    public static int WATER_DOME_RADIUS = 3;
-    public static int WATER_REMOVAL_COST = 15;
-    public static int WATER_REMOVAL_RADIUS = 4;
-    public static int CHARM_COST = 15;
-    public static int CHARM_DURATION = 10*20; // in ticks
+    private final IntConfigProperty fireImmunityDuration = createTimeProperty("fire_immunity_duration", 15*20);
+    private final IntConfigProperty earthPillarCost = createCostProperty("earth_pillar_cost", 20);
+    private final IntConfigProperty earthCircleCost = createCostProperty("earth_circle_cost", 50);
+    private final IntConfigProperty earthRemovalCost = createCostProperty("earth_removal_cost", 25);
+    private final IntConfigProperty earthRemovalRadius = createDistanceProperty("earth_removal_radius", 4);
+    private final IntConfigProperty fireCircleCost = createCostProperty("fire_circle_cost", 40);
+    private final IntConfigProperty lavaRemovalCost = createCostProperty("lava_removal_cost", 18);
+    private final IntConfigProperty lavaRemovalRadius = createDistanceProperty("lava_removal_radius", 3);
+    private final IntConfigProperty waterDomeCost = createCostProperty("water_dome_cost", 30);
+    private final IntConfigProperty waterDomeRadius = createDistanceProperty("water_dome_radius", 3);
+    private final IntConfigProperty waterRemovalCost = createCostProperty("water_removal_cost", 15);
+    private final IntConfigProperty waterRemovalRadius = createDistanceProperty("water_removal_radius", 4);
+    private final IntConfigProperty charmCost = createCostProperty("charm_cost", 15);
+    // in ticks
+    private final IntConfigProperty charmDuration = createTimeProperty("charm_duration", 10*20);
 
     public Config() {
     }
@@ -83,7 +84,7 @@ public final class Config {
         return new IntConfigProperty(name, defaultValue, 1, Integer.MAX_VALUE, GameRules.Category.MISC);
     }
 
-    public static IntConfigProperty createRadiusProperty(String name, int defaultValue) {
+    public static IntConfigProperty createDistanceProperty(String name, int defaultValue) {
         return new IntConfigProperty(name, defaultValue, 1, Integer.MAX_VALUE, GameRules.Category.MISC);
     }
 
@@ -181,5 +182,121 @@ public final class Config {
 
     public IntConfigProperty getBigWaterMissileDamage() {
         return bigWaterMissileDamage;
+    }
+
+    public IntConfigProperty getAccelerateGrowthCost() {
+        return accelerateGrowthCost;
+    }
+
+    public IntConfigProperty getInstantHealCost() {
+        return instantHealCost;
+    }
+
+    public IntConfigProperty getShieldCost() {
+        return shieldCost;
+    }
+
+    public IntConfigProperty getShieldDuration() {
+        return shieldDuration;
+    }
+
+    public IntConfigProperty getNightVisionCost() {
+        return nightVisionCost;
+    }
+
+    public IntConfigProperty getNightVisionDuration() {
+        return nightVisionDuration;
+    }
+
+    public IntConfigProperty getGillsCost() {
+        return gillsCost;
+    }
+
+    public IntConfigProperty getGillsDuration() {
+        return gillsDuration;
+    }
+
+    public IntConfigProperty getOceansFriendCost() {
+        return oceansFriendCost;
+    }
+
+    public IntConfigProperty getOceansFriendDuration() {
+        return oceansFriendDuration;
+    }
+
+    public IntConfigProperty getLevitateCost() {
+        return levitateCost;
+    }
+
+    public IntConfigProperty getLevitateDuration() {
+        return levitateDuration;
+    }
+
+    public IntConfigProperty getFeatherFallCost() {
+        return featherFallCost;
+    }
+
+    public IntConfigProperty getFeatherFallDuration() {
+        return featherFallDuration;
+    }
+
+    public IntConfigProperty getFireImmunityCost() {
+        return fireImmunityCost;
+    }
+
+    public IntConfigProperty getFireImmunityDuration() {
+        return fireImmunityDuration;
+    }
+
+    public IntConfigProperty getEarthPillarCost() {
+        return earthPillarCost;
+    }
+
+    public IntConfigProperty getEarthCircleCost() {
+        return earthCircleCost;
+    }
+
+    public IntConfigProperty getEarthRemovalCost() {
+        return earthRemovalCost;
+    }
+
+    public IntConfigProperty getEarthRemovalRadius() {
+        return earthRemovalRadius;
+    }
+
+    public IntConfigProperty getFireCircleCost() {
+        return fireCircleCost;
+    }
+
+    public IntConfigProperty getLavaRemovalCost() {
+        return lavaRemovalCost;
+    }
+
+    public IntConfigProperty getLavaRemovalRadius() {
+        return lavaRemovalRadius;
+    }
+
+    public IntConfigProperty getWaterDomeCost() {
+        return waterDomeCost;
+    }
+
+    public IntConfigProperty getWaterDomeRadius() {
+        return waterDomeRadius;
+    }
+
+    public IntConfigProperty getWaterRemovalCost() {
+        return waterRemovalCost;
+    }
+
+    public IntConfigProperty getWaterRemovalRadius() {
+        return waterRemovalRadius;
+    }
+
+    public IntConfigProperty getCharmCost() {
+        return charmCost;
+    }
+
+    public IntConfigProperty getCharmDuration() {
+        return charmDuration;
     }
 }
