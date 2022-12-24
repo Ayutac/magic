@@ -56,6 +56,9 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     public void setSettings(ProjectileSettings settings) {
         this.settings = settings;
+        if (settings.getDamage() != null) {
+            setDamage(settings.getDamage().getValue());
+        }
     }
 
     @Override
