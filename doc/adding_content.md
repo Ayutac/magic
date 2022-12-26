@@ -1,6 +1,6 @@
 # Adding Content
 ## Adding an Enchantment
-1. Add cost and possibly other configurable stuff about the enchantment to `MagicConfig.java`.
+1. Add cost and possibly other configurable stuff about the enchantment to `MagicConfig.java`, including into the iterator.
 2. Add an enum entry to `Spell.java`.
 3. Add the enchantment effect to `WandItem.java`.
 4. Run datagen for good measure.
