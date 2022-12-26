@@ -10,8 +10,8 @@
     }
   },
   "pattern": [
-    " X",
-    "# "
+    "X ",
+    " #"
   ],
   "result": {
     "item": "magic:beginner_wand"
