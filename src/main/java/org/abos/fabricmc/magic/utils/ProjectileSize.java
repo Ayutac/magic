@@ -1,8 +1,7 @@
 package org.abos.fabricmc.magic.utils;
 
 import org.abos.fabricmc.magic.Magic;
-import org.abos.fabricmc.magic.config.Config;
-import org.abos.fabricmc.magic.config.IntConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.IntConfigProperty;
 
 public enum ProjectileSize {
 

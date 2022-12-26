@@ -1,6 +1,6 @@
 package org.abos.fabricmc.magic.utils;
 
-import org.abos.fabricmc.magic.config.IntConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.IntConfigProperty;
 
 import java.util.Objects;
 

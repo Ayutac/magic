@@ -17,7 +17,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import org.abos.fabricmc.magic.config.IntConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.IntConfigProperty;
 import org.abos.fabricmc.magic.enchantments.WandEnchantment;
 import org.abos.fabricmc.magic.entities.AccelerateGrowthProjectileEntity;
 import org.abos.fabricmc.magic.entities.EarthPillarProjectileEntity;

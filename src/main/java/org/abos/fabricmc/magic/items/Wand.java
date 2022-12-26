@@ -6,9 +6,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Identifier;
 import org.abos.fabricmc.magic.Magic;
-import org.abos.fabricmc.magic.config.Config;
-import org.abos.fabricmc.magic.config.IntConfigProperty;
-import org.abos.fabricmc.magic.config.PercentageConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.PercentageConfigProperty;
 
 import java.util.Locale;
 

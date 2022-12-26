@@ -21,6 +21,12 @@ repositories {
 		name = "Ladysnake Mods"
 		url = 'https://ladysnake.jfrog.io/artifactory/mods'
 	}
+	maven {
+		url "https://cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
+	}
 }
 
 sourceSets {
@@ -63,8 +69,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
-	modImplementation "org.abos.fabricmc:simpleconfig:${project.config_version}"
-	include "org.abos.fabricmc:simpleconfig:${project.config_version}"
+	modImplementation "curse.maven:config-775815:4258206"
+	include "curse.maven:config-775815:4258206"
 
 	datagenImplementation 'org.apache.groovy:groovy:4.0.6'
 }

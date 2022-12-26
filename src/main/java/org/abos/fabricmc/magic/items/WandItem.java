@@ -21,7 +21,7 @@ import org.abos.fabricmc.magic.Magic;
 import org.abos.fabricmc.magic.MagicContent;
 import org.abos.fabricmc.magic.Spell;
 import org.abos.fabricmc.magic.cca.NatMaxComponent;
-import org.abos.fabricmc.magic.config.PercentageConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.PercentageConfigProperty;
 import org.abos.fabricmc.magic.entities.MagicProjectileEntity;
 import org.abos.fabricmc.magic.utils.MagicType;
 import org.abos.fabricmc.magic.utils.WorldUtils;

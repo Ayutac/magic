@@ -3,10 +3,10 @@ package org.abos.fabricmc.magic.config;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.GameRules;
 import org.abos.fabricmc.magic.Magic;
-import org.abos.fabricmc.simpleconfig.AbstractConfig;
-import org.abos.fabricmc.simpleconfig.ConfigProperty;
-import org.abos.fabricmc.simpleconfig.IntConfigProperty;
-import org.abos.fabricmc.simpleconfig.PercentageConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.AbstractConfig;
+import org.abos.fabricmc.ayusimpleconfig.ConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.IntConfigProperty;
+import org.abos.fabricmc.ayusimpleconfig.PercentageConfigProperty;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
