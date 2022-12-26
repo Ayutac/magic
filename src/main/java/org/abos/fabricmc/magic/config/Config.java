@@ -23,7 +23,7 @@ public final class Config extends AbstractConfig {
     private final PercentageConfigProperty masterManaFactor = createPercentageProperty("master_mana_factor", 50);
 
     // in ticks
-    private final IntConfigProperty wandCoolDown = createTimeProperty("wand_cool_down", 20);
+    private final IntConfigProperty wandCoolDown = createTimeProperty("wand_cool_down", 20, GameRules.Category.PLAYER);
 
 
     private final IntConfigProperty smallMissileCost = createCostProperty("small_missile_cost", 2);
@@ -89,8 +89,12 @@ public final class Config extends AbstractConfig {
         return new PercentageConfigProperty(name, defaultValue, 0, Integer.MAX_VALUE, GameRules.Category.MISC);
     }
 
+    public static IntConfigProperty createTimeProperty(String name, int defaultValue, GameRules.Category category) {
+        return new IntConfigProperty(name, defaultValue, 1, Integer.MAX_VALUE, category);
+    }
+
     public static IntConfigProperty createTimeProperty(String name, int defaultValue) {
-        return new IntConfigProperty(name, defaultValue, 1, Integer.MAX_VALUE, GameRules.Category.MISC);
+        return createTimeProperty(name, defaultValue, GameRules.Category.MISC);
     }
 
     public static IntConfigProperty createCostProperty(String name, int defaultValue) {
